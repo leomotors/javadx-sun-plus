@@ -6,15 +6,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import pane.RootPane;
 
-public class TodoItem extends HBox{
-	public TodoItem(String value) {
-		this.setSpacing(10);
-		Text text = new Text(value);
-		text.setFont(Font.font(20));
-		Button button = new Button("Delete");
-		button.setOnAction(event->{
-			RootPane.getDisplayPane().removeTodoItem(this);
-		});
-		this.getChildren().addAll(text,button);
-	}
+public class TodoItem extends HBox {
+    public TodoItem(String value) {
+        this.setSpacing(10);
+        Text text = new Text(value);
+        text.setFont(Font.font(20));
+        Button button = new Button("Delete");
+        button.setOnAction(event -> {
+            RootPane.getDisplayPane().removeTodoItem(this);
+        });
+        this.getChildren().addAll(text, button);
+    }
 }

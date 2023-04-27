@@ -8,13 +8,13 @@ public class RootPane extends BorderPane {
     private static InputPane inputPane;
 
     public RootPane() {
-    	navigationPane = new NavigationPane();
-    	displayPane = new DisplayPane();
-    	inputPane = new InputPane();
-    	getNavigationPane().addPage();
-    	this.setLeft(navigationPane);
-    	this.setCenter(displayPane);
-    	this.setBottom(inputPane);
+        navigationPane = new NavigationPane();
+        displayPane = new DisplayPane();
+        inputPane = new InputPane();
+        getNavigationPane().addPage();
+        this.setLeft(navigationPane);
+        this.setCenter(displayPane);
+        this.setBottom(inputPane);
     }
 
     public static NavigationPane getNavigationPane() {
