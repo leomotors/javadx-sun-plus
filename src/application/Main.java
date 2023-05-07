@@ -1,27 +1,21 @@
 package application;
 
-import config.Config;
+import java.io.IOException;
+
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import router.Router;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        // create root
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("test.fxml"));
-            Scene scene = new Scene(root, Config.SCREEN_HEIGHT,
-                    Config.SCREEN_WIDTH);
-            stage.setScene(scene);
-            stage.setTitle("JavaDX SUN PLUS!");
-            stage.setResizable(false);
-            stage.show();
-        } catch (Exception e) {
+            Router.createInstance(stage);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
+            stage.close();
         }
     }
 
