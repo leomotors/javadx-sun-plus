@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import router.IPage;
-import router.Pages;
+import router.Page;
 import router.Router;
 import utils.Utils;
 
@@ -24,7 +24,7 @@ public class Welcome implements IPage {
         button.setFont(new Font(48));
 
         button.setOnAction(e -> {
-            Router.getInstance().push(Pages.GAME);
+            Router.getInstance().push(Page.GAME);
         });
 
         this.node.getChildren().addAll(logo, button);

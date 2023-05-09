@@ -5,6 +5,9 @@ import java.util.Map;
 import javafx.scene.input.KeyCode;
 
 public class Config {
+    private Config() {
+    }
+
     public static final int SCREEN_HEIGHT = 1600;
     public static final int SCREEN_WIDTH = 900;
     public static final int K_TILE = 4;
