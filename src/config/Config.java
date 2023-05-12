@@ -4,9 +4,11 @@ import java.util.Map;
 
 import javafx.scene.input.KeyCode;
 
+/**
+ * A static class containing constants related to game configuration.
+ */
 public class Config {
-    private Config() {
-    }
+    private Config() {}
 
     public static final int SCREEN_HEIGHT = 1600;
     public static final int SCREEN_WIDTH = 900;

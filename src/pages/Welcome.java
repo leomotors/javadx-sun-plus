@@ -1,5 +1,6 @@
 package pages;
 
+import config.Resource;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -15,7 +16,7 @@ public class Welcome implements IPage {
 
     @Override
     public void initialize() {
-        var logo = Utils.loadImage("images/JavaDX.png", 500, 500);
+        var logo = Utils.loadImage(Resource.JAVADX_LOGO, 500, 500);
 
         this.node = new VBox();
 
