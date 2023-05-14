@@ -21,24 +21,24 @@ import pages.Welcome;
 public final class Router {
     private static Router instance;
 
-    private HashMap<Page, IPage> pages = new HashMap<Page, IPage>();
+    private HashMap<AppPage, Page> pages = new HashMap<AppPage, Page>();
     private Stage stage;
     private Scene scene;
 
-    private Stack<Page> history = new Stack<Page>();
-    private Page currentPage = Page.WELCOME;
+    private Stack<AppPage> history = new Stack<AppPage>();
+    private AppPage currentPage = AppPage.WELCOME;
 
     private Router(Stage stage) throws IOException {
         this.stage = stage;
 
-        this.pages.put(Page.WELCOME, new Welcome());
-        this.pages.put(Page.GAME, new Game());
+        this.pages.put(AppPage.WELCOME, new Welcome());
+        this.pages.put(AppPage.GAME, new Game());
 
         for (var page : this.pages.values()) {
             page.initialize();
         }
 
-        this.scene = new Scene(this.pages.get(Page.WELCOME).getNode(),
+        this.scene = new Scene(this.pages.get(AppPage.WELCOME).getNode(),
                 Config.SCREEN_HEIGHT,
                 Config.SCREEN_WIDTH);
 
@@ -48,7 +48,7 @@ public final class Router {
         this.stage.show();
     }
 
-    private void setScenePage(Page pageKey) {
+    private void setScenePage(AppPage pageKey) {
         var page = this.pages.get(pageKey);
         var current = this.pages.get(this.getCurrentPage());
 
@@ -65,7 +65,7 @@ public final class Router {
      * @param pageKey
      *            enum for destination page
      */
-    public synchronized void push(Page pageKey) {
+    public synchronized void push(AppPage pageKey) {
         this.setScenePage(pageKey);
         this.history.push(pageKey);
     }
@@ -78,7 +78,7 @@ public final class Router {
             var pageKey = this.history.pop();
             this.setScenePage(pageKey);
         } catch (EmptyStackException e) {
-            this.setScenePage(Page.WELCOME);
+            this.setScenePage(AppPage.WELCOME);
         }
     }
 
@@ -88,7 +88,7 @@ public final class Router {
      * @param pageKey
      *            enum for destination page
      */
-    public synchronized void replace(Page pageKey) {
+    public synchronized void replace(AppPage pageKey) {
         if (!this.history.isEmpty()) {
             this.history.pop();
         }
@@ -130,7 +130,7 @@ public final class Router {
         return Router.instance;
     }
 
-    public Page getCurrentPage() {
+    public AppPage getCurrentPage() {
         return this.currentPage;
     }
 }

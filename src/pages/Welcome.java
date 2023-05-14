@@ -6,12 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import router.IPage;
+import router.AppPage;
 import router.Page;
 import router.Router;
 import utils.Utils;
 
-public class Welcome implements IPage {
+public class Welcome implements Page {
     private VBox node;
 
     @Override
@@ -25,7 +25,7 @@ public class Welcome implements IPage {
         button.setFont(new Font(48));
 
         button.setOnAction(e -> {
-            Router.getInstance().push(Page.GAME);
+            Router.getInstance().push(AppPage.GAME);
         });
 
         this.node.getChildren().addAll(logo, button);

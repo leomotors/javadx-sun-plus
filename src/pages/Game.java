@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import router.IPage;
+import router.Page;
 
-public class Game implements IPage {
+public class Game implements Page {
     private Parent node;
 
     @Override
