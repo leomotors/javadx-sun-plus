@@ -389,7 +389,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Group>
-      <Label layoutX="574.0" layoutY="93.0" text="SELECT SONG">
+      <Label layoutX="574.0" layoutY="105.0" text="SELECT SONG">
          <font>
             <Font name="System Bold" size="70.0" />
          </font>
