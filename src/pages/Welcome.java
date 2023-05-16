@@ -2,6 +2,7 @@ package pages;
 
 import config.Resource;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -23,6 +24,7 @@ public class Welcome implements Page {
         var button = new Button();
         button.setText("Go to Game");
         button.setFont(new Font(48));
+        button.setCursor(Cursor.HAND);
 
         button.setOnAction(e -> {
             Router.getInstance().push(AppPage.GAME);
