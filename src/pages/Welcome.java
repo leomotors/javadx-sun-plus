@@ -1,6 +1,6 @@
 package pages;
 
-import config.Resource;
+import constant.Resource;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;

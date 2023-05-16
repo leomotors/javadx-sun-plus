@@ -5,9 +5,9 @@ import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.Stack;
 
-import config.Config;
-import config.Constant;
-import config.Resource;
+import constant.Config;
+import constant.Constant;
+import constant.Resource;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pages.Game;

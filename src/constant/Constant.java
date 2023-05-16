@@ -1,4 +1,4 @@
-package config;
+package constant;
 
 /**
  * A static class containing useful constants ex: App name
