@@ -23,7 +23,7 @@
       </ImageView>
       <HBox layoutY="786.0" prefHeight="100.0" prefWidth="1600.0" style="-fx-background-color: rgba(0, 0, 0, 0.3);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
          <children>
-            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #e0e1e0; -fx-background-radius: 5;" text="A" textAlignment="CENTER">
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 5;" text="A" textAlignment="CENTER">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
@@ -46,7 +46,7 @@
                   <Insets right="10.0" />
                </padding>
             </Label>
-            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #e0e1e0; -fx-background-radius: 5;" text="D" textAlignment="CENTER">
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 5;" text="D" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
@@ -69,7 +69,7 @@
                   <Insets right="10.0" />
                </padding>
             </Label>
-            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #e0e1e0; -fx-background-radius: 5;" text="Q" textAlignment="CENTER">
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 5;" text="Q" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
@@ -92,7 +92,7 @@
                   <Insets right="10.0" />
                </padding>
             </Label>
-            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #e0e1e0; -fx-background-radius: 5;" text="E" textAlignment="CENTER">
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 5;" text="E" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
@@ -115,7 +115,7 @@
                   <Insets right="10.0" />
                </padding>
             </Label>
-            <Label alignment="CENTER" prefHeight="40.0" prefWidth="103.0" style="-fx-background-color: #e0e1e0; -fx-background-radius: 5;" text="ENTER" textAlignment="CENTER">
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="103.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 5;" text="ENTER" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
