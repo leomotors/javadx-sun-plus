@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import router.Router;
+import store.DataManager;
 
 public class Main extends Application {
 
@@ -12,8 +13,8 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             Router.createInstance(stage);
+            DataManager.createInstance();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             stage.close();
         }
