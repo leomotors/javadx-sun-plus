@@ -7,10 +7,12 @@ import java.util.Stack;
 
 import config.Config;
 import config.Constant;
+import config.Resource;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pages.Game;
 import pages.Welcome;
+import utils.ImageUtil;
 
 /**
  * Setup primary stage, scene and all pages.
@@ -45,6 +47,10 @@ public final class Router {
         this.stage.setScene(this.scene);
         this.stage.setTitle(Constant.APP_NAME);
         this.stage.setResizable(false);
+
+        var appIcon = ImageUtil.loadImage(Resource.JAVADX_LOGO_SQUARE);
+        this.stage.getIcons().add(appIcon);
+
         this.stage.show();
     }
 

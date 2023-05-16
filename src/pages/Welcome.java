@@ -17,7 +17,7 @@ public class Welcome implements Page {
 
     @Override
     public void initialize() {
-        var logo = ImageUtil.loadImage(Resource.JAVADX_LOGO, 500, 500);
+        var logo = ImageUtil.loadImageAsView(Resource.JAVADX_LOGO, 500, 500);
 
         this.node = new VBox();
 
