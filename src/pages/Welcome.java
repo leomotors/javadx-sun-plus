@@ -9,14 +9,14 @@ import javafx.scene.text.Font;
 import router.AppPage;
 import router.Page;
 import router.Router;
-import utils.Utils;
+import utils.ImageUtil;
 
 public class Welcome implements Page {
     private VBox node;
 
     @Override
     public void initialize() {
-        var logo = Utils.loadImage(Resource.JAVADX_LOGO, 500, 500);
+        var logo = ImageUtil.loadImage(Resource.JAVADX_LOGO, 500, 500);
 
         this.node = new VBox();
 

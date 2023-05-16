@@ -3,7 +3,9 @@ package utils;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Utils {
+public final class ImageUtil {
+    private ImageUtil() {}
+
     public static ImageView loadImage(String imagePath) {
         var path = ClassLoader.getSystemResource(imagePath).toString();
 
