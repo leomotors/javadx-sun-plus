@@ -2,6 +2,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import logic.core.Judgement;
 import logic.core.PlayResult;
 import utils.ScoreUtil;
 
@@ -16,7 +17,7 @@ class ScoreUtilTest {
         assertEquals(ScoreUtil.getRank(969_999), "AAA");
     }
 
-    private static PlayResult createNoFastLatePlayResult(
+    private static PlayResult createNoFastLateTapOnlyPlayResult(
             int platinumCriticalPerfect, int criticalPerfect, int perfect,
             int good, int miss, int maxCombo) {
         return new PlayResult() {
@@ -25,6 +26,33 @@ class ScoreUtilTest {
             public int getMaxCombo() {
                 return maxCombo;
             }
+
+            @Override
+            public Judgement getTap() {
+                return ScoreUtilTest.createNoFastLatePlayJudgement(
+                        platinumCriticalPerfect, criticalPerfect, perfect, good,
+                        miss);
+            }
+
+            @Override
+            public Judgement getHold() {
+                return ScoreUtilTest.createNoFastLatePlayJudgement(0, 0, 0, 0,
+                        0);
+            }
+
+            @Override
+            public Judgement getFlick() {
+                return ScoreUtilTest.createNoFastLatePlayJudgement(0, 0, 0, 0,
+                        0);
+            }
+
+        };
+    }
+
+    private static Judgement createNoFastLatePlayJudgement(
+            int platinumCriticalPerfect, int criticalPerfect, int perfect,
+            int good, int miss) {
+        return new Judgement() {
 
             @Override
             public int getPlatinumCriticalPerfect() {
@@ -85,7 +113,7 @@ class ScoreUtilTest {
 
     @Test
     void testCalculateScoreTheoreticalValue() {
-        var score = ScoreUtilTest.createNoFastLatePlayResult(
+        var score = ScoreUtilTest.createNoFastLateTapOnlyPlayResult(
                 69, 0, 0, 0, 0, 69);
 
         assertEquals(1_010_000, ScoreUtil.calculateScore(score));
@@ -96,7 +124,7 @@ class ScoreUtilTest {
 
     @Test
     void testCalculateScore1010000FastLate() {
-        var score = ScoreUtilTest.createNoFastLatePlayResult(
+        var score = ScoreUtilTest.createNoFastLateTapOnlyPlayResult(
                 42, 27, 0, 0, 0, 69);
 
         assertEquals(1_010_000, ScoreUtil.calculateScore(score));
@@ -107,7 +135,7 @@ class ScoreUtilTest {
 
     @Test
     void testAllPerfect() {
-        var score = ScoreUtilTest.createNoFastLatePlayResult(
+        var score = ScoreUtilTest.createNoFastLateTapOnlyPlayResult(
                 0, 0, 69, 0, 0, 69);
 
         assertEquals(901_785, ScoreUtil.calculateScore(score));
@@ -118,7 +146,7 @@ class ScoreUtilTest {
 
     @Test
     void testAllPerfectWithCritical() {
-        var score = ScoreUtilTest.createNoFastLatePlayResult(
+        var score = ScoreUtilTest.createNoFastLateTapOnlyPlayResult(
                 42, 10, 17, 0, 0, 69);
 
         assertEquals(983_338, ScoreUtil.calculateScore(score));

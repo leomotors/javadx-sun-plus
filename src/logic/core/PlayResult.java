@@ -2,35 +2,15 @@ package logic.core;
 
 public interface PlayResult {
     public default int getTotalNotes() {
-        return this.getPlatinumCriticalPerfect() + this.getCriticalPerfect()
-                + this.getPerfect() + this.getGood() + this.getMiss();
+        return this.getTap().getTotalNotes() + this.getHold().getTotalNotes()
+                + this.getFlick().getTotalNotes();
     }
 
     public int getMaxCombo();
 
-    // Judgements
+    public Judgement getTap();
 
-    public int getPlatinumCriticalPerfect();
+    public Judgement getHold();
 
-    public int getCriticalPerfect();
-
-    public int getPerfect();
-
-    public int getGood();
-
-    public int getMiss();
-
-    // Fast Late
-
-    public int getFastCriticalPerfect();
-
-    public int getLateCriticalPerfect();
-
-    public int getFastPerfect();
-
-    public int getLatePerfect();
-
-    public int getFastGood();
-
-    public int getLateGood();
+    public Judgement getFlick();
 }
