@@ -62,9 +62,13 @@ public final class Router {
         var page = this.pages.get(pageKey);
         var current = this.pages.get(this.getCurrentPage());
 
-        current.onNavigatedFrom();
+        current.onBeforeNavigatedFrom();
+        page.onBeforeNavigatedTo();
+
         this.scene.setRoot(page.getNode());
-        page.onNavigatedTo();
+
+        current.onAfterNavigatedFrom();
+        current.onAfterNavigatedTo();
 
         this.currentPage = pageKey;
     }

@@ -11,9 +11,13 @@ import javafx.scene.Parent;
 public interface Page {
     public void initialize() throws IOException;
 
-    public default void onNavigatedFrom() {}
+    public default void onBeforeNavigatedFrom() {}
 
-    public default void onNavigatedTo() {}
+    public default void onAfterNavigatedFrom() {}
+
+    public default void onBeforeNavigatedTo() {}
+
+    public default void onAfterNavigatedTo() {}
 
     public Parent getNode();
 }
