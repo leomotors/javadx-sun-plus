@@ -2,6 +2,7 @@ package utils;
 
 import java.math.BigInteger;
 
+import logic.core.Judgement;
 import logic.core.PlayResult;
 
 public final class ScoreUtil {
@@ -10,6 +11,8 @@ public final class ScoreUtil {
     public static final int CRITICAL_PERFECT_WEIGHT = 112_00;
     public static final int PERFECT_WEIGHT = 100_00;
     public static final int GOOD_WEIGHT = 69_42;
+
+    public static final int MAX_SCORE = 101_0000;
 
     public static String getRank(int score) {
         if (score >= 1_005_000) {
@@ -57,22 +60,38 @@ public final class ScoreUtil {
         return result.intValue();
     }
 
+    public static int calculatePartialScore(Judgement judgement) {
+        int rawScore = (judgement.getPlatinumCriticalPerfect()
+                + judgement.getCriticalPerfect())
+                * ScoreUtil.CRITICAL_PERFECT_WEIGHT
+                + judgement.getPerfect() * ScoreUtil.PERFECT_WEIGHT
+                + judgement.getGood() * ScoreUtil.GOOD_WEIGHT;
+
+        return rawScore;
+    }
+
     public static int calculateScore(PlayResult playResult) {
         int theoreticalScore = playResult.getTotalNotes()
                 * ScoreUtil.CRITICAL_PERFECT_WEIGHT;
 
-        int rawScore = (playResult.getPlatinumCriticalPerfect()
-                + playResult.getCriticalPerfect())
-                * ScoreUtil.CRITICAL_PERFECT_WEIGHT
-                + playResult.getPerfect() * ScoreUtil.PERFECT_WEIGHT
-                + playResult.getGood() * ScoreUtil.GOOD_WEIGHT;
+        int rawScore = ScoreUtil.calculatePartialScore(playResult.getTap())
+                + ScoreUtil.calculatePartialScore(playResult.getHold())
+                + ScoreUtil.calculatePartialScore(playResult.getFlick());
 
-        return ScoreUtil.safeScaling(rawScore, theoreticalScore, 1_010_000);
+        return ScoreUtil.safeScaling(rawScore, theoreticalScore,
+                ScoreUtil.MAX_SCORE);
+    }
+
+    public static int calculatePartialPlatinumScore(Judgement judgement) {
+        return judgement.getPlatinumCriticalPerfect() * 2
+                + judgement.getCriticalPerfect();
     }
 
     public static int calculatePlatinumScore(PlayResult playResult) {
-        return playResult.getPlatinumCriticalPerfect() * 2
-                + playResult.getCriticalPerfect();
+        return ScoreUtil.calculatePartialPlatinumScore(playResult.getTap())
+                + ScoreUtil.calculatePartialPlatinumScore(playResult.getHold())
+                + ScoreUtil
+                        .calculatePartialPlatinumScore(playResult.getFlick());
     }
 
     public static int calculateMaxPlatinumScore(PlayResult playResult) {
