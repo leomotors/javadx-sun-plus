@@ -41,7 +41,7 @@ public interface Judgement {
 
     public default int getLate() {
         return this.getLateCriticalPerfect()
-                + this.getLateGood()
+                + this.getLatePerfect()
                 + this.getLateGood();
     }
 }

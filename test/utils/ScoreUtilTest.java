@@ -102,4 +102,12 @@ class ScoreUtilTest {
         assertEquals(444, score.getGood());
         assertEquals(555, score.getMiss());
     }
+
+    @Test
+    void testComputeFastLate() {
+        var score = ScoreUtilMock.getMockPlayResult();
+
+        assertEquals(73, score.getFast());
+        assertEquals(94, score.getLate());
+    }
 }
