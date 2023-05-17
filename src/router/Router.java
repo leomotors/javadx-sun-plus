@@ -8,6 +8,7 @@ import java.util.Stack;
 import constant.Config;
 import constant.Constant;
 import constant.Resource;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pages.Game;
@@ -66,12 +67,20 @@ public final class Router {
         page.onBeforeNavigatedTo();
 
         this.scene.setRoot(page.getNode());
-        this.scene.getRoot().requestFocus();
-
         current.onAfterNavigatedFrom();
         current.onAfterNavigatedTo();
-
         this.currentPage = pageKey;
+        requestFocusRepeat();
+    }
+
+    private void requestFocusRepeat() {
+        Platform.runLater(() -> {
+            if (!scene.getRoot().isFocused()) {
+                scene.getRoot().requestFocus();
+                requestFocusRepeat();
+            }
+        });
+
     }
 
     /**
