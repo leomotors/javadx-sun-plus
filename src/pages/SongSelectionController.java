@@ -39,8 +39,6 @@ public class SongSelectionController {
     @FXML
     private Label PrevScore;
     @FXML
-    private VBox SelectButton;
-    @FXML
     private VBox SelectSong;
     @FXML
     private ImageView SelectImage;
