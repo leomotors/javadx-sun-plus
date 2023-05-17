@@ -13,7 +13,9 @@ public class SongSelectionController {
     @FXML
     private Label username;
     @FXML
-    private StackPane settingButton;
+    private StackPane SettingButton;
+    @FXML
+    private StackPane BackButton;
     @FXML
     private VBox PrevButton;
     @FXML
@@ -77,17 +79,17 @@ public class SongSelectionController {
 
     @FXML
     private void backButtonHandler() {
-
+        Router.getInstance().push(AppPage.WELCOME);
     }
 
     @FXML
     private void nextButtonHandler() {
-
+        toNextSong();
     }
 
     @FXML
     private void prevButtonHandler() {
-
+        toPrevSong();
     }
 
     @FXML
@@ -126,6 +128,7 @@ public class SongSelectionController {
         }
     }
 
+    @FXML
     private void playSong() {
         Router.getInstance().push(AppPage.GAME);
     }
