@@ -1,6 +1,7 @@
 package store;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,6 +28,9 @@ public final class DataManager {
         if (os.startsWith("Mac")) {
             this.pathPrefix = System.getProperty("user.home")
                     + DataManager.MAC_OS_X_PREFIX;
+        } else if (os.startsWith("Windows")) {
+            this.pathPrefix = Paths.get("").toAbsolutePath().toString();
+
         } else {
             throw new IOException("Unsupported OS");
         }
