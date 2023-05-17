@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -144,7 +143,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </HBox>
-      <Group fx:id="SelectSong" layoutX="625.0" layoutY="250.0">
+      <VBox fx:id="SelectSong" layoutX="625.0" layoutY="250.0">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="370.0" prefWidth="350.0" style="-fx-background-color: #089c7c;">
                <padding>
@@ -169,7 +168,7 @@
                   <Insets />
                </opaqueInsets>
             </VBox>
-            <VBox alignment="TOP_CENTER" layoutY="370.0" prefHeight="70.0" prefWidth="350.0" style="-fx-background-color: #F9F9F9;">
+            <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="350.0" style="-fx-background-color: #F9F9F9;">
                <padding>
                   <Insets left="20.0" right="20.0" />
                </padding>
@@ -195,9 +194,49 @@
                   <Insets />
                </opaqueInsets>
             </VBox>
-            <HBox alignment="TOP_RIGHT" layoutY="442.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="350.0" spacing="10.0" style="-fx-background-color: #344048;">
+            <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="350.0" spacing="10.0" style="-fx-background-color: #344048;">
+               <padding>
+                  <Insets bottom="5.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
                <children>
-                  <Label fx:id="SongName111" alignment="BOTTOM_RIGHT" graphicTextGap="0.0" prefHeight="50.0" text="SCORE :" textFill="WHITE">
+                  <Label fx:id="SelectClear" alignment="CENTER" graphicTextGap="0.0" prefHeight="24.0" prefWidth="100.0" style="-fx-background-color: #fffd5a;" text="CLEAR">
+                     <font>
+                        <Font name="Impact" size="18.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="SelectRank" alignment="CENTER" graphicTextGap="0.0" prefHeight="24.0" prefWidth="100.0" style="-fx-background-color: #fffd5a;" text="SSS">
+                     <font>
+                        <Font name="Impact" size="18.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="SelectAPFC" alignment="CENTER" graphicTextGap="0.0" prefHeight="24.0" prefWidth="100.0" style="-fx-background-color: #fffd5a;" text="AC">
+                     <font>
+                        <Font name="Impact" size="18.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefWidth="350.0" spacing="10.0" style="-fx-background-color: #344048;">
+               <children>
+                  <Label fx:id="SongName111" alignment="BOTTOM_RIGHT" graphicTextGap="0.0" text="SCORE :" textFill="WHITE">
                      <font>
                         <Font name="Impact" size="18.0" />
                      </font>
@@ -208,9 +247,9 @@
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="SelectScore" alignment="BOTTOM_RIGHT" minWidth="100.0" prefHeight="50.0" text="1,010,000" textFill="WHITE">
+                  <Label fx:id="SelectScore" alignment="BOTTOM_RIGHT" minWidth="100.0" text="1,010,000" textFill="WHITE">
                      <font>
-                        <Font name="Impact" size="40.0" />
+                        <Font name="Impact" size="35.0" />
                      </font>
                      <opaqueInsets>
                         <Insets />
@@ -218,15 +257,12 @@
                   </Label>
                </children>
                <padding>
-                  <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                  <Insets bottom="5.0" left="20.0" right="20.0" />
                </padding>
             </HBox>
          </children>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Group>
-      <Group fx:id="PrevSong" layoutX="996.0" layoutY="250.0" scaleX="0.9" scaleY="0.9" AnchorPane.leftAnchor="150.0">
+      </VBox>
+      <VBox fx:id="PrevSong" layoutX="151.0" layoutY="250.0" scaleX="0.9" scaleY="0.9" AnchorPane.leftAnchor="150.0">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="370.0" prefWidth="350.0" style="-fx-background-color: #089c7c;">
                <padding>
@@ -251,7 +287,7 @@
                   <Insets />
                </opaqueInsets>
             </VBox>
-            <VBox alignment="TOP_CENTER" layoutY="370.0" prefHeight="70.0" prefWidth="350.0" style="-fx-background-color: #F9F9F9;">
+            <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="350.0" style="-fx-background-color: #F9F9F9;">
                <padding>
                   <Insets left="20.0" right="20.0" />
                </padding>
@@ -277,9 +313,49 @@
                   <Insets />
                </opaqueInsets>
             </VBox>
-            <HBox alignment="TOP_RIGHT" layoutY="442.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="350.0" spacing="10.0" style="-fx-background-color: #344048;">
+            <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="350.0" spacing="10.0" style="-fx-background-color: #344048;">
+               <padding>
+                  <Insets bottom="5.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
                <children>
-                  <Label fx:id="SongName11111" alignment="BOTTOM_RIGHT" graphicTextGap="0.0" prefHeight="50.0" text="SCORE :" textFill="WHITE">
+                  <Label fx:id="PrevClear" alignment="CENTER" graphicTextGap="0.0" prefHeight="24.0" prefWidth="100.0" style="-fx-background-color: #fffd5a;" text="CLEAR">
+                     <font>
+                        <Font name="Impact" size="18.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="PrevRank" alignment="CENTER" graphicTextGap="0.0" prefHeight="24.0" prefWidth="100.0" style="-fx-background-color: #fffd5a;" text="SSS">
+                     <font>
+                        <Font name="Impact" size="18.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="PrevAPFC" alignment="CENTER" graphicTextGap="0.0" prefHeight="24.0" prefWidth="100.0" style="-fx-background-color: #fffd5a;" text="AC">
+                     <font>
+                        <Font name="Impact" size="18.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefWidth="350.0" spacing="10.0" style="-fx-background-color: #344048;">
+               <children>
+                  <Label fx:id="SongName11111" alignment="BOTTOM_RIGHT" graphicTextGap="0.0" text="SCORE :" textFill="WHITE">
                      <font>
                         <Font name="Impact" size="18.0" />
                      </font>
@@ -290,9 +366,9 @@
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="PrevScore" alignment="BOTTOM_RIGHT" minWidth="100.0" prefHeight="50.0" text="1,010,000" textFill="WHITE">
+                  <Label fx:id="PrevScore" alignment="BOTTOM_RIGHT" minWidth="100.0" text="1,010,000" textFill="WHITE">
                      <font>
-                        <Font name="Impact" size="40.0" />
+                        <Font name="Impact" size="35.0" />
                      </font>
                      <opaqueInsets>
                         <Insets />
@@ -300,15 +376,12 @@
                   </Label>
                </children>
                <padding>
-                  <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                  <Insets bottom="5.0" left="20.0" right="20.0" />
                </padding>
             </HBox>
          </children>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Group>
-      <Group fx:id="NextSong" layoutX="1120.0" layoutY="250.0" scaleX="0.9" scaleY="0.9" AnchorPane.rightAnchor="150.0">
+      </VBox>
+      <VBox fx:id="NextSong" layoutX="1100.0" layoutY="250.0" scaleX="0.9" scaleY="0.9" AnchorPane.rightAnchor="150.0">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="370.0" prefWidth="350.0" style="-fx-background-color: #089c7c;">
                <padding>
@@ -333,7 +406,7 @@
                   <Insets />
                </opaqueInsets>
             </VBox>
-            <VBox alignment="TOP_CENTER" layoutY="370.0" prefHeight="70.0" prefWidth="350.0" style="-fx-background-color: #F9F9F9;">
+            <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="350.0" style="-fx-background-color: #F9F9F9;">
                <padding>
                   <Insets left="20.0" right="20.0" />
                </padding>
@@ -359,9 +432,49 @@
                   <Insets />
                </opaqueInsets>
             </VBox>
-            <HBox alignment="TOP_RIGHT" layoutY="442.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="350.0" spacing="10.0" style="-fx-background-color: #344048;">
+            <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="350.0" spacing="10.0" style="-fx-background-color: #344048;">
+               <padding>
+                  <Insets bottom="5.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
                <children>
-                  <Label fx:id="SongName1111" alignment="BOTTOM_RIGHT" graphicTextGap="0.0" prefHeight="50.0" text="SCORE :" textFill="WHITE">
+                  <Label fx:id="NextClear" alignment="CENTER" graphicTextGap="0.0" prefHeight="24.0" prefWidth="100.0" style="-fx-background-color: #fffd5a;" text="CLEAR">
+                     <font>
+                        <Font name="Impact" size="18.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="NextRank" alignment="CENTER" graphicTextGap="0.0" prefHeight="24.0" prefWidth="100.0" style="-fx-background-color: #fffd5a;" text="SSS">
+                     <font>
+                        <Font name="Impact" size="18.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="NextAPFC" alignment="CENTER" graphicTextGap="0.0" prefHeight="24.0" prefWidth="100.0" style="-fx-background-color: #fffd5a;" text="AC">
+                     <font>
+                        <Font name="Impact" size="18.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefWidth="350.0" spacing="10.0" style="-fx-background-color: #344048;">
+               <children>
+                  <Label fx:id="SongName1111" alignment="BOTTOM_RIGHT" graphicTextGap="0.0" text="SCORE :" textFill="WHITE">
                      <font>
                         <Font name="Impact" size="18.0" />
                      </font>
@@ -372,9 +485,9 @@
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="NextScore" alignment="BOTTOM_RIGHT" minWidth="100.0" prefHeight="50.0" text="1,010,000" textFill="WHITE">
+                  <Label fx:id="NextScore" alignment="BOTTOM_RIGHT" minWidth="100.0" text="1,010,000" textFill="WHITE">
                      <font>
-                        <Font name="Impact" size="40.0" />
+                        <Font name="Impact" size="35.0" />
                      </font>
                      <opaqueInsets>
                         <Insets />
@@ -382,14 +495,11 @@
                   </Label>
                </children>
                <padding>
-                  <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                  <Insets bottom="5.0" left="20.0" right="20.0" />
                </padding>
             </HBox>
          </children>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Group>
+      </VBox>
       <Label layoutX="574.0" layoutY="105.0" text="SELECT SONG">
          <font>
             <Font name="System Bold" size="70.0" />
