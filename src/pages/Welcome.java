@@ -30,7 +30,7 @@ public class Welcome implements Page {
         button.setCursor(Cursor.HAND);
 
         button.setOnAction(e -> {
-            Router.getInstance().push(AppPage.GAME);
+            Router.getInstance().push(AppPage.SONG_SELECTION);
         });
 
         this.node.getChildren().addAll(logo, button);

@@ -462,6 +462,9 @@
                <image>
                   <Image url="@../../res/images/settings.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
          <padding>
