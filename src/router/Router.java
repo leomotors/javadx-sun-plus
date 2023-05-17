@@ -11,6 +11,7 @@ import constant.Resource;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pages.Game;
+import pages.Result;
 import pages.SongSelection;
 import pages.Welcome;
 import utils.ImageUtil;
@@ -37,6 +38,7 @@ public final class Router {
         this.pages.put(AppPage.WELCOME, new Welcome());
         this.pages.put(AppPage.GAME, new Game());
         this.pages.put(AppPage.SONG_SELECTION, new SongSelection());
+        this.pages.put(AppPage.RESULT, new Result());
 
         for (var page : this.pages.values()) {
             page.initialize();
@@ -102,6 +104,14 @@ public final class Router {
         }
 
         this.push(pageKey);
+    }
+
+    /**
+     * Soft Reset, only used for testing
+     */
+    public synchronized void reset() {
+        this.history.clear();
+        this.setScenePage(AppPage.WELCOME);
     }
 
     /**

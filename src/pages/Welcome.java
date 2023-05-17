@@ -24,8 +24,7 @@ public class Welcome implements Page {
 
         this.node = new VBox();
 
-        var button = new Button();
-        button.setText("Enter Game");
+        var button = new Button("Enter Game");
         button.setFont(new Font(36));
         button.setCursor(Cursor.HAND);
 
@@ -33,7 +32,15 @@ public class Welcome implements Page {
             Router.getInstance().push(AppPage.SONG_SELECTION);
         });
 
-        this.node.getChildren().addAll(logo, button);
+        var testButton = new Button("Test: Result Page");
+        testButton.setFont(new Font(36));
+        testButton.setCursor(Cursor.HAND);
+
+        testButton.setOnAction(e -> {
+            Router.getInstance().push(AppPage.RESULT);
+        });
+
+        this.node.getChildren().addAll(logo, button, testButton);
         this.node.setAlignment(Pos.CENTER);
         this.node.setSpacing(48);
         this.node.setBackground(new Background(
