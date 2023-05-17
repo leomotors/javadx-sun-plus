@@ -52,7 +52,7 @@ public final class ScoreUtil {
         var denominator = BigInteger.valueOf(maxScore);
         var multiplier = BigInteger.valueOf(scale);
 
-        var result = numerator.divide(denominator).multiply(multiplier);
+        var result = numerator.multiply(multiplier).divide(denominator);
 
         return result.intValue();
     }
