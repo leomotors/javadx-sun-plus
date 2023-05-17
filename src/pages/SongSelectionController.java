@@ -76,6 +76,18 @@ public class SongSelectionController {
     private Label NextAPFC;
     @FXML
     private Label NextScore;
+    @FXML
+    private VBox SelectBG;
+    @FXML
+    private VBox NextBG;
+    @FXML
+    private VBox PrevBG;
+
+    private final String BASIC_COLOR = "#22ad39";
+    private final String ADVANCE_COLOR = "#f39800";
+    private final String EXPERT_COLOR = "#e5024f";
+    private final String MASTER_COLOR = "#ae0cd2";
+    private int currentDifficulty = 0;
 
     @FXML
     private void backButtonHandler() {
@@ -134,7 +146,50 @@ public class SongSelectionController {
     }
 
     private void difficultyHandler(int modifier) {
-
+        if (currentDifficulty + modifier > 3
+                || currentDifficulty + modifier < 0) {
+            return;
+        }
+        currentDifficulty += modifier;
+        String bgFill;
+        switch (currentDifficulty) {
+            case 0:
+                bgFill = "-fx-background-color: " + BASIC_COLOR + ";";
+                SelectDifficulty.setText("BASIC");
+                PrevDifficulty.setText("BASIC");
+                NextDifficulty.setText("BASIC");
+                SelectBG.setStyle(bgFill);
+                NextBG.setStyle(bgFill);
+                PrevBG.setStyle(bgFill);
+                break;
+            case 1:
+                bgFill = "-fx-background-color: " + ADVANCE_COLOR + ";";
+                SelectDifficulty.setText("ADVANCE");
+                PrevDifficulty.setText("ADVANCE");
+                NextDifficulty.setText("ADVANCE");
+                SelectBG.setStyle(bgFill);
+                NextBG.setStyle(bgFill);
+                PrevBG.setStyle(bgFill);
+                break;
+            case 2:
+                bgFill = "-fx-background-color: " + EXPERT_COLOR + ";";
+                SelectDifficulty.setText("EXPERT");
+                PrevDifficulty.setText("EXPERT");
+                NextDifficulty.setText("EXPERT");
+                SelectBG.setStyle(bgFill);
+                NextBG.setStyle(bgFill);
+                PrevBG.setStyle(bgFill);
+                break;
+            case 3:
+                bgFill = "-fx-background-color: " + MASTER_COLOR + ";";
+                SelectDifficulty.setText("MASTER");
+                PrevDifficulty.setText("MASTER");
+                NextDifficulty.setText("MASTER");
+                SelectBG.setStyle(bgFill);
+                NextBG.setStyle(bgFill);
+                PrevBG.setStyle(bgFill);
+                break;
+        }
     }
 
     private void toPrevSong() {
