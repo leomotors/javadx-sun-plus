@@ -101,6 +101,6 @@ public class SongSelectionController {
 
     @FXML
     private void keyPressHandler(KeyEvent event) {
-
+        System.out.println("PRESSED!");
     }
 }

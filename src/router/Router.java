@@ -66,6 +66,7 @@ public final class Router {
         page.onBeforeNavigatedTo();
 
         this.scene.setRoot(page.getNode());
+        this.scene.getRoot().requestFocus();
 
         current.onAfterNavigatedFrom();
         current.onAfterNavigatedTo();
