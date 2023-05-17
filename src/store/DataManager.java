@@ -12,6 +12,7 @@ public final class DataManager {
     private static DataManager instance;
 
     public static final String MAC_OS_X_PREFIX = "/Library/Application Support/javadx";
+    public static final String WINDOWS_OS_X_PREFIX = "/AppData/Local/javadx";
     public static final String SETTINGS_FILE = "/settings.txt";
 
     private static final Map<Setting, String> defaultValue = Collections
@@ -27,6 +28,10 @@ public final class DataManager {
         if (os.startsWith("Mac")) {
             this.pathPrefix = System.getProperty("user.home")
                     + DataManager.MAC_OS_X_PREFIX;
+        } else if (os.startsWith("Windows")) {
+            this.pathPrefix = System.getProperty("user.home")
+                    + DataManager.WINDOWS_OS_X_PREFIX;
+
         } else {
             throw new IOException("Unsupported OS");
         }
