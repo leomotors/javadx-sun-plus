@@ -6,6 +6,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import router.AppPage;
+import router.Router;
 
 public class SongSelectionController {
     @FXML
@@ -101,6 +103,42 @@ public class SongSelectionController {
 
     @FXML
     private void keyPressHandler(KeyEvent event) {
-        System.out.println("PRESSED!");
+        switch (event.getCode()) {
+            case ESCAPE:
+                Router.getInstance().push(AppPage.WELCOME);
+                break;
+            case ENTER:
+                playSong();
+                break;
+            case Q:
+                difficultyHandler(-1);
+                break;
+            case E:
+                difficultyHandler(1);
+                break;
+            case A:
+                toPrevSong();
+                break;
+            case D:
+                toNextSong();
+            default:
+                break;
+        }
+    }
+
+    private void playSong() {
+        Router.getInstance().push(AppPage.GAME);
+    }
+
+    private void difficultyHandler(int modifier) {
+
+    }
+
+    private void toPrevSong() {
+
+    }
+
+    private void toNextSong() {
+
     }
 }
