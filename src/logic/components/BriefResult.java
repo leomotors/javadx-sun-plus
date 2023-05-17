@@ -44,32 +44,21 @@ public class BriefResult extends BorderPane {
         this.setPadding(new Insets(24));
     }
 
-    private class DXText extends Text {
-        public DXText() {
-            super();
-            this.setFont(new Font("Helvetica", 36));
-        }
-
-        public DXText(String text) {
-            this();
-            this.setText(text);
-        }
-
-        public void setText(int number) {
-            super.setText(Integer.toString(number));
-        }
-    }
-
     private Node createTopPane() {
-        var topPane = new HBox();
+        var topPane = new GridPane();
 
         this.scoreText = new Text();
-        this.scoreText.setFont(new Font(192));
+        this.scoreText.setFont(new Font(144));
         this.rankText = new Text();
-        this.rankText.setFont(new Font(192));
+        this.rankText.setFont(new Font(144));
 
-        topPane.getChildren().addAll(scoreText, rankText);
-        topPane.setSpacing(72);
+        topPane.add(new DXText("SCORE"), 0, 0);
+        topPane.add(new DXText("RANK"), 1, 0);
+
+        topPane.add(this.scoreText, 0, 1);
+        topPane.add(this.rankText, 1, 1);
+
+        topPane.setHgap(72);
         topPane.setPadding(new Insets(24));
 
         topPane.setBackground(new Background(
