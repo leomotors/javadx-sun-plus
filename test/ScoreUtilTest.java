@@ -154,4 +154,39 @@ class ScoreUtilTest {
         assertEquals(138,
                 ScoreUtil.calculateMaxPlatinumScore(score));
     }
+
+    @Test
+    void testComputedProperties() {
+        var judgement = ScoreUtilTest.createNoFastLatePlayJudgement(5, 4, 3, 2,
+                9);
+
+        var score = new PlayResult() {
+
+            @Override
+            public int getMaxCombo() {
+                return 10;
+            }
+
+            @Override
+            public Judgement getTap() {
+                return judgement;
+            }
+
+            @Override
+            public Judgement getHold() {
+                return judgement;
+            }
+
+            @Override
+            public Judgement getFlick() {
+                return judgement;
+            }
+        };
+
+        assertEquals(15, score.getPlatinumCriticalPerfect());
+        assertEquals(12, score.getCriticalPerfect());
+        assertEquals(9, score.getPerfect());
+        assertEquals(6, score.getGood());
+        assertEquals(27, score.getMiss());
+    }
 }
