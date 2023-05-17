@@ -157,36 +157,42 @@ class ScoreUtilTest {
 
     @Test
     void testComputedProperties() {
-        var judgement = ScoreUtilTest.createNoFastLatePlayJudgement(5, 4, 3, 2,
-                9);
+        var judgementTap = ScoreUtilTest.createNoFastLatePlayJudgement(
+                100, 200, 300, 400, 500);
+
+        var judgementHold = ScoreUtilTest.createNoFastLatePlayJudgement(
+                10, 20, 30, 40, 50);
+
+        var judgementFlick = ScoreUtilTest.createNoFastLatePlayJudgement(
+                1, 2, 3, 4, 5);
 
         var score = new PlayResult() {
 
             @Override
             public int getMaxCombo() {
-                return 10;
+                return 69;
             }
 
             @Override
             public Judgement getTap() {
-                return judgement;
+                return judgementTap;
             }
 
             @Override
             public Judgement getHold() {
-                return judgement;
+                return judgementHold;
             }
 
             @Override
             public Judgement getFlick() {
-                return judgement;
+                return judgementFlick;
             }
         };
 
-        assertEquals(15, score.getPlatinumCriticalPerfect());
-        assertEquals(12, score.getCriticalPerfect());
-        assertEquals(9, score.getPerfect());
-        assertEquals(6, score.getGood());
-        assertEquals(27, score.getMiss());
+        assertEquals(111, score.getPlatinumCriticalPerfect());
+        assertEquals(222, score.getCriticalPerfect());
+        assertEquals(333, score.getPerfect());
+        assertEquals(444, score.getGood());
+        assertEquals(555, score.getMiss());
     }
 }
