@@ -41,4 +41,14 @@ public interface PlayResult {
         return this.getTap().getMiss() + this.getHold().getMiss()
                 + this.getFlick().getMiss();
     }
+
+    public default int getFast() {
+        return this.getTap().getFast() + this.getHold().getFast()
+                + this.getFlick().getFast();
+    }
+
+    public default int getLate() {
+        return this.getTap().getLate() + this.getHold().getLate()
+                + this.getFlick().getLate();
+    }
 }

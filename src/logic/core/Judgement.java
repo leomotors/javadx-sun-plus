@@ -1,11 +1,6 @@
 package logic.core;
 
 public interface Judgement {
-    public default int getTotalNotes() {
-        return this.getPlatinumCriticalPerfect() + this.getCriticalPerfect()
-                + this.getPerfect() + this.getGood() + this.getMiss();
-    }
-
     // Judgements
 
     public int getPlatinumCriticalPerfect();
@@ -31,4 +26,20 @@ public interface Judgement {
     public int getFastGood();
 
     public int getLateGood();
+
+    // Computed
+    public default int getTotalNotes() {
+        return this.getPlatinumCriticalPerfect() + this.getCriticalPerfect()
+                + this.getPerfect() + this.getGood() + this.getMiss();
+    }
+
+    public default int getFast() {
+        return this.getFastCriticalPerfect() + this.getFastPerfect()
+                + this.getFastGood();
+    }
+
+    public default int getLate() {
+        return this.getLateCriticalPerfect() + this.getLateGood()
+                + this.getLateGood();
+    }
 }
