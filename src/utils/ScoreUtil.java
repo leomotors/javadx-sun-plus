@@ -2,6 +2,7 @@ package utils;
 
 import java.math.BigInteger;
 
+import logic.core.ClearType;
 import logic.core.Judgement;
 import logic.core.PlayResult;
 
@@ -96,5 +97,22 @@ public final class ScoreUtil {
 
     public static int calculateMaxPlatinumScore(PlayResult playResult) {
         return playResult.getTotalNotes() * 2;
+    }
+
+    public static boolean isFullCombo(PlayResult playResult) {
+        return playResult.getTotalNotes() == playResult.getMaxCombo();
+    }
+
+    public static boolean isAllPerfect(PlayResult playResult) {
+        return ScoreUtil.isFullCombo(playResult) && playResult
+                .getTotalNotes() == (playResult.getPlatinumCriticalPerfect()
+                        + playResult.getCriticalPerfect()
+                        + playResult.getPerfect());
+    }
+
+    public static ClearType getClearType(PlayResult playResult) {
+        return ScoreUtil.isAllPerfect(playResult) ? ClearType.ALL_PERFECT
+                : ScoreUtil.isFullCombo(playResult) ? ClearType.FULL_COMBO
+                        : ClearType.CLEAR;
     }
 }

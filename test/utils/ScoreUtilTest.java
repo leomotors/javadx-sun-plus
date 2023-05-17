@@ -1,9 +1,12 @@
 package utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import logic.core.ClearType;
 import logic.core.Judgement;
 import logic.core.PlayResult;
 
@@ -109,5 +112,27 @@ class ScoreUtilTest {
 
         assertEquals(73, score.getFast());
         assertEquals(94, score.getLate());
+    }
+
+    @Test
+    void testCalculateClearType() {
+        var clear = ScoreUtilMock.getMockPlayResult();
+        var fc = ScoreUtilMock.createNoFastLateTapOnlyPlayResult(
+                42, 10, 16, 1, 0, 69);
+        var ap = ScoreUtilMock.createNoFastLateTapOnlyPlayResult(
+                42, 10, 17, 0, 0, 69);
+
+        assertEquals(ClearType.CLEAR, ScoreUtil.getClearType(clear));
+        assertEquals(ClearType.FULL_COMBO, ScoreUtil.getClearType(fc));
+        assertEquals(ClearType.ALL_PERFECT, ScoreUtil.getClearType(ap));
+
+        assertTrue(ScoreUtil.isFullCombo(ap));
+        assertTrue(ScoreUtil.isAllPerfect(ap));
+
+        assertTrue(ScoreUtil.isFullCombo(fc));
+        assertFalse(ScoreUtil.isAllPerfect(fc));
+
+        assertFalse(ScoreUtil.isFullCombo(clear));
+        assertFalse(ScoreUtil.isAllPerfect(clear));
     }
 }
