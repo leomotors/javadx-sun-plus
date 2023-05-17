@@ -35,7 +35,6 @@ public final class DataManager {
         } else {
             throw new IOException("Unsupported OS");
         }
-        // TODO Windows
 
         this.readConfig();
         this.writeConfig();
