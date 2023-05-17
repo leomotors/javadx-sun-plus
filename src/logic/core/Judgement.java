@@ -34,12 +34,14 @@ public interface Judgement {
     }
 
     public default int getFast() {
-        return this.getFastCriticalPerfect() + this.getFastPerfect()
+        return this.getFastCriticalPerfect()
+                + this.getFastPerfect()
                 + this.getFastGood();
     }
 
     public default int getLate() {
-        return this.getLateCriticalPerfect() + this.getLateGood()
+        return this.getLateCriticalPerfect()
+                + this.getLateGood()
                 + this.getLateGood();
     }
 }

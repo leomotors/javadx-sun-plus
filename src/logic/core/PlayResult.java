@@ -11,7 +11,8 @@ public interface PlayResult {
 
     // Computed
     public default int getTotalNotes() {
-        return this.getTap().getTotalNotes() + this.getHold().getTotalNotes()
+        return this.getTap().getTotalNotes()
+                + this.getHold().getTotalNotes()
                 + this.getFlick().getTotalNotes();
     }
 
@@ -28,27 +29,32 @@ public interface PlayResult {
     }
 
     public default int getPerfect() {
-        return this.getTap().getPerfect() + this.getHold().getPerfect()
+        return this.getTap().getPerfect()
+                + this.getHold().getPerfect()
                 + this.getFlick().getPerfect();
     }
 
     public default int getGood() {
-        return this.getTap().getGood() + this.getHold().getGood()
+        return this.getTap().getGood()
+                + this.getHold().getGood()
                 + this.getFlick().getGood();
     }
 
     public default int getMiss() {
-        return this.getTap().getMiss() + this.getHold().getMiss()
+        return this.getTap().getMiss()
+                + this.getHold().getMiss()
                 + this.getFlick().getMiss();
     }
 
     public default int getFast() {
-        return this.getTap().getFast() + this.getHold().getFast()
+        return this.getTap().getFast()
+                + this.getHold().getFast()
                 + this.getFlick().getFast();
     }
 
     public default int getLate() {
-        return this.getTap().getLate() + this.getHold().getLate()
+        return this.getTap().getLate()
+                + this.getHold().getLate()
                 + this.getFlick().getLate();
     }
 }
