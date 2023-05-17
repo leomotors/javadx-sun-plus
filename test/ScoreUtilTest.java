@@ -6,6 +6,16 @@ import logic.core.PlayResult;
 import utils.ScoreUtil;
 
 class ScoreUtilTest {
+    @Test
+    void testCalculateRank() {
+        assertEquals(ScoreUtil.getRank(1_005_000), "SSS+");
+        assertEquals(ScoreUtil.getRank(1_006_969), "SSS+");
+
+        assertEquals(ScoreUtil.getRank(690_420), "C");
+        assertEquals(ScoreUtil.getRank(970_000), "S");
+        assertEquals(ScoreUtil.getRank(969_999), "AAA");
+    }
+
     private static PlayResult createNoFastLatePlayResult(
             int platinumCriticalPerfect, int criticalPerfect, int perfect,
             int good, int miss, int maxCombo) {
