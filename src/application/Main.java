@@ -2,9 +2,12 @@ package application;
 
 import java.io.IOException;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import router.Router;
 import store.DataManager;
 
@@ -19,6 +22,14 @@ public class Main extends Application {
                     .getSystemResource("sounds/partner/CPP_WELCOME.wav")
                     .toString());
             welcome.play();
+            AudioClip audio2Player = new AudioClip(ClassLoader
+                    .getSystemResource("sounds/bgm/welcome.mp3")
+                    .toString());
+            audio2Player.setCycleCount(AudioClip.INDEFINITE);
+            Duration delay = Duration.seconds(2);
+            Timeline timeline = new Timeline(
+                    new KeyFrame(delay, event -> audio2Player.play()));
+            timeline.play();
         } catch (IOException e) {
             e.printStackTrace();
             stage.close();
