@@ -1,14 +1,30 @@
 package logic.components;
 
+import constant.JudgementName;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import logic.core.ClearType;
+import logic.core.Judgement;
 import logic.core.PlayResult;
 import utils.ScoreUtil;
 
+/**
+ * Component of {@link pages.Result}
+ */
 public class DetailedResult extends BorderPane {
     // States
 
@@ -18,6 +34,9 @@ public class DetailedResult extends BorderPane {
     private DXText rankText;
     private DXText clearText;
 
+    // Left Pane
+    private GridPane scoreTable;
+
     // Bottom Pane
     private DXText platinumScoreText;
 
@@ -26,6 +45,8 @@ public class DetailedResult extends BorderPane {
         this.setLeft(this.createLeftPane());
         this.setRight(this.createRightPane());
         this.setBottom(this.createBottomPane());
+
+        this.setPadding(new Insets(16));
     }
 
     private Node createTopPane() {
@@ -49,7 +70,121 @@ public class DetailedResult extends BorderPane {
     }
 
     private Node createLeftPane() {
-        return new GridPane();
+        this.scoreTable = new GridPane();
+
+        this.scoreTable.setPadding(new Insets(16));
+
+        this.scoreTable.setHgap(2);
+        this.scoreTable.setVgap(2);
+
+        this.scoreTable.setBackground(new Background(
+                new BackgroundFill(new Color(1.0, 1.0, 1.0, 0.5), null, null)));
+
+        return this.scoreTable;
+    }
+
+    private void renderLeftPane(PlayResult playResult) {
+        this.scoreTable.getChildren().clear();
+
+        this.scoreTable.add(this.createCell(), 0, 0);
+        this.scoreTable.add(
+                this.createCell(JudgementName.CRITICAL_PERFECT), 0, 1);
+        this.scoreTable.add(this.createCell(JudgementName.PERFECT), 0, 2);
+        this.scoreTable.add(this.createCell(JudgementName.GOOD), 0, 3);
+        this.scoreTable.add(this.createCell(JudgementName.MISS), 0, 4);
+
+        // Render Col 1 - 3
+        this.renderJudgement(playResult.getTap(), "TAP", 1);
+        this.renderJudgement(playResult.getHold(), "HOLD", 2);
+        this.renderJudgement(playResult.getFlick(), "FLICK", 3);
+
+        // Render Col 4
+        this.renderFastLateColumn(playResult);
+    }
+
+    private void renderJudgement(Judgement judgement, String name, int col) {
+        var topCell = this.createCell(name);
+        var percentText = new DXText(String.format("%.2f%%",
+                ScoreUtil.calculatePartialScoreAsPercentage(judgement)));
+        percentText.setFontSize(16);
+        topCell.getChildren().add(percentText);
+        topCell.setAlignment(Pos.CENTER);
+        topCell.setSpacing(4);
+
+        this.scoreTable.add(topCell, col, 0);
+
+        this.scoreTable
+                .add(this.createCell(judgement.getPlatinumCriticalPerfect()
+                        + judgement.getCriticalPerfect()), col, 1);
+        this.scoreTable.add(this.createCell(judgement.getPerfect()), col, 2);
+        this.scoreTable.add(this.createCell(judgement.getGood()), col, 3);
+        this.scoreTable.add(this.createCell(judgement.getMiss()), col, 4);
+    }
+
+    private void renderFastLateColumn(PlayResult playResult) {
+        this.scoreTable.add(
+                this.renderFastLateCell(playResult.getFast(),
+                        playResult.getLate(), 22),
+                4, 0);
+
+        this.scoreTable.add(
+                this.renderFastLateCell(playResult.getFastCriticalPerfect(),
+                        playResult.getLateCriticalPerfect()),
+                4, 1);
+        this.scoreTable.add(
+                this.renderFastLateCell(playResult.getFastPerfect(),
+                        playResult.getLatePerfect()),
+                4, 2);
+        this.scoreTable.add(
+                this.renderFastLateCell(playResult.getFastGood(),
+                        playResult.getLateGood()),
+                4, 3);
+
+        this.scoreTable.add(this.createCell("-"), 4, 4);
+    }
+
+    private VBox renderFastLateCell(int fast, int late) {
+        return this.renderFastLateCell(fast, late, 20);
+    }
+
+    private VBox renderFastLateCell(int fast, int late, int fontSize) {
+        var fastText = new DXText("FAST " + fast);
+        var lateText = new DXText("LATE " + late);
+
+        fastText.setFontSize(fontSize);
+        lateText.setFontSize(fontSize);
+
+        fastText.setFill(Color.BLUE);
+        lateText.setFill(Color.RED);
+
+        return this.createCell(fastText, lateText);
+    }
+
+    private VBox createCell(Node... children) {
+        var cell = new VBox();
+        cell.setBorder(new Border(
+                new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,
+                        CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
+        cell.getChildren().addAll(children);
+
+        cell.setPadding(new Insets(16));
+
+        return cell;
+    }
+
+    private VBox createCell(String text) {
+        if (text != null) {
+            var dxText = new DXText(text);
+            dxText.setFontSize(24);
+            return this.createCell(dxText);
+        }
+
+        return this.createCell();
+    }
+
+    private Pane createCell(int number) {
+        return this.createCell(Integer.toString(number));
     }
 
     private Node createRightPane() {
@@ -67,6 +202,7 @@ public class DetailedResult extends BorderPane {
     }
 
     public void render(PlayResult playResult) {
+        // Render Top Pane
         var score = ScoreUtil.calculateScore(playResult);
         var rank = ScoreUtil.getRank(score);
         var clearType = ScoreUtil.getClearType(playResult);
@@ -78,6 +214,10 @@ public class DetailedResult extends BorderPane {
                 ? "MADE IN SAMUT PRAKAN"
                 : clearType == ClearType.FULL_COMBO ? "FULL COMBO" : "CLEAR");
 
+        // Render Left Pane
+        this.renderLeftPane(playResult);
+
+        // Render Bottom Pane
         var pScore = ScoreUtil.calculatePlatinumScore(playResult);
         var maxPScore = ScoreUtil.calculateMaxPlatinumScore(playResult);
         this.platinumScoreText

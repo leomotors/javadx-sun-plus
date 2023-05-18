@@ -1,5 +1,6 @@
 package logic.components;
 
+import constant.JudgementName;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.Background;
@@ -14,6 +15,9 @@ import javafx.scene.text.Text;
 import logic.core.PlayResult;
 import utils.ScoreUtil;
 
+/**
+ * Component of {@link pages.Result}
+ */
 public class BriefResult extends BorderPane {
     // States
 
@@ -41,6 +45,7 @@ public class BriefResult extends BorderPane {
         this.setLeft(this.createLeftPane());
         this.setRight(this.createRightPane());
         this.setBottom(this.createBottomPane());
+
         this.setPadding(new Insets(24));
     }
 
@@ -70,10 +75,10 @@ public class BriefResult extends BorderPane {
     private Node createLeftPane() {
         var scoreTable = new GridPane();
 
-        scoreTable.add(new DXText("BANG PHLI SAMUT PRAKAN"), 0, 0);
-        scoreTable.add(new DXText("SAMUT PRAKAN"), 0, 1);
-        scoreTable.add(new DXText("MUEANG KHON"), 0, 2);
-        scoreTable.add(new DXText("MISS"), 0, 3);
+        scoreTable.add(new DXText(JudgementName.CRITICAL_PERFECT), 0, 0);
+        scoreTable.add(new DXText(JudgementName.PERFECT), 0, 1);
+        scoreTable.add(new DXText(JudgementName.GOOD), 0, 2);
+        scoreTable.add(new DXText(JudgementName.MISS), 0, 3);
 
         this.criticalPerfectText = new DXText();
         this.perfectText = new DXText();
@@ -121,10 +126,12 @@ public class BriefResult extends BorderPane {
     }
 
     public void render(PlayResult playResult) {
+        // Render Top Pane
         var score = ScoreUtil.calculateScore(playResult);
         this.scoreText.setText(Integer.toString(score));
         this.rankText.setText(ScoreUtil.getRank(score));
 
+        // Render Left Pane
         this.criticalPerfectText.setText(
                 playResult.getPlatinumCriticalPerfect()
                         + playResult.getCriticalPerfect());
@@ -132,10 +139,12 @@ public class BriefResult extends BorderPane {
         this.goodText.setText(playResult.getGood());
         this.missText.setText(playResult.getMiss());
 
+        // Render Right Pane
         this.comboText.setText("MAX COMBO " + playResult.getMaxCombo());
         this.fastText.setText("FAST " + playResult.getFast());
         this.lateText.setText("LATE " + playResult.getLate());
 
+        // Render Bottom Pane
         var pScore = ScoreUtil.calculatePlatinumScore(playResult);
         var maxPScore = ScoreUtil.calculateMaxPlatinumScore(playResult);
         this.platinumScoreText

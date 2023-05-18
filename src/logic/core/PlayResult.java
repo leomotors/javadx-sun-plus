@@ -57,4 +57,40 @@ public interface PlayResult {
                 + this.getHold().getLate()
                 + this.getFlick().getLate();
     }
+
+    public default int getFastCriticalPerfect() {
+        return this.getTap().getFastCriticalPerfect()
+                + this.getHold().getFastCriticalPerfect()
+                + this.getFlick().getFastCriticalPerfect();
+    }
+
+    public default int getLateCriticalPerfect() {
+        return this.getTap().getLateCriticalPerfect()
+                + this.getHold().getLateCriticalPerfect()
+                + this.getFlick().getLateCriticalPerfect();
+    }
+
+    public default int getFastPerfect() {
+        return this.getTap().getFastPerfect()
+                + this.getHold().getFastPerfect()
+                + this.getFlick().getFastPerfect();
+    }
+
+    public default int getLatePerfect() {
+        return this.getTap().getLatePerfect()
+                + this.getHold().getLatePerfect()
+                + this.getFlick().getLatePerfect();
+    }
+
+    public default int getFastGood() {
+        return this.getTap().getFastGood()
+                + this.getHold().getFastGood()
+                + this.getFlick().getFastGood();
+    }
+
+    public default int getLateGood() {
+        return this.getTap().getLateGood()
+                + this.getHold().getLateGood()
+                + this.getFlick().getLateGood();
+    }
 }

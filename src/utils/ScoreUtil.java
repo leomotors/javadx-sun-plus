@@ -71,6 +71,18 @@ public final class ScoreUtil {
         return rawScore;
     }
 
+    /**
+     * Get partial score as percentage from 101.00%
+     */
+    public static double calculatePartialScoreAsPercentage(
+            Judgement judgement) {
+        int rawScore = ScoreUtil.calculatePartialScore(judgement);
+        int totalScore = judgement.getTotalNotes()
+                * ScoreUtil.CRITICAL_PERFECT_WEIGHT;
+
+        return rawScore * 101.0 / totalScore;
+    }
+
     public static int calculateScore(PlayResult playResult) {
         int theoreticalScore = playResult.getTotalNotes()
                 * ScoreUtil.CRITICAL_PERFECT_WEIGHT;

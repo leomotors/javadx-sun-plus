@@ -12,6 +12,9 @@ public class Config {
 
     public static final int SCREEN_HEIGHT = 1600;
     public static final int SCREEN_WIDTH = 900;
+
+    public static final String UI_FONT = "Helvetica";
+
     public static final int K_TILE = 4;
     public static final String[] K_TILE_KEY = { "D", "F", "J", "K" };
     public static final KeyCode[] KEY_CODE = { KeyCode.D, KeyCode.F, KeyCode.J,
