@@ -13,148 +13,171 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
    <children>
-      <ImageView fitHeight="900.0" fitWidth="1600.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="900.0" fitWidth="1600.0" onKeyPressed="#keyPressHandler" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../res/images/Background.jpg" />
          </image>
       </ImageView>
-      <VBox layoutY="300.0" prefHeight="250.0" prefWidth="240.0" spacing="10.0" style="-fx-background-color: #00000080;">
+      <VBox layoutY="300.0" spacing="10.0" style="-fx-background-color: #00000080;">
          <padding>
             <Insets bottom="20.0" left="20.0" top="20.0" />
          </padding>
          <children>
-            <Label text="K B SAMUT PRAKAN" textFill="WHITE">
-               <font>
-                  <Font name="Impact" size="25.0" />
-               </font>
-            </Label>
-            <Label text="B SAMUT PRAKAN" textFill="WHITE">
-               <font>
-                  <Font name="Impact" size="25.0" />
-               </font>
-            </Label>
-            <Label text="SAMUT PRAKAN">
-               <font>
-                  <Font name="Impact" size="25.0" />
-               </font>
-               <textFill>
-                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="0.9736111164093018" blue="0.2083333283662796" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.006711409395973154">
-                           <color>
-                              <Color red="1.0" green="0.9736111164093018" blue="0.2083333283662796" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="0.9176470637321472" blue="0.1568627506494522" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </RadialGradient>
-               </textFill>
-            </Label>
-            <Label text="MUEANG KHON">
-               <font>
-                  <Font name="Impact" size="25.0" />
-               </font>
-               <textFill>
-                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.125" green="0.1979166716337204" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.17592592537403107" green="0.5604938268661499" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </RadialGradient>
-               </textFill>
-            </Label>
-            <Label text="MISS" textFill="#a4a4a4">
-               <font>
-                  <Font name="Impact" size="25.0" />
-               </font>
-            </Label>
+            <HBox>
+               <children>
+                  <Label prefWidth="200.0" text="B SAMUT PRAKAN" textFill="WHITE">
+                     <font>
+                        <Font name="Impact" size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="BSCount" alignment="CENTER_RIGHT" prefWidth="70.0" text="0" textFill="WHITE">
+                     <font>
+                        <Font name="Impact" size="25.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets right="20.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label prefWidth="200.0" text="SAMUT PRAKAN">
+                     <font>
+                        <Font name="Impact" size="25.0" />
+                     </font>
+                     <textFill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="1.0" green="0.9736111164093018" blue="0.2083333283662796" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.006711409395973154">
+                                 <color>
+                                    <Color red="1.0" green="0.9736111164093018" blue="0.2083333283662796" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="0.9176470637321472" blue="0.1568627506494522" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                  </Label>
+                  <Label fx:id="SCount" alignment="CENTER_RIGHT" prefWidth="70.0" text="0">
+                     <font>
+                        <Font name="Impact" size="25.0" />
+                     </font>
+                     <textFill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="1.0" green="0.9736111164093018" blue="0.2083333283662796" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="0.6833333373069763" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets right="20.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label prefWidth="200.0" text="MUEANG KHON">
+                     <font>
+                        <Font name="Impact" size="25.0" />
+                     </font>
+                     <textFill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.125" green="0.1979166716337204" blue="1.0" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.17592592537403107" green="0.5604938268661499" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                  </Label>
+                  <Label fx:id="MKCount" alignment="CENTER_RIGHT" prefWidth="70.0" text="0">
+                     <font>
+                        <Font name="Impact" size="25.0" />
+                     </font>
+                     <textFill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.125" green="0.1979166716337204" blue="1.0" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.17592592537403107" green="0.5604938268661499" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets right="20.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label prefWidth="200.0" text="MISS" textFill="#a4a4a4">
+                     <font>
+                        <Font name="Impact" size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="MissCount" alignment="CENTER_RIGHT" prefWidth="70.0" text="0" textFill="#a4a4a4">
+                     <font>
+                        <Font name="Impact" size="25.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets right="20.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
          </children>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
-      </VBox>
-      <VBox layoutX="240.0" layoutY="300.0" prefHeight="250.0" prefWidth="60.0" spacing="10.0" style="-fx-background-color: #00000080;">
-         <padding>
-            <Insets bottom="20.0" top="20.0" />
-         </padding>
-         <children>
-            <Label fx:id="KBSCount" text="0" textFill="WHITE">
-               <font>
-                  <Font name="Impact" size="25.0" />
-               </font>
-            </Label>
-            <Label fx:id="BSCount" text="0" textFill="WHITE">
-               <font>
-                  <Font name="Impact" size="25.0" />
-               </font>
-            </Label>
-            <Label fx:id="SCount" text="0">
-               <font>
-                  <Font name="Impact" size="25.0" />
-               </font>
-               <textFill>
-                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="0.9736111164093018" blue="0.2083333283662796" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="0.6833333373069763" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </RadialGradient>
-               </textFill>
-            </Label>
-            <Label fx:id="MKCount" text="0">
-               <font>
-                  <Font name="Impact" size="25.0" />
-               </font>
-               <textFill>
-                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.125" green="0.1979166716337204" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.17592592537403107" green="0.5604938268661499" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </RadialGradient>
-               </textFill>
-            </Label>
-            <Label fx:id="MissCount" text="0" textFill="#a4a4a4">
-               <font>
-                  <Font name="Impact" size="25.0" />
-               </font>
-            </Label>
-         </children>
       </VBox>
       <AnchorPane layoutX="500.0" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #00000080;">
          <children>
@@ -212,12 +235,12 @@
             </ImageView>
             <Label fx:id="SongName" text="SongName" textFill="WHITE">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="40.0" />
                </font>
             </Label>
             <Label fx:id="ArtistName" text="ArtistName" textFill="WHITE">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="20.0" />
                </font>
             </Label>
          </children>
@@ -225,7 +248,7 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Canvas fx:id="PlayArea" height="800.0" layoutX="400.0" layoutY="315.0" width="800.0" AnchorPane.bottomAnchor="0.0" />
+      <Canvas fx:id="PlayArea" height="719.0" layoutX="481.0" layoutY="315.0" width="719.0" AnchorPane.bottomAnchor="0.0" />
       <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="280.0" spacing="10.0" style="-fx-background-color: #00000080;" AnchorPane.bottomAnchor="150.0" AnchorPane.rightAnchor="60.0">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
