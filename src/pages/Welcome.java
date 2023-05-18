@@ -1,50 +1,18 @@
 package pages;
 
-import constant.Resource;
-import javafx.geometry.Pos;
-import javafx.scene.Cursor;
+import java.io.IOException;
+
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import router.AppPage;
 import router.Page;
-import router.Router;
-import utils.ImageUtil;
 
 public class Welcome implements Page {
-    private VBox node;
+    private Parent node;
 
     @Override
-    public void initialize() {
-        var logo = ImageUtil.loadImageAsView(Resource.JAVADX_LOGO, 500, 500);
-
-        this.node = new VBox();
-
-        var button = new Button("Enter Game");
-        button.setFont(new Font(36));
-        button.setCursor(Cursor.HAND);
-
-        button.setOnAction(e -> {
-            Router.getInstance().push(AppPage.SONG_SELECTION);
-        });
-
-        var testButton = new Button("Test: Result Page");
-        testButton.setFont(new Font(36));
-        testButton.setCursor(Cursor.HAND);
-
-        testButton.setOnAction(e -> {
-            Router.getInstance().push(AppPage.RESULT);
-        });
-
-        this.node.getChildren().addAll(logo, button, testButton);
-        this.node.setAlignment(Pos.CENTER);
-        this.node.setSpacing(48);
-        this.node.setBackground(new Background(
-                new BackgroundFill(Color.LIGHTGOLDENRODYELLOW, null, null)));
+    public void initialize() throws IOException {
+        this.node = FXMLLoader
+                .load(getClass().getResource("Welcome.fxml"));
     }
 
     @Override
