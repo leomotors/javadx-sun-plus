@@ -109,8 +109,7 @@ public class SongSelectionController {
 
     @FXML
     private void partnerButtonHandler() {
-        System.out.println("CLICKED");
-        NextName.setText("CLIKED");
+        Router.getInstance().push(AppPage.PARTNER_SELECTION);
     }
 
     @FXML

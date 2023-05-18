@@ -12,6 +12,7 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pages.Game;
+import pages.PartnerSelection;
 import pages.Result;
 import pages.SongSelection;
 import pages.Welcome;
@@ -40,6 +41,7 @@ public final class Router {
         this.pages.put(AppPage.GAME, new Game());
         this.pages.put(AppPage.SONG_SELECTION, new SongSelection());
         this.pages.put(AppPage.RESULT, new Result());
+        this.pages.put(AppPage.PARTNER_SELECTION, new PartnerSelection());
 
         for (var page : this.pages.values()) {
             page.initialize();
