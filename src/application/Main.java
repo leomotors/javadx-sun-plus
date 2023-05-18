@@ -22,13 +22,13 @@ public class Main extends Application {
                     .getSystemResource("sounds/partner/CPP_WELCOME.wav")
                     .toString());
             welcome.play();
-            AudioClip audio2Player = new AudioClip(ClassLoader
+            AudioClip bgmPlayer = new AudioClip(ClassLoader
                     .getSystemResource("sounds/bgm/welcome.mp3")
                     .toString());
-            audio2Player.setCycleCount(AudioClip.INDEFINITE);
+            bgmPlayer.setCycleCount(AudioClip.INDEFINITE);
             Duration delay = Duration.seconds(2);
             Timeline timeline = new Timeline(
-                    new KeyFrame(delay, event -> audio2Player.play()));
+                    new KeyFrame(delay, event -> bgmPlayer.play()));
             timeline.play();
         } catch (IOException e) {
             e.printStackTrace();
