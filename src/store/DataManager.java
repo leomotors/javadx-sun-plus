@@ -12,12 +12,13 @@ public final class DataManager {
     private static DataManager instance;
 
     public static final String MAC_OS_X_PREFIX = "/Library/Application Support/javadx";
-    public static final String WINDOWS_OS_X_PREFIX = "/AppData/Local/javadx";
+    public static final String WINDOWS_PREFIX = "/AppData/Local/javadx";
     public static final String SETTINGS_FILE = "/settings.txt";
 
     private static final Map<Setting, String> defaultValue = Collections
-            .singletonMap(
-                    Setting.PLAYER_NAME, "JavaDX");
+            .unmodifiableMap(
+                    Map.of(Setting.PLAYER_NAME, "JavaDX", Setting.PARTNER,
+                            "CPP"));
 
     private String pathPrefix;
     private final HashMap<Setting, String> setting = new HashMap<>();
@@ -30,7 +31,7 @@ public final class DataManager {
                     + DataManager.MAC_OS_X_PREFIX;
         } else if (os.startsWith("Windows")) {
             this.pathPrefix = System.getProperty("user.home")
-                    + DataManager.WINDOWS_OS_X_PREFIX;
+                    + DataManager.WINDOWS_PREFIX;
 
         } else {
             throw new IOException("Unsupported OS");

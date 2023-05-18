@@ -16,8 +16,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Router.createInstance(stage);
             DataManager.createInstance();
+            Router.createInstance(stage);
             AudioClip welcome = new AudioClip(ClassLoader
                     .getSystemResource("sounds/partner/CPP_WELCOME.wav")
                     .toString());
