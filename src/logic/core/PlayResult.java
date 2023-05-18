@@ -10,6 +10,7 @@ public interface PlayResult {
     public Judgement getFlick();
 
     // Computed
+
     public default int getTotalNotes() {
         return this.getTap().getTotalNotes()
                 + this.getHold().getTotalNotes()

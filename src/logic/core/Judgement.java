@@ -1,6 +1,7 @@
 package logic.core;
 
 public interface Judgement {
+
     // Judgements
 
     public int getPlatinumCriticalPerfect();
@@ -28,6 +29,7 @@ public interface Judgement {
     public int getLateGood();
 
     // Computed
+
     public default int getTotalNotes() {
         return this.getPlatinumCriticalPerfect() + this.getCriticalPerfect()
                 + this.getPerfect() + this.getGood() + this.getMiss();
