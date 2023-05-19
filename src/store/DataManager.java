@@ -18,7 +18,9 @@ public final class DataManager {
     private static final Map<Setting, String> defaultValue = Collections
             .unmodifiableMap(
                     Map.of(Setting.PLAYER_NAME, "JavaDX", Setting.PARTNER,
-                            "CPP"));
+                            "CPP", Setting.LANE_COUNT, "12", Setting.SPEED, "4",
+                            Setting.SONG_VOLUME, "100", Setting.FX_VOLUME,
+                            "100"));
 
     private String pathPrefix;
     private final HashMap<Setting, String> setting = new HashMap<>();
@@ -89,6 +91,12 @@ public final class DataManager {
 
     public void set(Setting key, String value) {
         this.setting.put(key, value);
+        try {
+            this.writeConfig();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     public static synchronized DataManager createInstance() throws IOException {
