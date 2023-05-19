@@ -33,4 +33,7 @@ public class Config {
     public static final int DELAY_BETWEEN_FRAME = 5;
     public static final int HIT_KEY_PRESS_DELAY = 100;
     public static final int MISS_BEFORE_HIT_KEY_PRESS_DELAY = 50;
+    public static final int LANE_COUNT = 12;
+    public static final int LANE_WIDTH = 60;
+    public static final int LANE_HEIGHT = 600;
 }
