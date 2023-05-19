@@ -8,6 +8,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import router.AppPage;
 import router.Router;
+import store.DataManager;
+import store.Setting;
 
 public class SongSelectionController implements BaseController {
     @FXML
@@ -89,7 +91,7 @@ public class SongSelectionController implements BaseController {
 
     @Override
     public void start() {
-
+        username.setText(DataManager.getInstance().get(Setting.PLAYER_NAME));
     }
 
     @FXML
