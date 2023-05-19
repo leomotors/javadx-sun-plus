@@ -16,7 +16,7 @@
 
 <AnchorPane fx:id="pageRoot" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyPress" onKeyReleased="#handleKeyRelease" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
    <children>
-      <ImageView fitHeight="900.0" fitWidth="1600.0" onKeyPressed="#keyPressHandler" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="900.0" fitWidth="1600.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../res/images/Background.jpg" />
          </image>

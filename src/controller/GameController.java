@@ -73,20 +73,6 @@ public class GameController {
         }
     }
 
-    @FXML
-    private void keyPressHandler(KeyEvent event) {
-        System.out.println(event.getCode());
-        switch (event.getCode()) {
-            case ESCAPE:
-                // TODO It should actually bring up Pause Menu
-                // (To be implemented)
-                Router.getInstance().push(AppPage.SONG_SELECTION);
-                break;
-            default:
-                break;
-        }
-    }
-
     private void drawLane(int laneNumber) {
         GraphicsContext gc = PlayArea.getGraphicsContext2D();
         double x1 = Config.LANE_BOTTOM_WIDTH * laneNumber;
@@ -147,6 +133,11 @@ public class GameController {
                 break;
             case ENTER:
                 laneNum = 11;
+                break;
+            case ESCAPE:
+                // TODO It should actually bring up Pause Menu
+                // (To be implemented)
+                Router.getInstance().push(AppPage.SONG_SELECTION);
                 break;
             default:
                 break;
