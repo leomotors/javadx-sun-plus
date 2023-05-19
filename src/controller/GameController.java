@@ -7,12 +7,15 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import router.AppPage;
 import router.Router;
+import store.DataManager;
+import store.Setting;
 
 public class GameController {
     @FXML
@@ -26,7 +29,7 @@ public class GameController {
     @FXML
     private Label Rank;
     @FXML
-    private Label PlayScore;
+    private Label MinusScore;
     @FXML
     private ImageView SongImage;
     @FXML
@@ -41,7 +44,34 @@ public class GameController {
     private Label ComboCount;
     @FXML
     private AnchorPane pageRoot;
+    @FXML
+    private Label MaxComboCount;
+    @FXML
+    private Label TechnicalScore;
+    @FXML
+    private Label PlatinumScore;
+    @FXML
+    private ImageView PartnerImage;
+
     private ArrayList<Boolean> active = new ArrayList<Boolean>();
+
+    private static final int WIDTH = 900;
+
+    public void start() {
+        for (int i = 0; i < Config.LANE_COUNT; i++) {
+            active.add(false);
+            drawLane(i);
+        }
+        if (DataManager.getInstance().get(Setting.PARTNER) == "CPP") {
+            PartnerImage.setImage(
+                    new Image(ClassLoader.getSystemResource("images/CPP.png")
+                            .toString()));
+        } else {
+            PartnerImage.setImage(
+                    new Image(ClassLoader.getSystemResource("images/JAVA.png")
+                            .toString()));
+        }
+    }
 
     @FXML
     private void keyPressHandler(KeyEvent event) {
@@ -54,15 +84,6 @@ public class GameController {
                 break;
             default:
                 break;
-        }
-    }
-
-    private static final int WIDTH = 900;
-
-    public void start() {
-        for (int i = 0; i < Config.LANE_COUNT; i++) {
-            active.add(false);
-            drawLane(i);
         }
     }
 
