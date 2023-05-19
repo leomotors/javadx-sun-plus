@@ -94,6 +94,11 @@ public final class Router {
     public synchronized void push(AppPage pageKey) {
         this.setScenePage(pageKey);
         this.history.push(pageKey);
+        if (pageKey == AppPage.GAME) {
+            Platform.runLater(()->{
+            ((Game) this.pages.get(AppPage.GAME)).startPage();
+            });
+            }
     }
 
     /**

@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
+<AnchorPane fx:id="pageRoot" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
    <children>
       <ImageView fitHeight="900.0" fitWidth="1600.0" onKeyPressed="#keyPressHandler" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -248,7 +248,7 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Canvas fx:id="PlayArea" height="750.0" layoutX="350.0" layoutY="150.0" width="900.0" AnchorPane.bottomAnchor="0.0" />
+      <Canvas fx:id="PlayArea" height="600.0" layoutX="350.0" layoutY="150.0" width="900.0" AnchorPane.bottomAnchor="0.0" />
       <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="280.0" spacing="10.0" style="-fx-background-color: #00000080;" AnchorPane.bottomAnchor="150.0" AnchorPane.rightAnchor="60.0">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
