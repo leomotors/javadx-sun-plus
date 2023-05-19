@@ -18,7 +18,7 @@ public final class DataManager {
     private static final Map<Setting, String> defaultValue = Collections
             .unmodifiableMap(
                     Map.of(Setting.PLAYER_NAME, "JavaDX", Setting.PARTNER,
-                            "CPP", Setting.LANE_COUNT, "12", Setting.SPEED, "4",
+                            "CPP", Setting.SPEED, "4",
                             Setting.SONG_VOLUME, "100", Setting.FX_VOLUME,
                             "100"));
 
