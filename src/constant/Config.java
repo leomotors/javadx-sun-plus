@@ -37,4 +37,5 @@ public class Config {
     public static final int LANE_BOTTOM_WIDTH = 75;
     public static final int LANE_TOP_WIDTH = 30;
     public static final int LANE_HEIGHT = 600;
+    public static final int NOTE_SHOW_TIME = 1800;
 }

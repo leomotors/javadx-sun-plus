@@ -481,5 +481,6 @@
             <Image url="@../../res/images/CPP.png" />
          </image>
       </ImageView>
+      <Canvas fx:id="NoteArea" height="600.0" layoutX="350.0" layoutY="150.0" width="900.0" AnchorPane.bottomAnchor="0.0" />
    </children>
 </AnchorPane>

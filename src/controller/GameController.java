@@ -3,6 +3,9 @@ package controller;
 import java.util.ArrayList;
 
 import constant.Config;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -12,6 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
+import logic.components.DrawNote;
 import router.AppPage;
 import router.Router;
 import store.DataManager;
@@ -39,6 +44,8 @@ public class GameController implements BaseController {
     @FXML
     private Canvas PlayArea;
     @FXML
+    private Canvas NoteArea;
+    @FXML
     private Label JudgeName;
     @FXML
     private Label ComboCount;
@@ -52,13 +59,20 @@ public class GameController implements BaseController {
     private Label PlatinumScore;
     @FXML
     private ImageView PartnerImage;
-
+    private long startTime;
+    private Timeline animation;
+    private long UPDATE_DELAY = 10;
     private ArrayList<Boolean> active = new ArrayList<Boolean>();
-
+    private ArrayList<DrawNote> notes = new ArrayList<DrawNote>();
     private static final int WIDTH = 900;
+    private static final int HEIGHT = 600;
+    private GraphicsContext gc;
+    private GraphicsContext gcNote;
 
     @Override
     public void start() {
+        gc = PlayArea.getGraphicsContext2D();
+        gcNote = NoteArea.getGraphicsContext2D();
         for (int i = 0; i < Config.LANE_COUNT; i++) {
             active.add(false);
             drawLane(i);
@@ -72,10 +86,55 @@ public class GameController implements BaseController {
                     new Image(ClassLoader.getSystemResource("images/JAVA.png")
                             .toString()));
         }
+        startTime = System.currentTimeMillis();
+        animation = new Timeline(new KeyFrame(Duration.millis(UPDATE_DELAY),
+                event -> {
+                    update();
+                    if (notes.isEmpty()) {
+                        notes.add(new DrawNote(
+                                getCurrentTime() + 3000, 1, 2));
+                        notes.add(new DrawNote(
+                                getCurrentTime() + 4000, 3, 4));
+                        notes.add(new DrawNote(
+                                getCurrentTime() + 5000, 5, 6));
+                    }
+                }));
+        animation.setCycleCount(Animation.INDEFINITE);
+        animation.play();
+    }
+
+    private int getCurrentTime() {
+        return (int) (System.currentTimeMillis() - startTime);
+    }
+
+    private int calculatePosY(DrawNote note) {
+        int timeDiff = Math.max(0, note.getTime() - getCurrentTime());
+        float ratio = 1 - ((float) timeDiff / (float) Config.NOTE_SHOW_TIME);
+        return (int) (ratio * HEIGHT);
+    }
+
+    private void update() {
+        for (DrawNote note : notes) {
+            note.setY(calculatePosY(note));
+            if (note.getY() >= HEIGHT) {
+                notes.remove(note);
+                break;
+            }
+        }
+        drawNote();
+    }
+
+    private void drawNote() {
+        gcNote.clearRect(0, 0, WIDTH, HEIGHT);
+
+        for (DrawNote note : notes) {
+            gcNote.setFill(Color.RED);
+            gcNote.fillRect(note.getX(), note.getY(),
+                    Config.LANE_BOTTOM_WIDTH, 10);
+        }
     }
 
     private void drawLane(int laneNumber) {
-        GraphicsContext gc = PlayArea.getGraphicsContext2D();
         double x1 = Config.LANE_BOTTOM_WIDTH * laneNumber;
         double buffer = (WIDTH - Config.LANE_TOP_WIDTH * Config.LANE_COUNT) / 2;
         double x2 = buffer + Config.LANE_TOP_WIDTH * laneNumber;
@@ -140,6 +199,8 @@ public class GameController implements BaseController {
                 // (To be implemented)
                 Router.getInstance().push(AppPage.SONG_SELECTION);
                 break;
+            case Q:
+
             default:
                 break;
         }
