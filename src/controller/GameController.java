@@ -17,7 +17,7 @@ import router.Router;
 import store.DataManager;
 import store.Setting;
 
-public class GameController {
+public class GameController implements BaseController {
     @FXML
     private Label BSCount;
     @FXML
@@ -57,6 +57,7 @@ public class GameController {
 
     private static final int WIDTH = 900;
 
+    @Override
     public void start() {
         for (int i = 0; i < Config.LANE_COUNT; i++) {
             active.add(false);

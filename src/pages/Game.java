@@ -2,7 +2,7 @@ package pages;
 
 import java.io.IOException;
 
-import controller.GameController;
+import controller.BaseController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import router.Page;
@@ -10,7 +10,7 @@ import router.Page;
 public class Game implements Page {
     private Parent node;
 
-    private GameController controller;
+    private BaseController controller;
 
     @Override
     public void initialize() throws IOException {
@@ -24,6 +24,7 @@ public class Game implements Page {
         return this.node;
     }
 
+    @Override
     public void startPage() {
         controller.start();
     }

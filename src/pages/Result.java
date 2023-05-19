@@ -43,6 +43,9 @@ public class Result implements Page {
         this.node.getChildren().addAll(background, this.mainPane);
     }
 
+    @Override
+    public void startPage() {}
+
     private BorderPane createMainPane() {
         var mainPane = new BorderPane();
 

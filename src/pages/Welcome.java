@@ -2,6 +2,7 @@ package pages;
 
 import java.io.IOException;
 
+import controller.BaseController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import router.Page;
@@ -9,10 +10,20 @@ import router.Page;
 public class Welcome implements Page {
     private Parent node;
 
+    private BaseController controller;
+
     @Override
     public void initialize() throws IOException {
-        this.node = FXMLLoader
-                .load(getClass().getResource("Welcome.fxml"));
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("Welcome.fxml"));
+        this.node = loader.load();
+        controller = loader.getController();
+
+    }
+
+    @Override
+    public void startPage() {
+        controller.start();
     }
 
     @Override

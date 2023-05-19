@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 import router.AppPage;
 import router.Router;
 
-public class SongSelectionController {
+public class SongSelectionController implements BaseController {
     @FXML
     private Label username;
     @FXML
@@ -86,6 +86,11 @@ public class SongSelectionController {
     private final String EXPERT_COLOR = "#e5024f";
     private final String MASTER_COLOR = "#ae0cd2";
     private int currentDifficulty = 0;
+
+    @Override
+    public void start() {
+
+    }
 
     @FXML
     private void backButtonHandler() {

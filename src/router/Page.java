@@ -19,5 +19,7 @@ public interface Page {
 
     public default void onAfterNavigatedTo() {}
 
+    public default void startPage() {}
+
     public Parent getNode();
 }

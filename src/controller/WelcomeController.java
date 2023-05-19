@@ -5,9 +5,14 @@ import javafx.scene.control.Button;
 import router.AppPage;
 import router.Router;
 
-public class WelcomeController {
+public class WelcomeController implements BaseController {
     @FXML
     private Button welcomeButton;
+
+    @Override
+    public void start() {
+
+    }
 
     @FXML
     public void buttonHandler() {
