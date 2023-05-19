@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,157 +21,162 @@
             <Image url="@../../res/images/Background.jpg" />
          </image>
       </ImageView>
-      <VBox layoutY="300.0" spacing="10.0" style="-fx-background-color: #00000080;">
+      <VBox alignment="TOP_RIGHT" layoutY="257.0" prefHeight="434.0" prefWidth="280.0" spacing="10.0" style="-fx-background-color: #00000080;">
          <padding>
-            <Insets bottom="20.0" left="20.0" top="20.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <children>
             <HBox>
                <children>
-                  <Label prefWidth="200.0" text="B SAMUT PRAKAN" textFill="WHITE">
+                  <Label prefWidth="170.0" text="MAX COMBO" textFill="WHITE">
+                     <font>
+                        <Font name="Impact" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="MaxComboCount" alignment="CENTER_RIGHT" minWidth="70.0" prefWidth="70.0" text="1111" textFill="WHITE">
+                     <font>
+                        <Font name="Impact" size="32.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label prefWidth="170.0" text="B SAMUT PRAKAN" textFill="#d8e93e">
                      <font>
                         <Font name="Impact" size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="BSCount" alignment="CENTER_RIGHT" prefWidth="70.0" text="0" textFill="WHITE">
+                  <Label fx:id="BSCount" alignment="CENTER_RIGHT" minWidth="70.0" prefWidth="70.0" text="0" textFill="#d8e93e">
                      <font>
                         <Font name="Impact" size="25.0" />
                      </font>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
-                     <padding>
-                        <Insets right="20.0" />
-                     </padding>
                   </Label>
                </children>
             </HBox>
             <HBox>
                <children>
-                  <Label prefWidth="200.0" text="SAMUT PRAKAN">
+                  <Label prefWidth="170.0" text="SAMUT PRAKAN" textFill="#c57c32">
                      <font>
                         <Font name="Impact" size="25.0" />
                      </font>
-                     <textFill>
-                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="1.0" green="0.9736111164093018" blue="0.2083333283662796" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="0.006711409395973154">
-                                 <color>
-                                    <Color red="1.0" green="0.9736111164093018" blue="0.2083333283662796" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="1.0" green="0.9176470637321472" blue="0.1568627506494522" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </RadialGradient>
-                     </textFill>
                   </Label>
-                  <Label fx:id="SCount" alignment="CENTER_RIGHT" prefWidth="70.0" text="0">
+                  <Label fx:id="SCount" alignment="CENTER_RIGHT" minWidth="70.0" prefWidth="70.0" text="0" textFill="#c57c32">
                      <font>
                         <Font name="Impact" size="25.0" />
                      </font>
-                     <textFill>
-                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="1.0" green="0.9736111164093018" blue="0.2083333283662796" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="1.0" green="0.6833333373069763" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </RadialGradient>
-                     </textFill>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
-                     <padding>
-                        <Insets right="20.0" />
-                     </padding>
                   </Label>
                </children>
             </HBox>
             <HBox>
                <children>
-                  <Label prefWidth="200.0" text="MUEANG KHON">
+                  <Label prefWidth="170.0" text="MUEANG KHON" textFill="#29c4d8">
                      <font>
                         <Font name="Impact" size="25.0" />
                      </font>
-                     <textFill>
-                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.125" green="0.1979166716337204" blue="1.0" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.17592592537403107" green="0.5604938268661499" blue="1.0" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </RadialGradient>
-                     </textFill>
                   </Label>
-                  <Label fx:id="MKCount" alignment="CENTER_RIGHT" prefWidth="70.0" text="0">
+                  <Label fx:id="MKCount" alignment="CENTER_RIGHT" minWidth="70.0" prefWidth="70.0" text="0" textFill="#29c4d8">
                      <font>
                         <Font name="Impact" size="25.0" />
                      </font>
-                     <textFill>
-                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.125" green="0.1979166716337204" blue="1.0" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.17592592537403107" green="0.5604938268661499" blue="1.0" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </RadialGradient>
-                     </textFill>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
-                     <padding>
-                        <Insets right="20.0" />
-                     </padding>
                   </Label>
                </children>
             </HBox>
             <HBox>
                <children>
-                  <Label prefWidth="200.0" text="MISS" textFill="#a4a4a4">
+                  <Label prefWidth="170.0" text="MISS" textFill="#b4b9b9">
                      <font>
                         <Font name="Impact" size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="MissCount" alignment="CENTER_RIGHT" prefWidth="70.0" text="0" textFill="#a4a4a4">
+                  <Label fx:id="MissCount" alignment="CENTER_RIGHT" minWidth="70.0" prefWidth="70.0" text="0" textFill="#b4b9b9">
                      <font>
                         <Font name="Impact" size="25.0" />
                      </font>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
-                     <padding>
-                        <Insets right="20.0" />
-                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefWidth="200.0" text="TECHNICAL SCORE" textFill="WHITE">
+                     <font>
+                        <Font name="Impact" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.8026315569877625" green="0.8026315569877625" blue="0.13748781383037567" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_RIGHT">
+               <children>
+                  <Label fx:id="TechnicalScore" alignment="CENTER_RIGHT" contentDisplay="TOP" prefWidth="200.0" text="1,010,000" textFill="WHITE">
+                     <font>
+                        <Font name="Impact" size="48.0" />
+                     </font>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.8026315569877625" green="0.8026315569877625" blue="0.13748781383037567" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label prefWidth="200.0" text="Platinum Score" textFill="WHITE">
+                     <font>
+                        <Font name="Impact" size="25.0" />
+                     </font>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.41203704476356506" green="0.8628086447715759" blue="1.0" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Label>
+                  <Label fx:id="PlatinumScore" alignment="CENTER_RIGHT" minWidth="70.0" prefWidth="100.0" text="0" textFill="WHITE">
+                     <font>
+                        <Font name="Impact" size="25.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.41203704476356506" green="0.8628086447715759" blue="1.0" />
+                           </color>
+                        </DropShadow>
+                     </effect>
                   </Label>
                </children>
             </HBox>
@@ -214,7 +220,7 @@
                         <Font name="Impact" size="50.0" />
                      </font>
                   </Label>
-                  <Label fx:id="PlayScore" text="1,010,000" textFill="WHITE">
+                  <Label fx:id="MinusScore" text="1,010,000" textFill="WHITE">
                      <font>
                         <Font name="Impact" size="50.0" />
                      </font>
@@ -223,7 +229,7 @@
             </HBox>
          </children>
       </AnchorPane>
-      <VBox alignment="TOP_CENTER" prefHeight="250.0" prefWidth="280.0" spacing="10.0" style="-fx-background-color: #00000080;" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="100.0">
+      <VBox alignment="TOP_CENTER" layoutX="1320.0" layoutY="100.0" prefHeight="250.0" prefWidth="280.0" spacing="10.0" style="-fx-background-color: #00000080;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
@@ -249,25 +255,231 @@
          </opaqueInsets>
       </VBox>
       <Canvas fx:id="PlayArea" height="600.0" layoutX="350.0" layoutY="150.0" width="900.0" AnchorPane.bottomAnchor="0.0" />
-      <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="280.0" spacing="10.0" style="-fx-background-color: #00000080;" AnchorPane.bottomAnchor="150.0" AnchorPane.rightAnchor="60.0">
+      <VBox alignment="TOP_CENTER" layoutX="350.0" layoutY="560.0" prefWidth="900.0" spacing="10.0" AnchorPane.bottomAnchor="150.0">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <children>
-            <Label fx:id="JudgeName" text="JudgeName" textFill="WHITE">
+            <Label fx:id="JudgeName" text="BANPLI SAMUT PRAKAN" textFill="#d8e93e">
                <font>
                   <Font name="Impact" size="46.0" />
                </font>
+               <effect>
+                  <DropShadow height="30.0" radius="14.5" width="30.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" opacity="0.800000011920929" />
+                     </color>
+                  </DropShadow>
+               </effect>
             </Label>
             <Label fx:id="ComboCount" text="0000" textFill="WHITE">
                <font>
-                  <Font name="Impact" size="40.0" />
+                  <Font name="Impact" size="48.0" />
                </font>
+               <effect>
+                  <DropShadow height="30.0" radius="14.5" width="30.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" opacity="0.800000011920929" />
+                     </color>
+                  </DropShadow>
+               </effect>
             </Label>
          </children>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </VBox>
+      <HBox layoutX="350.0" layoutY="800.0" prefHeight="100.0" prefWidth="900.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 5;" text="A" textAlignment="CENTER">
+               <HBox.margin>
+                  <Insets bottom="17.5" left="17.5" right="17.5" top="17.5" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.3015267252922058" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Label>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 5;" text="S" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.3015267252922058" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="17.5" left="17.5" right="17.5" top="17.5" />
+               </HBox.margin>
+            </Label>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 5;" text="D" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.3015267252922058" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="17.5" left="17.5" right="17.5" top="17.5" />
+               </HBox.margin>
+            </Label>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 5;" text="F" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.3015267252922058" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="17.5" left="17.5" right="17.5" top="17.5" />
+               </HBox.margin>
+            </Label>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 5;" text="G" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.3015267252922058" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="17.5" left="17.5" right="17.5" top="17.5" />
+               </HBox.margin>
+            </Label>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 5;" text="H" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.3015267252922058" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="17.5" left="17.5" right="17.5" top="17.5" />
+               </HBox.margin>
+            </Label>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 5;" text="J" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.3015267252922058" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="17.5" left="17.5" right="17.5" top="17.5" />
+               </HBox.margin>
+            </Label>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 5;" text="K" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.3015267252922058" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="17.5" left="17.5" right="17.5" top="17.5" />
+               </HBox.margin>
+            </Label>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 5;" text="L" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.3015267252922058" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="17.5" left="17.5" right="17.5" top="17.5" />
+               </HBox.margin>
+            </Label>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 5;" text=";" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.3015267252922058" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="17.5" left="17.5" right="17.5" top="17.5" />
+               </HBox.margin>
+            </Label>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 5;" text="'" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.3015267252922058" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="17.5" left="17.5" right="17.5" top="17.5" />
+               </HBox.margin>
+            </Label>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 5;" text="↵ " textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.3015267252922058" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="17.5" left="17.5" right="17.5" top="17.5" />
+               </HBox.margin>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </HBox>
+      <ImageView fx:id="PartnerImage" fitHeight="400.0" fitWidth="225.0" layoutX="1348.0" layoutY="500.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../res/images/CPP.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
