@@ -15,6 +15,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -30,6 +31,9 @@ import logic.core.JudgementType;
 import logic.core.NoteType;
 import logic.game.LaneManager;
 import logic.game.ScoreManager;
+import router.AppPage;
+import router.Router;
+import store.AppState;
 import store.DataManager;
 import store.Setting;
 import store.SongManager;
@@ -289,6 +293,16 @@ public class GameController implements BaseController {
 
     @FXML
     public void handleKeyPress(KeyEvent e) {
+        // TEMP!!!
+        if (e.getCode() == KeyCode.ESCAPE && this.scoreManager
+                .getTotalNotes() == this.scoreManager.getPlayedNotes()) {
+            AppState.getInstance().setPlayResult(this.scoreManager);
+
+            Router.getInstance().replace(AppPage.RESULT);
+
+            return;
+        }
+
         int laneId = Config.getLaneFromKey(e.getCode()) - 1;
 
         if (laneId < 0)

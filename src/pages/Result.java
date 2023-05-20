@@ -18,11 +18,11 @@ import logic.components.DetailedResult;
 import logic.core.Difficulty;
 import router.Page;
 import router.Router;
+import store.AppState;
 import store.DataManager;
 import store.Setting;
 import store.SongManager;
 import utils.ImageUtil;
-import utils.ScoreUtilMock;
 
 public class Result implements Page {
     private StackPane node;
@@ -131,7 +131,7 @@ public class Result implements Page {
         this.isShowingDetailedResult = false;
         this.mainPane.setLeft(this.briefResult);
 
-        var result = ScoreUtilMock.getMockPlayResult();
+        var result = AppState.getInstance().getPlayResult();
         this.briefResult.render(result);
         this.detailedResult.render(result);
     }
