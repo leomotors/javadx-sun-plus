@@ -1,7 +1,5 @@
 package constant;
 
-import java.util.Map;
-
 import javafx.scene.input.KeyCode;
 
 /**
@@ -15,18 +13,70 @@ public class Config {
 
     public static final String UI_FONT = "Helvetica";
 
-    public static final int K_TILE = 4;
-    public static final String[] K_TILE_KEY = { "D", "F", "J", "K" };
-    public static final KeyCode[] KEY_CODE = { KeyCode.D, KeyCode.F, KeyCode.J,
-            KeyCode.K };
+    public static final int N_LANES = 12;
+
+    public static int getLaneFromKey(KeyCode keyCode) {
+        switch (keyCode) {
+            case Q:
+                return 1;
+            case A:
+                return 13;
+            case W:
+                return 2;
+            case S:
+                return 14;
+            case E:
+                return 3;
+            case D:
+                return 15;
+            case R:
+                return 4;
+            case F:
+                return 16;
+            case T:
+                return 5;
+            case G:
+                return 17;
+            case Y:
+                return 6;
+            case H:
+                return 18;
+            case U:
+                return 7;
+            case J:
+                return 19;
+            case I:
+                return 8;
+            case K:
+                return 20;
+            case O:
+                return 9;
+            case L:
+                return 21;
+            case P:
+                return 10;
+            case SEMICOLON:
+                return 22;
+            case OPEN_BRACKET:
+                return 11;
+            case QUOTE:
+                return 23;
+            case CLOSE_BRACKET:
+                return 12;
+            case ENTER:
+                return 24;
+            default:
+                return 0;
+        }
+    }
+
+    // Unused, to be removed
     public static final int SUBTILE_PER_TILE = 50;
     public static final int TILE_HEIGHT = SUBTILE_PER_TILE * 10;
     public static final double TILE_SECTION_BORDER_WIDTH = 0.1;
     public static final int PRESS_KEY_HEIGHT = 25;
     public static final int MENU_HEIGHT = 25;
-    public static final Map<String, Integer> KEY_MAPPING = Map.ofEntries(
-            Map.entry("64", 0), Map.entry("192", 1),
-            Map.entry("320", 2), Map.entry("448", 3));
+
     public static final int TILE_TIME_RANGE = 2000;
     public static final int TIME_RANGE_PER_TILE = TILE_TIME_RANGE
             / SUBTILE_PER_TILE;
