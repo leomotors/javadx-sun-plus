@@ -4,6 +4,8 @@ import constant.DXColor;
 import constant.JudgementName;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -147,6 +149,26 @@ public class BriefResult extends BorderPane {
 
         // Render Right Pane
         this.comboText.setText("MAX COMBO " + playResult.getMaxCombo());
+
+        this.fullComboLabel.setEffect(null);
+        if (ScoreUtil.isAllPerfect(playResult)) {
+            this.fullComboLabel.setText("MADE IN SAMUT PRAKAN");
+            this.fullComboLabel.setFill(Color.WHITE);
+            this.fullComboLabel.setEffect(new DropShadow() {
+                {
+                    this.setBlurType(BlurType.THREE_PASS_BOX);
+                    this.setRadius(15);
+                    this.setColor(DXColor.CRITICAL_PERFECT);
+                }
+            });
+        } else if (ScoreUtil.isFullCombo(playResult)) {
+            this.fullComboLabel.setText("FULL COMBO");
+            this.fullComboLabel.setFill(DXColor.PERFECT);
+        } else {
+            this.fullComboLabel.setText("FULL COMBO");
+            this.fullComboLabel.setFill(Color.GRAY);
+        }
+
         this.fastText.setText("FAST " + playResult.getFast());
         this.lateText.setText("LATE " + playResult.getLate());
 

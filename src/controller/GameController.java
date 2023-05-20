@@ -192,7 +192,7 @@ public class GameController implements BaseController {
 
         // TEMP
         this._tempCOUNTER += 1;
-        if (this._tempCOUNTER >= 30) {
+        if (this._tempCOUNTER >= 1) {
             this._tempCOUNTER = 0;
 
             if (this.scoreManager.getPlayedNotes() >= this.scoreManager
@@ -202,17 +202,17 @@ public class GameController implements BaseController {
 
             double rng = this.random.nextDouble();
 
-            if (rng < 0.8) {
+            if (rng < 0) {
                 this.feedbackManager.addJudgement(NoteType.TAP,
                         JudgementType.PLATINUM_CRITICAL_PERFECT,
                         FastLateType.NONE);
-            } else if (rng < 0.9) {
+            } else if (rng < 0) {
                 this.feedbackManager.addJudgement(NoteType.TAP,
                         JudgementType.CRITICAL_PERFECT, FastLateType.FAST);
-            } else if (rng < 1) {
+            } else if (rng < 0) {
                 this.feedbackManager.addJudgement(NoteType.TAP,
                         JudgementType.PERFECT, FastLateType.LATE);
-            } else if (rng < 0.99) {
+            } else if (rng < 1) {
                 this.feedbackManager.addJudgement(NoteType.TAP,
                         JudgementType.GOOD, FastLateType.FAST);
             } else {

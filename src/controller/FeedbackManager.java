@@ -13,7 +13,7 @@ import logic.core.NoteType;
 import logic.game.ScoreManager;
 
 public class FeedbackManager {
-    public static int DISPLAY_TIME = 3_000;
+    public static int DISPLAY_TIME = 1500;
 
     public static String judgementToName(JudgementType judgementType) {
         switch (judgementType) {
