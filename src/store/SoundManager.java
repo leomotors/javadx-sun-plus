@@ -23,7 +23,7 @@ public final class SoundManager {
                         .toString()));
         fxPlayer.setVolume(Integer
                 .parseInt(DataManager.getInstance().get(Setting.FX_VOLUME))
-                / 100);
+                / 100.00);
         fxPlayer.play();
     }
 
@@ -35,7 +35,7 @@ public final class SoundManager {
                         .toString()));
         partnerPlayer.setVolume(Integer
                 .parseInt(DataManager.getInstance().get(Setting.PARTNER_VOLUME))
-                / 100);
+                / 100.00);
         partnerPlayer.play();
     }
 
@@ -47,7 +47,7 @@ public final class SoundManager {
                         .toString()));
         bgmPlayer.setVolume(Integer
                 .parseInt(DataManager.getInstance().get(Setting.BGM_VOLUME))
-                / 100);
+                / 100.00);
         bgmPlayer.play();
     }
 
@@ -66,7 +66,7 @@ public final class SoundManager {
                 String.valueOf(volume));
         bgmPlayer.setVolume(Integer
                 .parseInt(DataManager.getInstance().get(Setting.BGM_VOLUME))
-                / 100);
+                / 100.00);
     }
 
     public int getTime() {
