@@ -1,5 +1,6 @@
 package logic.components;
 
+import constant.DXColor;
 import constant.JudgementName;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -78,7 +79,7 @@ public class DetailedResult extends BorderPane {
         this.scoreTable.setVgap(2);
 
         this.scoreTable.setBackground(new Background(
-                new BackgroundFill(new Color(1.0, 1.0, 1.0, 0.5), null, null)));
+                new BackgroundFill(new Color(0, 0, 0, 0.75), null, null)));
 
         return this.scoreTable;
     }
@@ -88,10 +89,15 @@ public class DetailedResult extends BorderPane {
 
         this.scoreTable.add(this.createCell(), 0, 0);
         this.scoreTable.add(
-                this.createCell(JudgementName.CRITICAL_PERFECT), 0, 1);
-        this.scoreTable.add(this.createCell(JudgementName.PERFECT), 0, 2);
-        this.scoreTable.add(this.createCell(JudgementName.GOOD), 0, 3);
-        this.scoreTable.add(this.createCell(JudgementName.MISS), 0, 4);
+                this.createCell(JudgementName.CRITICAL_PERFECT,
+                        DXColor.CRITICAL_PERFECT),
+                0, 1);
+        this.scoreTable.add(
+                this.createCell(JudgementName.PERFECT, DXColor.PERFECT), 0, 2);
+        this.scoreTable.add(this.createCell(JudgementName.GOOD, DXColor.GOOD),
+                0, 3);
+        this.scoreTable.add(this.createCell(JudgementName.MISS, DXColor.MISS),
+                0, 4);
 
         // Render Col 1 - 3
         this.renderJudgement(playResult.getTap(), "TAP", 1);
@@ -103,9 +109,10 @@ public class DetailedResult extends BorderPane {
     }
 
     private void renderJudgement(Judgement judgement, String name, int col) {
-        var topCell = this.createCell(name);
+        var topCell = this.createCell(name, Color.WHITE);
         var percentText = new DXText(String.format("%.2f%%",
-                ScoreUtil.calculatePartialScoreAsPercentage(judgement)));
+                ScoreUtil.calculatePartialScoreAsPercentage(judgement)),
+                Color.WHITE);
         percentText.setFontSize(16);
         topCell.getChildren().add(percentText);
         topCell.setAlignment(Pos.CENTER);
@@ -115,10 +122,15 @@ public class DetailedResult extends BorderPane {
 
         this.scoreTable
                 .add(this.createCell(judgement.getPlatinumCriticalPerfect()
-                        + judgement.getCriticalPerfect()), col, 1);
-        this.scoreTable.add(this.createCell(judgement.getPerfect()), col, 2);
-        this.scoreTable.add(this.createCell(judgement.getGood()), col, 3);
-        this.scoreTable.add(this.createCell(judgement.getMiss()), col, 4);
+                        + judgement.getCriticalPerfect(),
+                        DXColor.CRITICAL_PERFECT), col, 1);
+        this.scoreTable.add(
+                this.createCell(judgement.getPerfect(), DXColor.PERFECT),
+                col, 2);
+        this.scoreTable.add(this.createCell(judgement.getGood(), DXColor.GOOD),
+                col, 3);
+        this.scoreTable.add(this.createCell(judgement.getMiss(), DXColor.MISS),
+                col, 4);
     }
 
     private void renderFastLateColumn(PlayResult playResult) {
@@ -140,7 +152,7 @@ public class DetailedResult extends BorderPane {
                         playResult.getLateGood()),
                 4, 3);
 
-        this.scoreTable.add(this.createCell("-"), 4, 4);
+        this.scoreTable.add(this.createCell("-", Color.WHITE), 4, 4);
     }
 
     private VBox renderFastLateCell(int fast, int late) {
@@ -148,14 +160,11 @@ public class DetailedResult extends BorderPane {
     }
 
     private VBox renderFastLateCell(int fast, int late, int fontSize) {
-        var fastText = new DXText("FAST " + fast);
-        var lateText = new DXText("LATE " + late);
+        var fastText = new DXText("FAST " + fast, Color.LIGHTBLUE);
+        var lateText = new DXText("LATE " + late, Color.PINK);
 
         fastText.setFontSize(fontSize);
         lateText.setFontSize(fontSize);
-
-        fastText.setFill(Color.BLUE);
-        lateText.setFill(Color.RED);
 
         return this.createCell(fastText, lateText);
     }
@@ -163,7 +172,7 @@ public class DetailedResult extends BorderPane {
     private VBox createCell(Node... children) {
         var cell = new VBox();
         cell.setBorder(new Border(
-                new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,
+                new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID,
                         CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
         cell.getChildren().addAll(children);
@@ -183,8 +192,22 @@ public class DetailedResult extends BorderPane {
         return this.createCell();
     }
 
+    private VBox createCell(String text, Color color) {
+        if (text != null) {
+            var dxText = new DXText(text, color);
+            dxText.setFontSize(24);
+            return this.createCell(dxText);
+        }
+
+        return this.createCell();
+    }
+
     private Pane createCell(int number) {
         return this.createCell(Integer.toString(number));
+    }
+
+    private VBox createCell(int number, Color color) {
+        return this.createCell(Integer.toString(number), color);
     }
 
     private Node createRightPane() {
