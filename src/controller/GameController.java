@@ -17,11 +17,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import logic.components.ChartCard;
 import logic.components.game.BaseNote;
 import logic.components.game.EXTapNote;
 import logic.components.game.TapNote;
+import logic.core.Difficulty;
 import logic.core.FastLateType;
 import logic.core.JudgementType;
 import logic.core.NoteType;
@@ -29,6 +32,7 @@ import logic.game.LaneManager;
 import logic.game.ScoreManager;
 import store.DataManager;
 import store.Setting;
+import store.SongManager;
 import utils.ScoreUtil;
 
 public class GameController implements BaseController {
@@ -44,12 +48,10 @@ public class GameController implements BaseController {
     private Label topLeft;
     @FXML
     private Label topRight;
+
     @FXML
-    private ImageView SongImage;
-    @FXML
-    private Label SongName;
-    @FXML
-    private Label ArtistName;
+    private VBox cardBox;
+
     @FXML
     private Canvas PlayArea;
     @FXML
@@ -82,6 +84,7 @@ public class GameController implements BaseController {
 
     private final ArrayList<LaneManager> laneManagers = new ArrayList<>();
     private ScoreManager scoreManager;
+    private FeedbackManager feedbackManager;
 
     private static DecimalFormat formatter = new DecimalFormat("#,###");
 
@@ -93,8 +96,15 @@ public class GameController implements BaseController {
 
     @Override
     public void start() {
-        this.scoreManager = new ScoreManager(1000);
+        this.scoreManager = new ScoreManager(100);
+        this.feedbackManager = new FeedbackManager(this.JudgeName,
+                this.fastLateLabel, this.scoreManager);
+
         this.topLeft.setText(Config.TOP_LEFT_TEXT);
+        this.cardBox.getChildren().clear();
+        this.cardBox.getChildren()
+                .add(new ChartCard(SongManager.getInstance().getCharts().get(0),
+                        Difficulty.EXPERT));
 
         gc = PlayArea.getGraphicsContext2D();
         gcNote = NoteArea.getGraphicsContext2D();
@@ -174,9 +184,11 @@ public class GameController implements BaseController {
         this.topRight.setText(border >= 0 ? GameController.formatter
                 .format(border) : "FAIL");
 
+        this.feedbackManager.updateDisplay();
+
         // TEMP
         this._tempCOUNTER += 1;
-        if (this._tempCOUNTER >= 5) {
+        if (this._tempCOUNTER >= 30) {
             this._tempCOUNTER = 0;
 
             if (this.scoreManager.getPlayedNotes() >= this.scoreManager
@@ -186,21 +198,21 @@ public class GameController implements BaseController {
 
             double rng = this.random.nextDouble();
 
-            if (rng < 0.7) {
-                this.scoreManager.addJudgement(NoteType.TAP,
+            if (rng < 0.9) {
+                this.feedbackManager.addJudgement(NoteType.TAP,
                         JudgementType.PLATINUM_CRITICAL_PERFECT,
                         FastLateType.NONE);
-            } else if (rng < 0.8) {
-                this.scoreManager.addJudgement(NoteType.TAP,
-                        JudgementType.CRITICAL_PERFECT, FastLateType.NONE);
-            } else if (rng < 0.92) {
-                this.scoreManager.addJudgement(NoteType.TAP,
-                        JudgementType.PERFECT, FastLateType.NONE);
+            } else if (rng < 0.95) {
+                this.feedbackManager.addJudgement(NoteType.TAP,
+                        JudgementType.CRITICAL_PERFECT, FastLateType.FAST);
             } else if (rng < 0.97) {
-                this.scoreManager.addJudgement(NoteType.TAP,
-                        JudgementType.GOOD, FastLateType.NONE);
+                this.feedbackManager.addJudgement(NoteType.TAP,
+                        JudgementType.PERFECT, FastLateType.LATE);
+            } else if (rng < 0.99) {
+                this.feedbackManager.addJudgement(NoteType.TAP,
+                        JudgementType.GOOD, FastLateType.FAST);
             } else {
-                this.scoreManager.addJudgement(NoteType.TAP,
+                this.feedbackManager.addJudgement(NoteType.TAP,
                         JudgementType.MISS, FastLateType.NONE);
             }
         }
