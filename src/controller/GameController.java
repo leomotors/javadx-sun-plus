@@ -20,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import logic.components.game.BaseNote;
+import logic.components.game.EXTapNote;
 import logic.components.game.TapNote;
 import logic.core.FastLateType;
 import logic.core.JudgementType;
@@ -118,11 +119,13 @@ public class GameController implements BaseController {
                     update();
                     if (notes.isEmpty()) {
                         notes.add(new TapNote(
-                                getCurrentTime() + 3000, 1, 2));
+                                getCurrentTime() + 3000, 0, 1));
                         notes.add(new TapNote(
                                 getCurrentTime() + 4000, 3, 4));
                         notes.add(new TapNote(
-                                getCurrentTime() + 5000, 5, 11));
+                                getCurrentTime() + 5000, 8, 11));
+                        notes.add(new EXTapNote(
+                                getCurrentTime() + 5000, 0, 3));
                     }
                 }));
         animation.setCycleCount(Animation.INDEFINITE);
@@ -236,9 +239,13 @@ public class GameController implements BaseController {
 
     private void drawNote() {
         gcNote.clearRect(0, 0, WIDTH, HEIGHT);
-
         for (BaseNote note : notes) {
-            gcNote.setFill(Color.RED);
+            if (note instanceof EXTapNote) {
+                gcNote.setFill(Color.GOLD);
+            } else {
+                gcNote.setFill(Color.RED);
+            }
+
             gcNote.fillRect(calculatePosX(note), calculatePosY(note),
                     calculateWidth(note), 10);
         }
