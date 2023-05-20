@@ -9,6 +9,7 @@ import java.util.Map;
 import javafx.scene.image.Image;
 import logic.core.Difficulty;
 import store.DataManager;
+import store.SongManager;
 import utils.FileUtil;
 import utils.ImageUtil;
 
@@ -56,12 +57,12 @@ public class SongInfo {
 
     public String getPath() {
         return DataManager.getInstance().getPathPrefix()
-                + DataManager.SONGS_DIR + this.id;
+                + SongManager.SONGS_DIR + this.id;
     }
 
     public String getPath(String path) {
         return DataManager.getInstance().getPathPrefix()
-                + DataManager.SONGS_DIR + this.id + path;
+                + SongManager.SONGS_DIR + this.id + path;
     }
 
     public void fetch() {
