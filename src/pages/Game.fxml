@@ -232,7 +232,12 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <children>
-            <Label fx:id="JudgeName" text="BANPLI SAMUT PRAKAN" textFill="#d8e93e">
+            <Label id="fastLateLabel" text="FAST" textFill="BLUE">
+               <font>
+                  <Font name="Helvetica" size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="JudgeName" text="BANG PHLI SAMUT PRAKAN" textFill="#d8e93e">
                <font>
                   <Font name="Impact" size="46.0" />
                </font>

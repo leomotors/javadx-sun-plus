@@ -45,6 +45,8 @@ public class GameController implements BaseController {
     @FXML
     private Canvas NoteArea;
     @FXML
+    private Label fastLateLabel;
+    @FXML
     private Label JudgeName;
     @FXML
     private Label ComboCount;
