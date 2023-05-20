@@ -1,5 +1,6 @@
 package logic.components;
 
+import constant.DXColor;
 import constant.JudgementName;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -75,15 +76,17 @@ public class BriefResult extends BorderPane {
     private Node createLeftPane() {
         var scoreTable = new GridPane();
 
-        scoreTable.add(new DXText(JudgementName.CRITICAL_PERFECT), 0, 0);
-        scoreTable.add(new DXText(JudgementName.PERFECT), 0, 1);
-        scoreTable.add(new DXText(JudgementName.GOOD), 0, 2);
-        scoreTable.add(new DXText(JudgementName.MISS), 0, 3);
+        scoreTable.add(new DXText(JudgementName.CRITICAL_PERFECT,
+                DXColor.CRITICAL_PERFECT), 0, 0);
+        scoreTable.add(new DXText(JudgementName.PERFECT,
+                DXColor.PERFECT), 0, 1);
+        scoreTable.add(new DXText(JudgementName.GOOD, DXColor.GOOD), 0, 2);
+        scoreTable.add(new DXText(JudgementName.MISS, DXColor.MISS), 0, 3);
 
-        this.criticalPerfectText = new DXText();
-        this.perfectText = new DXText();
-        this.goodText = new DXText();
-        this.missText = new DXText();
+        this.criticalPerfectText = new DXText(Color.WHITE);
+        this.perfectText = new DXText(Color.WHITE);
+        this.goodText = new DXText(Color.WHITE);
+        this.missText = new DXText(Color.WHITE);
 
         scoreTable.add(this.criticalPerfectText, 1, 0);
         scoreTable.add(this.perfectText, 1, 1);
@@ -94,6 +97,9 @@ public class BriefResult extends BorderPane {
         scoreTable.setHgap(16);
         scoreTable.setPadding(new Insets(24));
 
+        scoreTable.setBackground(new Background(
+                new BackgroundFill(new Color(0, 0, 0, 0.75), null, null)));
+
         return scoreTable;
     }
 
@@ -103,8 +109,8 @@ public class BriefResult extends BorderPane {
         this.comboText = new DXText("MAX COMBO ");
         this.fullComboLabel = new DXText("FULL COMBO");
 
-        this.fastText = new DXText("FAST ");
-        this.lateText = new DXText("LATE ");
+        this.fastText = new DXText("FAST ", Color.BLUE);
+        this.lateText = new DXText("LATE ", Color.RED);
 
         rightPane.getChildren().addAll(
                 this.comboText, this.fullComboLabel,

@@ -17,8 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import logic.components.DrawNote;
-import router.AppPage;
-import router.Router;
+import logic.game.LaneManager;
 import store.DataManager;
 import store.Setting;
 
@@ -62,21 +61,30 @@ public class GameController implements BaseController {
     private long startTime;
     private Timeline animation;
     private long UPDATE_DELAY = 10;
-    private ArrayList<Boolean> active = new ArrayList<Boolean>();
+
     private ArrayList<DrawNote> notes = new ArrayList<DrawNote>();
     private static final int WIDTH = 900;
     private static final int HEIGHT = 600;
     private GraphicsContext gc;
     private GraphicsContext gcNote;
 
+    private final ArrayList<LaneManager> laneManagers = new ArrayList<>();
+
+    public GameController() {
+        for (int i = 0; i < Config.N_LANES; i++) {
+            this.laneManagers.add(new LaneManager());
+        }
+    }
+
     @Override
     public void start() {
         gc = PlayArea.getGraphicsContext2D();
         gcNote = NoteArea.getGraphicsContext2D();
+
         for (int i = 0; i < Config.LANE_COUNT; i++) {
-            active.add(false);
             drawLane(i);
         }
+
         if (DataManager.getInstance().get(Setting.PARTNER) == "CPP") {
             PartnerImage.setImage(
                     new Image(ClassLoader.getSystemResource("images/CPP.png")
@@ -86,6 +94,7 @@ public class GameController implements BaseController {
                     new Image(ClassLoader.getSystemResource("images/JAVA.png")
                             .toString()));
         }
+
         startTime = System.currentTimeMillis();
         animation = new Timeline(new KeyFrame(Duration.millis(UPDATE_DELAY),
                 event -> {
@@ -138,7 +147,7 @@ public class GameController implements BaseController {
         double x1 = Config.LANE_BOTTOM_WIDTH * laneNumber;
         double buffer = (WIDTH - Config.LANE_TOP_WIDTH * Config.LANE_COUNT) / 2;
         double x2 = buffer + Config.LANE_TOP_WIDTH * laneNumber;
-        if (active.get(laneNumber))
+        if (this.getLaneManager(laneNumber).isPressed())
             gc.setFill(Color.web("#383f47"));
         else
             gc.setFill(Color.BLACK);
@@ -154,109 +163,38 @@ public class GameController implements BaseController {
         gc.stroke();
     }
 
+    public LaneManager getLaneManager(int lane) {
+        return this.laneManagers.get(lane);
+    }
+
     @FXML
     public void handleKeyPress(KeyEvent e) {
-        int laneNum = -1;
-        switch (e.getCode()) {
-            case A:
-                laneNum = 0;
-                break;
-            case S:
-                laneNum = 1;
-                break;
-            case D:
-                laneNum = 2;
-                break;
-            case F:
-                laneNum = 3;
-                break;
-            case G:
-                laneNum = 4;
-                break;
-            case H:
-                laneNum = 5;
-                break;
-            case J:
-                laneNum = 6;
-                break;
-            case K:
-                laneNum = 7;
-                break;
-            case L:
-                laneNum = 8;
-                break;
-            case SEMICOLON:
-                laneNum = 9;
-                break;
-            case QUOTE:
-                laneNum = 10;
-                break;
-            case ENTER:
-                laneNum = 11;
-                break;
-            case ESCAPE:
-                // TODO It should actually bring up Pause Menu
-                // (To be implemented)
-                Router.getInstance().push(AppPage.SONG_SELECTION);
-                break;
-            case Q:
+        int laneId = Config.getLaneFromKey(e.getCode()) - 1;
 
-            default:
-                break;
-        }
-        if (laneNum != -1) {
-            active.set(laneNum, true);
-            drawLane(laneNum);
-        }
+        if (laneId < 0)
+            return;
+
+        int laneNum = laneId % Config.N_LANES;
+
+        this.getLaneManager(laneNum).handleKeyPress(0,
+                laneId > Config.N_LANES);
+
+        this.drawLane(laneNum);
     }
 
     @FXML
     public void handleKeyRelease(KeyEvent e) {
-        int laneNum = -1;
-        switch (e.getCode()) {
-            case A:
-                laneNum = 0;
-                break;
-            case S:
-                laneNum = 1;
-                break;
-            case D:
-                laneNum = 2;
-                break;
-            case F:
-                laneNum = 3;
-                break;
-            case G:
-                laneNum = 4;
-                break;
-            case H:
-                laneNum = 5;
-                break;
-            case J:
-                laneNum = 6;
-                break;
-            case K:
-                laneNum = 7;
-                break;
-            case L:
-                laneNum = 8;
-                break;
-            case SEMICOLON:
-                laneNum = 9;
-                break;
-            case QUOTE:
-                laneNum = 10;
-                break;
-            case ENTER:
-                laneNum = 11;
-                break;
-            default:
-                break;
-        }
-        if (laneNum != -1) {
-            active.set(laneNum, false);
-            drawLane(laneNum);
-        }
+        int laneId = Config.getLaneFromKey(e.getCode()) - 1;
+
+        if (laneId < 0)
+            return;
+
+        int laneNum = laneId % Config.N_LANES;
+
+        this.getLaneManager(laneNum).handleKeyRelease(0,
+                laneId > Config.N_LANES);
+
+        this.drawLane(laneNum);
     }
 
 }
