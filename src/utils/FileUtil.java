@@ -12,6 +12,30 @@ import java.util.Scanner;
 public final class FileUtil {
     private FileUtil() {}
 
+    public static final String MAC_OS_X_PREFIX = "/Library/Application Support/javadx";
+    public static final String WINDOWS_PREFIX = "/AppData/Local/javadx";
+
+    private static String pathPrefix;
+
+    public static String getPathPrefix() throws IOException {
+        if (FileUtil.pathPrefix == null) {
+            var os = System.getProperty("os.name");
+
+            if (os.startsWith("Mac")) {
+                FileUtil.pathPrefix = System.getProperty("user.home")
+                        + FileUtil.MAC_OS_X_PREFIX;
+            } else if (os.startsWith("Windows")) {
+                FileUtil.pathPrefix = System.getProperty("user.home")
+                        + FileUtil.WINDOWS_PREFIX;
+
+            } else {
+                throw new IOException("Unsupported OS");
+            }
+        }
+
+        return FileUtil.pathPrefix;
+    }
+
     public static List<String> readFileAsLines(String filePath) {
         var fileContent = new ArrayList<String>();
 

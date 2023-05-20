@@ -11,10 +11,7 @@ import utils.FileUtil;
 public final class DataManager {
     private static DataManager instance;
 
-    public static final String MAC_OS_X_PREFIX = "/Library/Application Support/javadx";
-    public static final String WINDOWS_PREFIX = "/AppData/Local/javadx";
     public static final String SETTINGS_FILE = "/settings.txt";
-    public static final String SONGS_DIR = "/charts/";
 
     private static final Map<Setting, String> defaultValue = Collections
             .unmodifiableMap(
@@ -27,18 +24,7 @@ public final class DataManager {
     private final HashMap<Setting, String> setting = new HashMap<>();
 
     private DataManager() throws IOException {
-        var os = System.getProperty("os.name");
-
-        if (os.startsWith("Mac")) {
-            this.pathPrefix = System.getProperty("user.home")
-                    + DataManager.MAC_OS_X_PREFIX;
-        } else if (os.startsWith("Windows")) {
-            this.pathPrefix = System.getProperty("user.home")
-                    + DataManager.WINDOWS_PREFIX;
-
-        } else {
-            throw new IOException("Unsupported OS");
-        }
+        this.pathPrefix = FileUtil.getPathPrefix();
 
         this.readConfig();
         this.writeConfig();
