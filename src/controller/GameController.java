@@ -122,7 +122,7 @@ public class GameController implements BaseController {
                         notes.add(new TapNote(
                                 getCurrentTime() + 4000, 3, 4));
                         notes.add(new TapNote(
-                                getCurrentTime() + 5000, 5, 6));
+                                getCurrentTime() + 5000, 5, 11));
                     }
                 }));
         animation.setCycleCount(Animation.INDEFINITE);
@@ -140,7 +140,7 @@ public class GameController implements BaseController {
     private void update() {
         int curTime = getCurrentTime();
         for (BaseNote note : notes) {
-            if (note.getTime() < curTime + 42) {
+            if (note.getTime() < curTime - 1000) {
                 Platform.runLater(() -> {
                     notes.remove(note);
                 });
