@@ -159,6 +159,8 @@ public class GameController implements BaseController {
         this.MKCount.setText(Integer.toString(this.scoreManager.getGood()));
         this.MissCount.setText(Integer.toString(this.scoreManager.getMiss()));
 
+        var combo = this.scoreManager.getCombo();
+        this.ComboCount.setText(combo >= 5 ? Integer.toString(combo) : "");
         this.MaxComboCount
                 .setText(Integer.toString(this.scoreManager.getMaxCombo()));
         this.TechnicalScore.setText(GameController.formatter

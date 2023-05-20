@@ -24,6 +24,10 @@ public class ScoreManager implements PlayResult {
         this.totalNotes = totalNotes;
     }
 
+    public int getCombo() {
+        return this.combo;
+    }
+
     @Override
     public int getTotalNotes() {
         return this.totalNotes;
