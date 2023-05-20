@@ -10,8 +10,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.RadialGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="pageRoot" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyPress" onKeyReleased="#handleKeyRelease" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
@@ -21,14 +19,14 @@
             <Image url="@../../res/images/Background.jpg" />
          </image>
       </ImageView>
-      <VBox alignment="TOP_RIGHT" layoutY="257.0" prefHeight="434.0" prefWidth="280.0" spacing="10.0" style="-fx-background-color: #00000080;">
+      <VBox alignment="TOP_RIGHT" layoutY="257.0" prefHeight="434.0" prefWidth="368.0" spacing="10.0" style="-fx-background-color: #00000080;">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <children>
             <HBox>
                <children>
-                  <Label prefWidth="170.0" text="MAX COMBO" textFill="WHITE">
+                  <Label prefHeight="40.0" prefWidth="309.0" text="MAX COMBO" textFill="WHITE">
                      <font>
                         <Font name="Impact" size="32.0" />
                      </font>
@@ -48,7 +46,7 @@
             </HBox>
             <HBox>
                <children>
-                  <Label prefWidth="170.0" text="B SAMUT PRAKAN" textFill="#d8e93e">
+                  <Label prefHeight="32.0" prefWidth="280.0" text="BANG PHLI SAMUT PRAKAN" textFill="#d8e93e">
                      <font>
                         <Font name="Impact" size="25.0" />
                      </font>
@@ -65,7 +63,7 @@
             </HBox>
             <HBox>
                <children>
-                  <Label prefWidth="170.0" text="SAMUT PRAKAN" textFill="#c57c32">
+                  <Label prefHeight="32.0" prefWidth="287.0" text="SAMUT PRAKAN" textFill="#c57c32">
                      <font>
                         <Font name="Impact" size="25.0" />
                      </font>
@@ -82,7 +80,7 @@
             </HBox>
             <HBox>
                <children>
-                  <Label prefWidth="170.0" text="MUEANG KHON" textFill="#29c4d8">
+                  <Label prefHeight="32.0" prefWidth="335.0" text="MUEANG KHON" textFill="#29c4d8">
                      <font>
                         <Font name="Impact" size="25.0" />
                      </font>
@@ -99,7 +97,7 @@
             </HBox>
             <HBox>
                <children>
-                  <Label prefWidth="170.0" text="MISS" textFill="#b4b9b9">
+                  <Label prefHeight="32.0" prefWidth="259.0" text="MISS" textFill="#b4b9b9">
                      <font>
                         <Font name="Impact" size="25.0" />
                      </font>
@@ -116,7 +114,7 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT">
                <children>
-                  <Label alignment="CENTER_RIGHT" prefWidth="200.0" text="TECHNICAL SCORE" textFill="WHITE">
+                  <Label alignment="CENTER_RIGHT" prefWidth="200.0" text="SCORE" textFill="WHITE">
                      <font>
                         <Font name="Impact" size="20.0" />
                      </font>
@@ -151,7 +149,7 @@
             </HBox>
             <HBox>
                <children>
-                  <Label prefWidth="200.0" text="Platinum Score" textFill="WHITE">
+                  <Label prefHeight="32.0" prefWidth="159.0" text="Platinum Score" textFill="WHITE">
                      <font>
                         <Font name="Impact" size="25.0" />
                      </font>
@@ -163,7 +161,7 @@
                         </DropShadow>
                      </effect>
                   </Label>
-                  <Label fx:id="PlatinumScore" alignment="CENTER_RIGHT" minWidth="70.0" prefWidth="100.0" text="0" textFill="WHITE">
+                  <Label fx:id="PlatinumScore" alignment="CENTER_RIGHT" minWidth="70.0" prefHeight="32.0" prefWidth="171.0" text="0" textFill="WHITE">
                      <font>
                         <Font name="Impact" size="25.0" />
                      </font>
@@ -187,49 +185,23 @@
       </VBox>
       <AnchorPane layoutX="500.0" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #00000080;">
          <children>
-            <Label fx:id="Rank" text="SSS+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
-               <font>
-                  <Font name="Impact" size="50.0" />
-               </font>
-               <textFill>
-                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="0.9725490212440491" blue="0.2078431397676468" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.006711409395973154">
-                           <color>
-                              <Color red="1.0" green="0.9725490212440491" blue="0.2078431397676468" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="0.9176470637321472" blue="0.1568627506494522" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </RadialGradient>
-               </textFill>
-            </Label>
             <HBox alignment="CENTER" layoutX="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label text="SCORE : " textFill="WHITE">
-                     <font>
-                        <Font name="Impact" size="50.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="MinusScore" text="1,010,000" textFill="WHITE">
+                  <Label fx:id="MinusScore" alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="280.0" text="40,000" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="Impact" size="50.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
+            <Label layoutX="22.0" layoutY="20.0" prefHeight="62.0" prefWidth="279.0" text="RANK S" textFill="WHITE">
+               <font>
+                  <Font name="Impact" size="50.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-      <VBox alignment="TOP_CENTER" layoutX="1320.0" layoutY="100.0" prefHeight="250.0" prefWidth="280.0" spacing="10.0" style="-fx-background-color: #00000080;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+      <VBox alignment="TOP_CENTER" layoutX="1320.0" layoutY="100.0" prefHeight="374.0" prefWidth="368.0" spacing="10.0" style="-fx-background-color: #00000080;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
