@@ -1,5 +1,6 @@
 package controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import constant.Config;
@@ -18,8 +19,10 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import logic.components.game.DrawNote;
 import logic.game.LaneManager;
+import logic.game.ScoreManager;
 import store.DataManager;
 import store.Setting;
+import utils.ScoreUtil;
 
 public class GameController implements BaseController {
     @FXML
@@ -31,9 +34,9 @@ public class GameController implements BaseController {
     @FXML
     private Label MissCount;
     @FXML
-    private Label Rank;
+    private Label topLeft;
     @FXML
-    private Label MinusScore;
+    private Label topRight;
     @FXML
     private ImageView SongImage;
     @FXML
@@ -71,15 +74,21 @@ public class GameController implements BaseController {
     private GraphicsContext gcNote;
 
     private final ArrayList<LaneManager> laneManagers = new ArrayList<>();
+    private ScoreManager scoreManager;
+
+    private static DecimalFormat formatter = new DecimalFormat("#,###");
 
     public GameController() {
         for (int i = 0; i < Config.N_LANES; i++) {
             this.laneManagers.add(new LaneManager());
         }
+
     }
 
     @Override
     public void start() {
+        this.scoreManager = new ScoreManager(1000);
+
         gc = PlayArea.getGraphicsContext2D();
         gcNote = NoteArea.getGraphicsContext2D();
 
@@ -133,6 +142,20 @@ public class GameController implements BaseController {
             }
         }
         drawNote();
+
+        this.BSCount.setText(
+                Integer.toString(this.scoreManager.getPlatinumCriticalPerfect()
+                        + this.scoreManager.getCriticalPerfect()));
+        this.SCount.setText(Integer.toString(this.scoreManager.getPerfect()));
+        this.MKCount.setText(Integer.toString(this.scoreManager.getGood()));
+        this.MissCount.setText(Integer.toString(this.scoreManager.getMiss()));
+
+        this.MaxComboCount
+                .setText(Integer.toString(this.scoreManager.getMaxCombo()));
+        this.TechnicalScore.setText(GameController.formatter
+                .format(ScoreUtil.calculateScore(this.scoreManager)));
+        this.PlatinumScore.setText(Integer
+                .toString(ScoreUtil.calculatePlatinumScore(this.scoreManager)));
     }
 
     private void drawNote() {

@@ -187,14 +187,14 @@
          <children>
             <HBox alignment="CENTER" layoutX="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label fx:id="MinusScore" alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="280.0" text="40,000" textAlignment="RIGHT" textFill="WHITE">
+                  <Label fx:id="topRight" alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="280.0" text="40,000" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="Impact" size="50.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <Label layoutX="22.0" layoutY="20.0" prefHeight="62.0" prefWidth="279.0" text="RANK S" textFill="WHITE">
+            <Label fx:id="topLeft" layoutX="22.0" layoutY="20.0" prefHeight="62.0" prefWidth="279.0" text="RANK S" textFill="WHITE">
                <font>
                   <Font name="Impact" size="50.0" />
                </font>
@@ -232,7 +232,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <children>
-            <Label id="fastLateLabel" text="FAST" textFill="BLUE">
+            <Label fx:id="fastLateLabel" text="FAST" textFill="BLUE">
                <font>
                   <Font name="Helvetica" size="36.0" />
                </font>

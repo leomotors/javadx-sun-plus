@@ -14,6 +14,21 @@ public class ScoreManager implements PlayResult {
     private PartialScoreManager hold;
     private PartialScoreManager flick;
 
+    private int totalNotes;
+
+    public ScoreManager(int totalNotes) {
+        this.tap = new PartialScoreManager();
+        this.hold = new PartialScoreManager();
+        this.flick = new PartialScoreManager();
+
+        this.totalNotes = totalNotes;
+    }
+
+    @Override
+    public int getTotalNotes() {
+        return this.totalNotes;
+    }
+
     public void addJudgement(NoteType noteType, JudgementType judgement,
             FastLateType fastLate) {
         if (judgement == JudgementType.MISS) {
