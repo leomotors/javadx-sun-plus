@@ -22,7 +22,7 @@ public class SongInfo {
     private String rank; // X = No Rank, Else = respective rank
     private int score;
 
-    private Map<Difficulty, Integer> difficulties;
+    private Map<Difficulty, String> difficulties;
 
     public SongInfo(String id) {
         this.id = id;
@@ -32,10 +32,10 @@ public class SongInfo {
         this.score = 0;
         difficulties = Collections
                 .unmodifiableMap(
-                        Map.of(Difficulty.BASIC, 0,
-                                Difficulty.ADVANCED, 0,
-                                Difficulty.EXPERT, 0,
-                                Difficulty.MASTER, 0));
+                        Map.of(Difficulty.BASIC, "0",
+                                Difficulty.ADVANCED, "0",
+                                Difficulty.EXPERT, "0",
+                                Difficulty.MASTER, "0"));
         var stringToEnum = new HashMap<String, Difficulty>();
         Arrays.asList(Difficulty.values()).stream()
                 .map(val -> stringToEnum.put(val.name(), val));
@@ -50,7 +50,7 @@ public class SongInfo {
             }
 
             this.difficulties.put(stringToEnum.get(token[0]),
-                    Integer.parseInt(token[1]));
+                    token[1]);
         }
     }
 
@@ -108,7 +108,7 @@ public class SongInfo {
         this.score = score;
     }
 
-    public Integer getDifficulty(Difficulty key) {
+    public String getDifficulty(Difficulty key) {
         return this.difficulties.get(key);
     }
 
