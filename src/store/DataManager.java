@@ -14,6 +14,7 @@ public final class DataManager {
     public static final String MAC_OS_X_PREFIX = "/Library/Application Support/javadx";
     public static final String WINDOWS_PREFIX = "/AppData/Local/javadx";
     public static final String SETTINGS_FILE = "/settings.txt";
+    public static final String SONGS_DIR = "/Songs/";
 
     private static final Map<Setting, String> defaultValue = Collections
             .unmodifiableMap(
@@ -107,4 +108,9 @@ public final class DataManager {
     public static synchronized DataManager getInstance() {
         return DataManager.instance;
     }
+
+    public String getPathPrefix() {
+        return this.pathPrefix;
+    }
+
 }
