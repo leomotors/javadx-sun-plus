@@ -13,7 +13,7 @@ Java<ruby>DX<rt>でらっくす</rt></ruby> SUN PLUS! is a rythm game _not inspi
 - Lane from 1 to N (number of lanes)
 - `TAP` ARG0 = Is EX Note
 - `HOLD` ARG0 = End Time
-- `FLICK` ARG0 = EX Note and Direction (0 = left, 1 = right, 10 = EX & left, 11 = EX & right)
+- `FLICK` ARG0 = None
 - Example: `TAP 69 1 5 0`, `HOLD 69 1 5 420`
 
 ## Chart Folder Structure
