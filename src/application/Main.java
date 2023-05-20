@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import router.Router;
 import store.DataManager;
+import store.SongManager;
 
 public class Main extends Application {
 
@@ -17,7 +18,9 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             DataManager.createInstance();
+            SongManager.createInstance();
             Router.createInstance(stage);
+
             AudioClip welcome = new AudioClip(ClassLoader
                     .getSystemResource("sounds/partner/CPP_WELCOME.wav")
                     .toString());

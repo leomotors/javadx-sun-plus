@@ -32,8 +32,10 @@ public final class DataManager {
 
     private void readConfig() {
         var stringToEnum = new HashMap<String, Setting>();
-        Arrays.asList(Setting.values()).stream()
-                .map(val -> stringToEnum.put(val.name(), val));
+
+        for (var val : Arrays.asList(Setting.values())) {
+            stringToEnum.put(val.name(), val);
+        }
 
         // Set config from files
         for (var line : FileUtil
