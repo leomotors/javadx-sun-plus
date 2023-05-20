@@ -30,9 +30,13 @@ public interface Judgement {
 
     // Computed
 
-    public default int getTotalNotes() {
+    public default int getPlayedNotes() {
         return this.getPlatinumCriticalPerfect() + this.getCriticalPerfect()
                 + this.getPerfect() + this.getGood() + this.getMiss();
+    }
+
+    public default int getTotalNotes() {
+        return this.getPlayedNotes();
     }
 
     public default int getFast() {

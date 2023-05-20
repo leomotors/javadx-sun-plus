@@ -11,10 +11,22 @@ public interface PlayResult {
 
     // Computed
 
+    /**
+     * Will return sum of all played notes,
+     * on complete will be the same to {@link #getTotalNotes}
+     */
+    public default int getPlayedNotes() {
+        return this.getTap().getPlayedNotes()
+                + this.getHold().getPlayedNotes()
+                + this.getFlick().getPlayedNotes();
+    }
+
+    /**
+     * Get total notes including unplayed,
+     * on complete will be the same to {@link #getPlayedNotes}
+     */
     public default int getTotalNotes() {
-        return this.getTap().getTotalNotes()
-                + this.getHold().getTotalNotes()
-                + this.getFlick().getTotalNotes();
+        return this.getPlayedNotes();
     }
 
     public default int getPlatinumCriticalPerfect() {

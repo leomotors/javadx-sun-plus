@@ -70,6 +70,10 @@ public class Config {
         }
     }
 
+    // TODO Put this in settings
+    public static final String TOP_LEFT_TEXT = "RANK S";
+    public static final int TOP_RIGHT_GOAL = 970_000;
+
     // Unused, to be removed
     public static final int SUBTILE_PER_TILE = 50;
     public static final int TILE_HEIGHT = SUBTILE_PER_TILE * 10;
