@@ -1,4 +1,4 @@
-package logic.components;
+package logic.components.game;
 
 public abstract class BaseNote {
     protected int time;

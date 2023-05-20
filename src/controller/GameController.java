@@ -16,7 +16,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import logic.components.DrawNote;
+import logic.components.game.DrawNote;
 import logic.game.LaneManager;
 import store.DataManager;
 import store.Setting;

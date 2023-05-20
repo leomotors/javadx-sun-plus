@@ -1,4 +1,4 @@
-package logic.components;
+package logic.components.game;
 
 public class DrawNote extends BaseNote {
     private int x;

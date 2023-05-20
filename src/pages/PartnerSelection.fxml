@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PartnerSelectionController">
    <children>
@@ -57,7 +58,7 @@
                   <DropShadow height="30.0" radius="14.5" spread="0.36" width="30.0" />
                </effect>
             </ImageView>
-            <Label alignment="CENTER" prefWidth="250.0" text="CPP CHAN" textFill="WHITE">
+            <Label alignment="CENTER" prefWidth="250.0" text="CPP ちゃん" textFill="WHITE">
                <font>
                   <Font name="Impact" size="40.0" />
                </font>
@@ -69,6 +70,11 @@
                   </DropShadow>
                </effect>
             </Label>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="CV: 白石杏 (ProsekaTTS) ">
+               <font>
+                  <Font name="Helvetica" size="14.0" />
+               </font>
+            </Text>
             <Button fx:id="SelectCppButton" mnemonicParsing="false" onMouseClicked="#SelectCpp" prefHeight="50.0" prefWidth="200.0" style="-fx-background-radius: 15;" text="Select">
                <font>
                   <Font name="Impact" size="30.0" />
@@ -86,7 +92,7 @@
                   <DropShadow height="30.0" radius="14.5" spread="0.36" width="30.0" />
                </effect>
             </ImageView>
-            <Label alignment="CENTER" prefWidth="250.0" text="JAVA CHAN" textFill="WHITE">
+            <Label alignment="CENTER" prefWidth="250.0" text="JAVA ちゃん" textFill="WHITE">
                <font>
                   <Font name="Impact" size="40.0" />
                </font>
@@ -98,6 +104,11 @@
                   </DropShadow>
                </effect>
             </Label>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="CV: 暁山瑞希 (ProsekaTTS)">
+               <font>
+                  <Font name="Helvetica" size="14.0" />
+               </font>
+            </Text>
             <Button fx:id="SelectJavaButton" mnemonicParsing="false" onMouseClicked="#SelectJava" prefHeight="50.0" prefWidth="200.0" style="-fx-background-radius: 15;" text="Select">
                <font>
                   <Font name="Impact" size="30.0" />
