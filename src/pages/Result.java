@@ -8,13 +8,19 @@ import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import logic.components.BriefResult;
+import logic.components.ChartCard;
 import logic.components.DXButton;
 import logic.components.DetailedResult;
+import logic.core.Difficulty;
 import router.Page;
 import router.Router;
+import store.DataManager;
+import store.Setting;
+import store.SongManager;
 import utils.ImageUtil;
 import utils.ScoreUtilMock;
 
@@ -56,11 +62,30 @@ public class Result implements Page {
 
         mainPane.setLeft(this.briefResult);
 
-        // TODO Right Component
+        mainPane.setRight(this.createRightPane());
 
         mainPane.setBottom(this.createBottomPane());
 
         return mainPane;
+    }
+
+    private VBox createRightPane() {
+        var rightPane = new VBox();
+
+        var chartCard = new ChartCard(
+                SongManager.getInstance().getCharts().get(0),
+                Difficulty.EXPERT);
+
+        var partner = (DataManager.getInstance().get(Setting.PARTNER)
+                .equals("CPP")) ? ImageUtil.loadImageAsView("images/CPP.png")
+                        : ImageUtil.loadImageAsView("images/JAVA.png");
+
+        rightPane.getChildren().addAll(chartCard, partner);
+        rightPane.setSpacing(8);
+        rightPane.setPadding(new Insets(0, 72, 0, 0));
+        rightPane.setAlignment(Pos.CENTER);
+
+        return rightPane;
     }
 
     private HBox createTopPane() {
