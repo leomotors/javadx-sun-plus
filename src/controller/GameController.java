@@ -8,6 +8,7 @@ import constant.Config;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -132,24 +133,20 @@ public class GameController implements BaseController {
         return (int) (System.currentTimeMillis() - startTime);
     }
 
-    private int calculatePosY(BaseNote note) {
-        int timeDiff = Math.max(0, note.getTime() - getCurrentTime());
-        float ratio = 1 - ((float) timeDiff / (float) Config.NOTE_SHOW_TIME);
-        return (int) (ratio * HEIGHT);
-    }
-
     // TEMP
     private int _tempCOUNTER = 0;
     Random random = new Random();
 
     private void update() {
-        // for (DrawNote note : notes) {
-        // note.setY(calculatePosY(note));
-        // if (note.getY() >= HEIGHT) {
-        // notes.remove(note);
-        // break;
-        // }
-        // }
+        int curTime = getCurrentTime();
+        for (BaseNote note : notes) {
+            if (note.getTime() < curTime + 42) {
+                Platform.runLater(() -> {
+                    notes.remove(note);
+                });
+
+            }
+        }
         drawNote();
 
         this.BSCount.setText(
@@ -206,14 +203,45 @@ public class GameController implements BaseController {
         }
     }
 
+    private int calculatePosY(BaseNote note) {
+        int timeDiff = Math.max(0, note.getTime() - getCurrentTime());
+        float ratio = 1 - ((float) timeDiff / (float) Config.NOTE_SHOW_TIME);
+        return (int) (ratio * HEIGHT);
+    }
+
+    private int calculatePosX(BaseNote note) {
+        int laneNumber = note.getLaneStart();
+        double x1 = Config.LANE_BOTTOM_WIDTH * laneNumber; // bottom left
+        double buffer = (WIDTH - Config.LANE_TOP_WIDTH * Config.LANE_COUNT) / 2; // empty
+                                                                                 // space
+        double x2 = buffer + Config.LANE_TOP_WIDTH * laneNumber; // top left
+        double translation = x1 - x2;
+        int timeDiff = Math.max(0, note.getTime() - getCurrentTime());
+        float ratio = 1 - ((float) timeDiff / (float) Config.NOTE_SHOW_TIME); // 0-100
+                                                                              // =
+                                                                              // top
+                                                                              // to
+                                                                              // bottom
+        return (int) (x2 + (ratio * translation));
+    }
+
+    private int calculateWidth(BaseNote note) {
+        int laneCount = note.getLaneEnd() - note.getLaneStart() + 1;
+        int timeDiff = Math.max(0, note.getTime() - getCurrentTime());
+        int translation = Config.LANE_BOTTOM_WIDTH - Config.LANE_TOP_WIDTH;
+        float ratio = 1 - ((float) timeDiff / (float) Config.NOTE_SHOW_TIME);
+        return (int) ((laneCount * Config.LANE_TOP_WIDTH)
+                + ratio * laneCount * translation);
+    }
+
     private void drawNote() {
         gcNote.clearRect(0, 0, WIDTH, HEIGHT);
 
-        // for (DrawNote note : notes) {
-        // gcNote.setFill(Color.RED);
-        // gcNote.fillRect(note.getX(), note.getY(),
-        // Config.LANE_BOTTOM_WIDTH, 10);
-        // }
+        for (BaseNote note : notes) {
+            gcNote.setFill(Color.RED);
+            gcNote.fillRect(calculatePosX(note), calculatePosY(note),
+                    calculateWidth(note), 10);
+        }
     }
 
     private void drawLane(int laneNumber) {
