@@ -24,7 +24,7 @@ Java<ruby>DX<rt>でらっくす</rt></ruby> SUN PLUS! is a rythm game _not inspi
  |- charts
     |- [chartId] # Folder Name = id
         |- metadata.txt
-        |- cover.png
+        |- cover.jpg
         |- music.mp3
         |- (basic.txt) # If exists
         |- (advanced.txt)
