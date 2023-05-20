@@ -83,15 +83,36 @@ public final class ScoreUtil {
         return rawScore * 101.0 / totalScore;
     }
 
-    public static int calculateScore(PlayResult playResult) {
-        int theoreticalScore = playResult.getTotalNotes()
-                * ScoreUtil.CRITICAL_PERFECT_WEIGHT;
-
+    public static int calculateRawScore(PlayResult playResult) {
         int rawScore = ScoreUtil.calculatePartialScore(playResult.getTap())
                 + ScoreUtil.calculatePartialScore(playResult.getHold())
                 + ScoreUtil.calculatePartialScore(playResult.getFlick());
 
+        return rawScore;
+    }
+
+    public static int calculateScore(PlayResult playResult) {
+        int theoreticalScore = playResult.getTotalNotes()
+                * ScoreUtil.CRITICAL_PERFECT_WEIGHT;
+
+        int rawScore = ScoreUtil.calculateRawScore(playResult);
+
         return ScoreUtil.safeScaling(rawScore, theoreticalScore,
+                ScoreUtil.MAX_SCORE);
+    }
+
+    public static int calculateScoreTypeMinus(PlayResult playResult) {
+        int rawScore = ScoreUtil.calculateRawScore(playResult);
+
+        int remainingNotes = playResult.getTotalNotes()
+                - playResult.getPlayedNotes();
+
+        int bestCaseScore = rawScore
+                + remainingNotes * ScoreUtil.CRITICAL_PERFECT_WEIGHT;
+        int theoreticalScore = playResult.getTotalNotes()
+                * ScoreUtil.CRITICAL_PERFECT_WEIGHT;
+
+        return ScoreUtil.safeScaling(bestCaseScore, theoreticalScore,
                 ScoreUtil.MAX_SCORE);
     }
 
@@ -109,6 +130,10 @@ public final class ScoreUtil {
 
     public static int calculateMaxPlatinumScore(PlayResult playResult) {
         return playResult.getTotalNotes() * 2;
+    }
+
+    public static int calculateCurrentMaxPlatinumScore(PlayResult playResult) {
+        return playResult.getPlayedNotes() * 2;
     }
 
     public static boolean isFullCombo(PlayResult playResult) {
