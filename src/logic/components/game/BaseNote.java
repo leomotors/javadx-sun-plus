@@ -1,32 +1,56 @@
 package logic.components.game;
 
+import controller.GameController;
+import logic.core.FastLateType;
+import logic.core.JudgementType;
+import logic.core.NoteType;
+
 public abstract class BaseNote {
-    protected int time;
-    protected int laneStart;
-    protected int laneEnd;
+    private final int time;
+    private final int laneStart;
+    private final int laneEnd;
+
+    private JudgementType judgementType;
+    private FastLateType fastLateType;
+
+    public BaseNote(int time, int laneStart, int laneEnd) {
+        this.time = time;
+        this.laneStart = laneStart;
+        this.laneEnd = laneEnd;
+    }
 
     public int getTime() {
         return time;
-    }
-
-    public void setTime(int time) {
-        this.time = time;
     }
 
     public int getLaneStart() {
         return laneStart;
     }
 
-    public void setLaneStart(int laneStart) {
-        this.laneStart = laneStart;
-    }
-
     public int getLaneEnd() {
         return laneEnd;
     }
 
-    public void setLaneEnd(int laneEnd) {
-        this.laneEnd = laneEnd;
+    public JudgementType getJudgementType() {
+        return this.judgementType;
     }
 
+    public FastLateType fastLateType() {
+        return this.fastLateType;
+    }
+
+    protected void setJudgementType(JudgementType judgementType) {
+        this.judgementType = judgementType;
+    }
+
+    protected void setFastLateType(FastLateType fastLateType) {
+        this.fastLateType = fastLateType;
+    }
+
+    public abstract NoteType getNoteType();
+
+    /**
+     * Returns true if judgement has been made and note should be removed.
+     */
+    public abstract boolean checkJudgement(GameController controller);
 }
