@@ -14,7 +14,7 @@ public final class DataManager {
     public static final String MAC_OS_X_PREFIX = "/Library/Application Support/javadx";
     public static final String WINDOWS_PREFIX = "/AppData/Local/javadx";
     public static final String SETTINGS_FILE = "/settings.txt";
-    public static final String SONGS_DIR = "/Songs/";
+    public static final String SONGS_DIR = "/charts/";
 
     private static final Map<Setting, String> defaultValue = Collections
             .unmodifiableMap(
