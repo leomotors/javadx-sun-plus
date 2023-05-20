@@ -5,15 +5,15 @@ import logic.core.FastLateType;
 import logic.core.JudgementType;
 import logic.core.NoteType;
 
-public class TapNote extends BaseNote {
+public class FlickNote extends BaseNote {
 
-    public TapNote(int time, int laneStart, int laneEnd) {
+    public FlickNote(int time, int laneStart, int laneEnd) {
         super(time, laneStart, laneEnd);
     }
 
     @Override
     public NoteType getNoteType() {
-        return NoteType.TAP;
+        return NoteType.FLICK;
     }
 
     @Override

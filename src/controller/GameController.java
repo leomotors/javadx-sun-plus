@@ -146,7 +146,7 @@ public class GameController implements BaseController {
         animation.play();
     }
 
-    private int getCurrentTime() {
+    public int getCurrentTime() {
         return (int) (System.currentTimeMillis() - startTime);
     }
 

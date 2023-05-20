@@ -49,8 +49,5 @@ public abstract class BaseNote {
 
     public abstract NoteType getNoteType();
 
-    /**
-     * Returns true if judgement has been made and note should be removed.
-     */
-    public abstract boolean checkJudgement(GameController controller);
+    public abstract NoteCheckResult checkJudgement(GameController controller);
 }
