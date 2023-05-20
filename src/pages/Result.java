@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -62,12 +63,17 @@ public class Result implements Page {
 
         mainPane.setLeft(this.briefResult);
 
-        mainPane.setRight(this.createRightPane());
+        this.rightPane = this.createRightPane();
+        mainPane.setRight(this.rightPane);
 
         mainPane.setBottom(this.createBottomPane());
 
         return mainPane;
     }
+
+    private ImageView cppChan;
+    private ImageView javaChan;
+    private VBox rightPane;
 
     private VBox createRightPane() {
         var rightPane = new VBox();
@@ -76,11 +82,15 @@ public class Result implements Page {
                 SongManager.getInstance().getCharts().get(0),
                 Difficulty.EXPERT);
 
-        var partner = (DataManager.getInstance().get(Setting.PARTNER)
-                .equals("CPP")) ? ImageUtil.loadImageAsView("images/CPP.png")
-                        : ImageUtil.loadImageAsView("images/JAVA.png");
+        this.cppChan = ImageUtil.loadImageAsView("images/CPP.png");
+        this.cppChan.setFitWidth(272);
+        this.cppChan.setFitHeight(481);
 
-        rightPane.getChildren().addAll(chartCard, partner);
+        this.javaChan = ImageUtil.loadImageAsView("images/JAVA.png");
+        this.javaChan.setFitWidth(272);
+        this.javaChan.setFitHeight(481);
+
+        rightPane.getChildren().addAll(chartCard, this.cppChan);
         rightPane.setSpacing(8);
         rightPane.setPadding(new Insets(0, 72, 0, 0));
         rightPane.setAlignment(Pos.CENTER);
@@ -134,6 +144,13 @@ public class Result implements Page {
         var result = AppState.getInstance().getPlayResult();
         this.briefResult.render(result);
         this.detailedResult.render(result);
+
+        this.rightPane.getChildren().remove(1);
+        if (DataManager.getInstance().get(Setting.PARTNER).equals("CPP")) {
+            this.rightPane.getChildren().add(this.cppChan);
+        } else {
+            this.rightPane.getChildren().add(this.javaChan);
+        }
     }
 
     @Override

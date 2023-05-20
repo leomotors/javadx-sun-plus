@@ -202,14 +202,14 @@ public class GameController implements BaseController {
 
             double rng = this.random.nextDouble();
 
-            if (rng < 0.9) {
+            if (rng < 0.8) {
                 this.feedbackManager.addJudgement(NoteType.TAP,
                         JudgementType.PLATINUM_CRITICAL_PERFECT,
                         FastLateType.NONE);
-            } else if (rng < 0.95) {
+            } else if (rng < 0.9) {
                 this.feedbackManager.addJudgement(NoteType.TAP,
                         JudgementType.CRITICAL_PERFECT, FastLateType.FAST);
-            } else if (rng < 0.97) {
+            } else if (rng < 1) {
                 this.feedbackManager.addJudgement(NoteType.TAP,
                         JudgementType.PERFECT, FastLateType.LATE);
             } else if (rng < 0.99) {

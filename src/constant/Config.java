@@ -73,8 +73,9 @@ public class Config {
     // TODO Put this in settings
     public static final String TOP_LEFT_TEXT = "RANK S";
     public static final int TOP_RIGHT_GOAL = 970_000;
+    public static final int NOTE_SHOW_TIME = 900;
 
-    // Unused, to be removed
+    // Unused (?), to be removed
     public static final int SUBTILE_PER_TILE = 50;
     public static final int TILE_HEIGHT = SUBTILE_PER_TILE * 10;
     public static final double TILE_SECTION_BORDER_WIDTH = 0.1;
@@ -91,5 +92,4 @@ public class Config {
     public static final int LANE_BOTTOM_WIDTH = 75;
     public static final int LANE_TOP_WIDTH = 30;
     public static final int LANE_HEIGHT = 600;
-    public static final int NOTE_SHOW_TIME = 1800;
 }
