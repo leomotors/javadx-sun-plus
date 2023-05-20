@@ -26,7 +26,7 @@ public class PartnerSelectionController implements BaseController {
 
     @Override
     public void start() {
-        if (DataManager.getInstance().get(Setting.PARTNER) == "CPP") {
+        if (DataManager.getInstance().get(Setting.PARTNER).equals("CPP")) {
             SelectCppButton.setDisable(true);
             SelectCppButton.setText("Selected");
             SelectJavaButton.setDisable(false);

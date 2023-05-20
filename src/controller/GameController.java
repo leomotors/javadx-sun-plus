@@ -96,7 +96,7 @@ public class GameController implements BaseController {
             drawLane(i);
         }
 
-        if (DataManager.getInstance().get(Setting.PARTNER) == "CPP") {
+        if (DataManager.getInstance().get(Setting.PARTNER).equals("CPP")) {
             PartnerImage.setImage(
                     new Image(ClassLoader.getSystemResource("images/CPP.png")
                             .toString()));
