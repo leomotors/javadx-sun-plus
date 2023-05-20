@@ -21,6 +21,9 @@ public final class SoundManager {
         fxPlayer = new MediaPlayer(new Media(
                 SoundManager.class.getResource(this.path + soundPath)
                         .toString()));
+        fxPlayer.setVolume(Integer
+                .parseInt(DataManager.getInstance().get(Setting.FX_VOLUME))
+                / 100);
         fxPlayer.play();
     }
 
@@ -30,6 +33,9 @@ public final class SoundManager {
         partnerPlayer = new MediaPlayer(new Media(
                 SoundManager.class.getResource(this.path + soundPath)
                         .toString()));
+        partnerPlayer.setVolume(Integer
+                .parseInt(DataManager.getInstance().get(Setting.PARTNER_VOLUME))
+                / 100);
         partnerPlayer.play();
     }
 
@@ -39,6 +45,9 @@ public final class SoundManager {
         bgmPlayer = new MediaPlayer(new Media(
                 SoundManager.class.getResource(this.path + soundPath)
                         .toString()));
+        bgmPlayer.setVolume(Integer
+                .parseInt(DataManager.getInstance().get(Setting.BGM_VOLUME))
+                / 100);
         bgmPlayer.play();
     }
 
@@ -50,6 +59,14 @@ public final class SoundManager {
     public void playBGM() {
         if (bgmPlayer != null)
             bgmPlayer.play();
+    }
+
+    public void setBGMVolume(int volume) {
+        DataManager.getInstance().set(Setting.BGM_VOLUME,
+                String.valueOf(volume));
+        bgmPlayer.setVolume(Integer
+                .parseInt(DataManager.getInstance().get(Setting.BGM_VOLUME))
+                / 100);
     }
 
     public int getTime() {

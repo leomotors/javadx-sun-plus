@@ -17,8 +17,8 @@ public final class DataManager {
             .unmodifiableMap(
                     Map.of(Setting.PLAYER_NAME, "JavaDX", Setting.PARTNER,
                             "CPP", Setting.SPEED, "4",
-                            Setting.SONG_VOLUME, "100", Setting.FX_VOLUME,
-                            "100"));
+                            Setting.BGM_VOLUME, "100", Setting.FX_VOLUME,
+                            "100", Setting.PARTNER_VOLUME, "100"));
 
     private String pathPrefix;
     private final HashMap<Setting, String> setting = new HashMap<>();
