@@ -42,8 +42,6 @@ public final class SongManager {
                 e.printStackTrace();
             }
         }
-
-        System.out.println(this.getCharts());
     }
 
     private List<String> listSong(String directoryPath) {
