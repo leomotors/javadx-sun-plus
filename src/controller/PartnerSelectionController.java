@@ -5,12 +5,12 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.AudioClip;
 import javafx.util.Duration;
 import router.AppPage;
 import router.Router;
 import store.DataManager;
 import store.Setting;
+import store.SoundManager;
 
 public class PartnerSelectionController implements BaseController {
     @FXML
@@ -19,10 +19,6 @@ public class PartnerSelectionController implements BaseController {
     private Button SelectCppButton;
     @FXML
     private Button SelectJavaButton;
-
-    private AudioClip selectFx = new AudioClip(ClassLoader
-            .getSystemResource("sounds/fx/SELECT.mp4")
-            .toString());
 
     @Override
     public void start() {
@@ -42,32 +38,28 @@ public class PartnerSelectionController implements BaseController {
     @FXML
     private void SelectCpp() {
         DataManager.getInstance().set(Setting.PARTNER, "CPP");
-        selectFx.play();
+        SoundManager.getInstance().playFx("fx/SELECT.mp4");
         SelectCppButton.setDisable(true);
         SelectCppButton.setText("Selected");
         SelectJavaButton.setDisable(false);
         SelectJavaButton.setText("Select");
-        AudioClip Cpp = new AudioClip(ClassLoader
-                .getSystemResource("sounds/partner/CPP_SELECT.wav")
-                .toString());
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(0.5), event -> Cpp.play()));
+                new KeyFrame(Duration.seconds(0.5), event -> SoundManager
+                        .getInstance().playPartner("partner/CPP_SELECT.wav")));
         timeline.play();
     }
 
     @FXML
     private void SelectJava() {
         DataManager.getInstance().set(Setting.PARTNER, "JAVA");
-        selectFx.play();
+        SoundManager.getInstance().playFx("fx/SELECT.mp4");
         SelectCppButton.setDisable(false);
         SelectCppButton.setText("Select");
         SelectJavaButton.setDisable(true);
         SelectJavaButton.setText("Selected");
-        AudioClip Java = new AudioClip(ClassLoader
-                .getSystemResource("sounds/partner/JAVA_SELECT.wav")
-                .toString());
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(0.5), event -> Java.play()));
+                new KeyFrame(Duration.seconds(0.5), event -> SoundManager
+                        .getInstance().playPartner("partner/JAVA_SELECT.wav")));
         timeline.play();
     }
 
