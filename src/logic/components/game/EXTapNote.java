@@ -14,7 +14,8 @@ public class EXTapNote extends TapNote {
     public NoteCheckResult checkJudgement(GameController controller) {
         var result = super.checkJudgement(controller);
 
-        if (result == NoteCheckResult.REMOVE) {
+        if (result == NoteCheckResult.REMOVE
+                && this.getJudgementType() != JudgementType.MISS) {
             this.setFastLateType(FastLateType.NONE);
             this.setJudgementType(JudgementType.PLATINUM_CRITICAL_PERFECT);
         }
