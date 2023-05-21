@@ -71,7 +71,6 @@ public class GameController implements BaseController {
     @FXML
     private ImageView PartnerImage;
 
-    private long startTime;
     private long UPDATE_DELAY = 10;
     private Timeline animation;
 
@@ -139,7 +138,6 @@ public class GameController implements BaseController {
                             .toString()));
         }
 
-        startTime = System.currentTimeMillis();
         animation = new Timeline(new KeyFrame(Duration.millis(UPDATE_DELAY),
                 event -> {
                     update();
