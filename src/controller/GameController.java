@@ -117,9 +117,6 @@ public class GameController implements BaseController {
             this.laneManagers.add(new LaneManager());
         }
 
-        this.setupLabels();
-        this.setupCanvas();
-
         try {
             this.mapLoader = new MapLoader(
                     AppState.getInstance().getCurrentChart(),
@@ -127,6 +124,9 @@ public class GameController implements BaseController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        this.setupLabels();
+        this.setupCanvas();
 
         SoundManager.getInstance().stopBGM();
         Timeline timeline = new Timeline(
@@ -137,7 +137,7 @@ public class GameController implements BaseController {
     }
 
     private void setupLabels() {
-        this.scoreManager = new ScoreManager(100);
+        this.scoreManager = new ScoreManager(this.mapLoader.getTotalNotes());
         this.feedbackManager = new FeedbackManager(this.JudgeName,
                 this.fastLateLabel, this.scoreManager);
 
@@ -185,12 +185,18 @@ public class GameController implements BaseController {
      * Runs every 10ms
      */
     private void update() {
+        this.mapLoader.getTotalNotes();
         for (var note : notes) {
             var checkResult = note.checkJudgement(this);
 
             if (checkResult == NoteCheckResult.REMOVE) {
                 Platform.runLater(() -> {
-                    notes.remove(note);
+                    if (note.isRemoved())
+                        return;
+
+                    note.setRemoved(true);
+                    this.notes.remove(note);
+
                     this.feedbackManager.addJudgement(note.getNoteType(),
                             JudgementType.MISS, FastLateType.NONE);
                 });

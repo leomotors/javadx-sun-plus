@@ -14,6 +14,7 @@ public class Config {
     public static final String UI_FONT = "Helvetica";
 
     public static final int N_LANES = 12;
+    public static final int HOLD_TICK = 250;
 
     public static int getLaneFromKey(KeyCode keyCode) {
         switch (keyCode) {
@@ -71,8 +72,8 @@ public class Config {
     }
 
     // TODO Put this in settings
-    public static final String TOP_LEFT_TEXT = "RANK S";
-    public static final int TOP_RIGHT_GOAL = 970_000;
+    public static final String TOP_LEFT_TEXT = "SCORE";
+    public static final int TOP_RIGHT_GOAL = 000_000;
     public static final int NOTE_SHOW_TIME = 900;
 
     // Unused (?), to be removed

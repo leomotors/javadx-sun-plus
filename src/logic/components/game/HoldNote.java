@@ -1,5 +1,6 @@
 package logic.components.game;
 
+import constant.Config;
 import controller.GameController;
 import logic.core.FastLateType;
 import logic.core.JudgementType;
@@ -32,5 +33,10 @@ public class HoldNote extends BaseNote {
 
     public int getEndTime() {
         return this.endTime;
+    }
+
+    public int getTotalTicks() {
+        return Math.ceilDiv(this.getEndTime() - this.getTime(),
+                Config.HOLD_TICK);
     }
 }
