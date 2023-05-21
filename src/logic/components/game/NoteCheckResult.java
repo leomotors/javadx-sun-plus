@@ -1,11 +1,13 @@
 package logic.components.game;
 
 /**
- * NONE - Do nothing
+ * <ul>
+ * <li>NONE - Do nothing</li>
  * 
- * PRESERVE - Save judgement and preserve note (Only for HOLD notes)
+ * <li>PRESERVE - Save judgement and preserve note (Only for HOLD notes)</li>
  * 
- * REMOVE - Save judgement and remove note
+ * <li>REMOVE - Save judgement and remove note</li>
+ * </ul>
  */
 public enum NoteCheckResult {
     NONE, PRESERVE, REMOVE
