@@ -30,6 +30,7 @@ import logic.game.ScoreManager;
 import store.AppState;
 import store.DataManager;
 import store.Setting;
+import store.SoundManager;
 import utils.ScoreUtil;
 
 public class GameController implements BaseController {
@@ -151,7 +152,7 @@ public class GameController implements BaseController {
     }
 
     public int getCurrentTime() {
-        return (int) (System.currentTimeMillis() - startTime);
+        return SoundManager.getInstance().getTime();
     }
 
     private void update() {

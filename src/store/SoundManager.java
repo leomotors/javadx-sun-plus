@@ -1,7 +1,12 @@
 package store;
 
+import java.io.File;
+import java.io.IOException;
+
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import logic.core.Chart;
+import utils.FileUtil;
 
 public final class SoundManager {
 
@@ -45,6 +50,20 @@ public final class SoundManager {
         bgmPlayer = new MediaPlayer(new Media(
                 SoundManager.class.getResource(this.path + soundPath)
                         .toString()));
+        bgmPlayer.setVolume(Integer
+                .parseInt(DataManager.getInstance().get(Setting.BGM_VOLUME))
+                / 100.00);
+        bgmPlayer.play();
+    }
+
+    public void playBGM(Chart chart) throws IOException {
+        var chartId = chart.id();
+        var location = FileUtil.getPathPrefix() + SongManager.SONGS_DIR
+                + chartId;
+        var url = new File(location + "/music.mp3").toURI().toString();
+        if (bgmPlayer != null)
+            bgmPlayer.stop();
+        bgmPlayer = new MediaPlayer(new Media(url));
         bgmPlayer.setVolume(Integer
                 .parseInt(DataManager.getInstance().get(Setting.BGM_VOLUME))
                 / 100.00);
