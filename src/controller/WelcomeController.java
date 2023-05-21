@@ -27,14 +27,6 @@ public class WelcomeController implements BaseController {
         Router.getInstance().push(AppPage.SONG_SELECTION);
     }
 
-    @FXML
-    private Button tempButton;
-
-    @FXML
-    public void tempHandler() {
-        Router.getInstance().push(AppPage.RESULT);
-    }
-
     public void enableWelcome() {
         welcomeButton.setDisable(false);
     }

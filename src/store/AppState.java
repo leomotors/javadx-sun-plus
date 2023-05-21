@@ -3,7 +3,6 @@ package store;
 import logic.core.Chart;
 import logic.core.Difficulty;
 import logic.core.PlayResult;
-import utils.ScoreUtilMock;
 
 public final class AppState {
     private static AppState instance;
@@ -14,9 +13,6 @@ public final class AppState {
     private Difficulty selectedDifficulty;
 
     private AppState() {
-        this.playResult = ScoreUtilMock.getMockPlayResult();
-        if (!ChartManager.getInstance().getCharts().isEmpty())
-            this.currentChart = ChartManager.getInstance().getCharts().get(0);
         this.selectedDifficulty = Difficulty.BASIC;
     }
 
