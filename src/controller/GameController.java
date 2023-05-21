@@ -25,7 +25,6 @@ import logic.components.game.BaseNote;
 import logic.components.game.EXTapNote;
 import logic.components.game.FlickNote;
 import logic.components.game.HoldNote;
-import logic.components.game.NoteCheckResult;
 import logic.game.FeedbackManager;
 import logic.game.LaneManager;
 import logic.game.MapLoader;
@@ -186,13 +185,20 @@ public class GameController implements BaseController {
         for (var note : notes) {
             var checkResult = note.checkJudgement(this);
 
-            if (checkResult == NoteCheckResult.REMOVE) {
-                Platform.runLater(() -> {
-                    this.notes.remove(note);
+            switch (checkResult) {
+                case NONE:
+                    break;
 
-                    this.feedbackManager.addJudgement(note.getNoteType(),
-                            note.getJudgementType(), note.getFastLateType());
-                });
+                case REMOVE:
+                    Platform.runLater(() -> {
+                        this.notes.remove(note);
+                    });
+                case PRESERVE:
+                    Platform.runLater(() -> {
+                        this.feedbackManager.addJudgement(note.getNoteType(),
+                                note.getJudgementType(),
+                                note.getFastLateType());
+                    });
             }
         }
 
