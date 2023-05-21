@@ -14,6 +14,7 @@ public final class FileUtil {
 
     public static final String MAC_OS_X_PREFIX = "/Library/Application Support/javadx";
     public static final String WINDOWS_PREFIX = "/AppData/Local/javadx";
+    public static final String LINUX_PREFIX = ".javadx";
 
     private static String pathPrefix;
 
@@ -29,7 +30,9 @@ public final class FileUtil {
                         + FileUtil.WINDOWS_PREFIX;
 
             } else {
-                throw new IOException("Unsupported OS");
+                // Assume it is Linux
+                FileUtil.pathPrefix = System.getProperty("user.home")
+                        + FileUtil.LINUX_PREFIX;
             }
         }
 
