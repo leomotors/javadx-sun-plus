@@ -59,6 +59,9 @@ public final class Router {
         this.stage.getIcons().add(appIcon);
 
         this.stage.show();
+        Platform.runLater(() -> {
+            this.pages.get(currentPage).startPage();
+        });
     }
 
     private void setScenePage(AppPage pageKey) {
