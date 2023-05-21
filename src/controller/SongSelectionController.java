@@ -7,12 +7,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import logic.core.Chart;
+import logic.core.Difficulty;
 import router.AppPage;
 import router.Router;
 import store.AppState;
+import store.ChartManager;
 import store.DataManager;
 import store.Setting;
-import store.ChartManager;
 import store.SoundManager;
 
 public class SongSelectionController implements BaseController {
@@ -183,6 +184,7 @@ public class SongSelectionController implements BaseController {
             return;
         }
         currentDifficulty += modifier;
+
         String bgFill;
         switch (currentDifficulty) {
             case 0:
@@ -193,6 +195,7 @@ public class SongSelectionController implements BaseController {
                 SelectBG.setStyle(bgFill);
                 NextBG.setStyle(bgFill);
                 PrevBG.setStyle(bgFill);
+                AppState.getInstance().setSelectedDifficulty(Difficulty.BASIC);
                 break;
             case 1:
                 bgFill = "-fx-background-color: " + ADVANCE_COLOR + ";";
@@ -202,6 +205,8 @@ public class SongSelectionController implements BaseController {
                 SelectBG.setStyle(bgFill);
                 NextBG.setStyle(bgFill);
                 PrevBG.setStyle(bgFill);
+                AppState.getInstance()
+                        .setSelectedDifficulty(Difficulty.ADVANCED);
                 break;
             case 2:
                 bgFill = "-fx-background-color: " + EXPERT_COLOR + ";";
@@ -211,6 +216,7 @@ public class SongSelectionController implements BaseController {
                 SelectBG.setStyle(bgFill);
                 NextBG.setStyle(bgFill);
                 PrevBG.setStyle(bgFill);
+                AppState.getInstance().setSelectedDifficulty(Difficulty.EXPERT);
                 break;
             case 3:
                 bgFill = "-fx-background-color: " + MASTER_COLOR + ";";
@@ -220,6 +226,7 @@ public class SongSelectionController implements BaseController {
                 SelectBG.setStyle(bgFill);
                 NextBG.setStyle(bgFill);
                 PrevBG.setStyle(bgFill);
+                AppState.getInstance().setSelectedDifficulty(Difficulty.MASTER);
                 break;
         }
     }

@@ -1,6 +1,7 @@
 package store;
 
 import logic.core.Chart;
+import logic.core.Difficulty;
 import logic.core.PlayResult;
 import utils.ScoreUtilMock;
 
@@ -10,6 +11,7 @@ public final class AppState {
     private PlayResult playResult;
 
     private Chart currentChart;
+    private Difficulty selectedDifficulty;
 
     private AppState() {
         this.playResult = ScoreUtilMock.getMockPlayResult();
@@ -31,6 +33,14 @@ public final class AppState {
 
     public void setCurrentChart(Chart currentChart) {
         this.currentChart = currentChart;
+    }
+
+    public Difficulty getSelectedDifficulty() {
+        return this.selectedDifficulty;
+    }
+
+    public void setSelectedDifficulty(Difficulty selectedDifficulty) {
+        this.selectedDifficulty = selectedDifficulty;
     }
 
     public static synchronized AppState getInstance() {

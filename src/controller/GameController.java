@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -22,10 +23,12 @@ import javafx.util.Duration;
 import logic.components.ChartCard;
 import logic.components.game.BaseNote;
 import logic.components.game.EXTapNote;
-import logic.components.game.TapNote;
+import logic.components.game.FlickNote;
+import logic.components.game.HoldNote;
 import logic.core.Difficulty;
 import logic.game.FeedbackManager;
 import logic.game.LaneManager;
+import logic.game.MapLoader;
 import logic.game.ScoreManager;
 import store.AppState;
 import store.DataManager;
@@ -88,13 +91,21 @@ public class GameController implements BaseController {
     private GraphicsContext gcNotes;
 
     private final ArrayList<LaneManager> laneManagers = new ArrayList<>();
+
+    public LaneManager getLaneManager(int lane) {
+        return this.laneManagers.get(lane);
+    }
+
     private ScoreManager scoreManager;
     private FeedbackManager feedbackManager;
+    private MapLoader mapLoader;
 
     private static DecimalFormat formatter = new DecimalFormat("#,###");
 
     /**
      * Runs everytime a game starts
+     * 
+     * @throws IOException
      */
     @Override
     public void start() {
@@ -102,8 +113,18 @@ public class GameController implements BaseController {
         for (int i = 0; i < Config.N_LANES; i++) {
             this.laneManagers.add(new LaneManager());
         }
+
         this.setupLabels();
         this.setupCanvas();
+
+        try {
+            this.mapLoader = new MapLoader(
+                    AppState.getInstance().getCurrentChart(),
+                    AppState.getInstance().getSelectedDifficulty());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         SoundManager.getInstance().stopBGM();
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(3), event -> SoundManager
@@ -146,16 +167,8 @@ public class GameController implements BaseController {
         animation = new Timeline(new KeyFrame(Duration.millis(UPDATE_DELAY),
                 event -> {
                     update();
-                    if (notes.isEmpty()) {
-                        notes.add(new TapNote(
-                                getCurrentTime() + 3000, 0, 1));
-                        notes.add(new TapNote(
-                                getCurrentTime() + 4000, 3, 4));
-                        notes.add(new TapNote(
-                                getCurrentTime() + 5000, 8, 11));
-                        notes.add(new EXTapNote(
-                                getCurrentTime() + 5000, 0, 3));
-                    }
+                    notes.addAll(
+                            this.mapLoader.getNotes(this.getCurrentTime()));
                 }));
         animation.setCycleCount(Animation.INDEFINITE);
         animation.play();
@@ -240,6 +253,10 @@ public class GameController implements BaseController {
         for (BaseNote note : notes) {
             if (note instanceof EXTapNote) {
                 gcNotes.setFill(Color.GOLD);
+            } else if (note instanceof FlickNote) {
+                gcNotes.setFill(Color.BLUE);
+            } else if (note instanceof HoldNote) {
+                gcNotes.setFill(Color.PURPLE);
             } else {
                 gcNotes.setFill(Color.RED);
             }
@@ -271,10 +288,6 @@ public class GameController implements BaseController {
         gcLanes.closePath();
         gcLanes.fill();
         gcLanes.stroke();
-    }
-
-    public LaneManager getLaneManager(int lane) {
-        return this.laneManagers.get(lane);
     }
 
     @FXML

@@ -16,7 +16,7 @@ import store.ChartManager;
 import utils.FileUtil;
 
 public class MapLoader {
-    private LinkedList<BaseNote> notes;
+    private LinkedList<BaseNote> notes = new LinkedList<>();
 
     public MapLoader(Chart chart, Difficulty difficulty) throws IOException {
         // Choose another difficulty if not exist
@@ -37,8 +37,8 @@ public class MapLoader {
                 return null;
 
             var time = Integer.parseInt(tokens[1]);
-            var laneStart = Integer.parseInt(tokens[2]);
-            var laneEnd = Integer.parseInt(tokens[3]);
+            var laneStart = Integer.parseInt(tokens[2]) - 1;
+            var laneEnd = Integer.parseInt(tokens[3]) - 1;
             var arg0 = tokens.length >= 5 ? Integer.parseInt(tokens[4]) : 0;
 
             if (tokens[0].equals("TAP")) {
@@ -68,7 +68,7 @@ public class MapLoader {
     /**
      * Load notes that should be show up
      */
-    public ArrayList<BaseNote> loadNotes(int currentTime) {
+    public ArrayList<BaseNote> getNotes(int currentTime) {
         var notes = new ArrayList<BaseNote>();
 
         while (!this.notes.isEmpty() && this.notes.peekFirst()
