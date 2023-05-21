@@ -31,7 +31,7 @@
                         <Font name="Impact" size="32.0" />
                      </font>
                   </Label>
-                  <Label fx:id="MaxComboCount" alignment="CENTER_RIGHT" minWidth="70.0" prefWidth="70.0" text="1111" textFill="WHITE">
+                  <Label fx:id="MaxComboCount" alignment="CENTER_RIGHT" minWidth="70.0" prefWidth="70.0" text="0" textFill="WHITE">
                      <font>
                         <Font name="Impact" size="32.0" />
                      </font>
@@ -133,7 +133,7 @@
             </HBox>
             <HBox alignment="TOP_RIGHT">
                <children>
-                  <Label fx:id="TechnicalScore" alignment="CENTER_RIGHT" contentDisplay="TOP" prefWidth="200.0" text="1,010,000" textFill="WHITE">
+                  <Label fx:id="TechnicalScore" alignment="CENTER_RIGHT" contentDisplay="TOP" prefWidth="200.0" text="0" textFill="WHITE">
                      <font>
                         <Font name="Impact" size="48.0" />
                      </font>
@@ -215,12 +215,12 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <children>
-            <Label fx:id="fastLateLabel" text="FAST" textFill="BLUE">
+            <Label fx:id="fastLateLabel" textFill="BLUE">
                <font>
                   <Font name="Helvetica" size="36.0" />
                </font>
             </Label>
-            <Label fx:id="JudgeName" text="BANG PHLI SAMUT PRAKAN" textFill="#d8e93e">
+            <Label fx:id="JudgeName" textFill="#d8e93e">
                <font>
                   <Font name="Impact" size="46.0" />
                </font>
@@ -232,7 +232,7 @@
                   </DropShadow>
                </effect>
             </Label>
-            <Label fx:id="ComboCount" text="0000" textFill="WHITE">
+            <Label fx:id="ComboCount" textFill="WHITE">
                <font>
                   <Font name="Impact" size="48.0" />
                </font>
