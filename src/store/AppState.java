@@ -13,8 +13,8 @@ public final class AppState {
 
     private AppState() {
         this.playResult = ScoreUtilMock.getMockPlayResult();
-        if (!SongManager.getInstance().getCharts().isEmpty())
-            this.currentChart = SongManager.getInstance().getCharts().get(0);
+        if (!ChartManager.getInstance().getCharts().isEmpty())
+            this.currentChart = ChartManager.getInstance().getCharts().get(0);
     }
 
     public PlayResult getPlayResult() {

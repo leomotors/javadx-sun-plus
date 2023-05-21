@@ -13,10 +13,10 @@ import logic.core.Chart;
 import logic.core.Difficulty;
 import utils.FileUtil;
 
-public final class SongManager {
-    private static SongManager instance;
+public final class ChartManager {
+    private static ChartManager instance;
 
-    public static final String SONGS_DIR = "/charts/";
+    public static final String CHARTS_DIR = "/charts/";
     private String pathPrefix;
 
     private static final Map<String, Difficulty> stringToDifficulty = Collections
@@ -28,17 +28,16 @@ public final class SongManager {
 
     private ArrayList<Chart> charts = new ArrayList<>();
 
-    private SongManager() throws IOException {
+    private ChartManager() throws IOException {
         this.pathPrefix = FileUtil.getPathPrefix();
 
-        var songs = this.listSong(this.pathPrefix + SongManager.SONGS_DIR);
+        var charts = this.listSong(this.pathPrefix + ChartManager.CHARTS_DIR);
 
-        for (var song : songs) {
+        for (var chart : charts) {
             try {
-                var chart = this.loadChart(song);
-                this.getCharts().add(chart);
+                this.getCharts().add(this.loadChart(chart));
             } catch (Exception e) {
-                System.out.println("Fail to load chart " + song);
+                System.out.println("Fail to load chart " + chart);
                 e.printStackTrace();
             }
         }
@@ -60,7 +59,7 @@ public final class SongManager {
     }
 
     private Chart loadChart(String chartId) {
-        var location = this.pathPrefix + SongManager.SONGS_DIR + chartId;
+        var location = this.pathPrefix + ChartManager.CHARTS_DIR + chartId;
 
         var meta = FileUtil.readFileAsLines(location + "/metadata.txt");
 
@@ -73,8 +72,8 @@ public final class SongManager {
             var levelName = tokens[0];
             var levelConstant = tokens[1];
 
-            if (SongManager.stringToDifficulty.keySet().contains(levelName)) {
-                diffMap.put(SongManager.stringToDifficulty.get(levelName),
+            if (ChartManager.stringToDifficulty.keySet().contains(levelName)) {
+                diffMap.put(ChartManager.stringToDifficulty.get(levelName),
                         levelConstant);
             }
         }
@@ -85,13 +84,14 @@ public final class SongManager {
         return new Chart(chartId, title, author, image, diffMap);
     }
 
-    public static synchronized SongManager createInstance() throws IOException {
-        SongManager.instance = new SongManager();
-        return SongManager.instance;
+    public static synchronized ChartManager createInstance()
+            throws IOException {
+        ChartManager.instance = new ChartManager();
+        return ChartManager.instance;
     }
 
-    public static synchronized SongManager getInstance() {
-        return SongManager.instance;
+    public static synchronized ChartManager getInstance() {
+        return ChartManager.instance;
     }
 
     public ArrayList<Chart> getCharts() {

@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import router.Router;
 import store.DataManager;
-import store.SongManager;
+import store.ChartManager;
 import store.SoundManager;
 
 public class Main extends Application {
@@ -18,7 +18,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             DataManager.createInstance();
-            SongManager.createInstance();
+            ChartManager.createInstance();
             SoundManager.createInstance();
             Router.createInstance(stage);
             SoundManager.getInstance().playPartner("partner/CPP_WELCOME.wav");

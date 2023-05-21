@@ -12,7 +12,7 @@ import router.Router;
 import store.AppState;
 import store.DataManager;
 import store.Setting;
-import store.SongManager;
+import store.ChartManager;
 import store.SoundManager;
 
 public class SongSelectionController implements BaseController {
@@ -73,12 +73,12 @@ public class SongSelectionController implements BaseController {
     private String prevID;
     private String selectID;
     private String nextID;
-    private SongManager instance;
+    private ChartManager instance;
 
     @Override
     public void start() {
         username.setText(DataManager.getInstance().get(Setting.PLAYER_NAME));
-        instance = SongManager.getInstance();
+        instance = ChartManager.getInstance();
         chartSize = instance.getCharts().size();
         setAllChart();
     }

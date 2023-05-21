@@ -2,7 +2,6 @@ package controller;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Random;
 
 import constant.Config;
 import javafx.animation.Animation;
@@ -15,7 +14,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -26,14 +24,9 @@ import logic.components.game.BaseNote;
 import logic.components.game.EXTapNote;
 import logic.components.game.TapNote;
 import logic.core.Difficulty;
-import logic.core.FastLateType;
-import logic.core.JudgementType;
-import logic.core.NoteType;
 import logic.game.FeedbackManager;
 import logic.game.LaneManager;
 import logic.game.ScoreManager;
-import router.AppPage;
-import router.Router;
 import store.AppState;
 import store.DataManager;
 import store.Setting;
@@ -76,9 +69,10 @@ public class GameController implements BaseController {
     private Label PlatinumScore;
     @FXML
     private ImageView PartnerImage;
+
     private long startTime;
-    private Timeline animation;
     private long UPDATE_DELAY = 10;
+    private Timeline animation;
 
     private ArrayList<BaseNote> notes = new ArrayList<BaseNote>();
     private static final int WIDTH = 900;
@@ -92,14 +86,21 @@ public class GameController implements BaseController {
 
     private static DecimalFormat formatter = new DecimalFormat("#,###");
 
-    public GameController() {
+    /**
+     * Runs everytime a game starts
+     */
+    @Override
+    public void start() {
+        this.laneManagers.clear();
         for (int i = 0; i < Config.N_LANES; i++) {
             this.laneManagers.add(new LaneManager());
         }
+
+        this.setupLabels();
+        this.setupCanvas();
     }
 
-    @Override
-    public void start() {
+    private void setupLabels() {
         this.scoreManager = new ScoreManager(100);
         this.feedbackManager = new FeedbackManager(this.JudgeName,
                 this.fastLateLabel, this.scoreManager);
@@ -110,6 +111,9 @@ public class GameController implements BaseController {
                 .add(new ChartCard(AppState.getInstance().getCurrentChart(),
                         Difficulty.EXPERT));
 
+    }
+
+    private void setupCanvas() {
         gc = PlayArea.getGraphicsContext2D();
         gcNote = NoteArea.getGraphicsContext2D();
 
@@ -150,10 +154,6 @@ public class GameController implements BaseController {
         return (int) (System.currentTimeMillis() - startTime);
     }
 
-    // TEMP
-    private int _tempCOUNTER = 0;
-    Random random = new Random();
-
     private void update() {
         int curTime = getCurrentTime();
         for (BaseNote note : notes) {
@@ -189,37 +189,6 @@ public class GameController implements BaseController {
                 .format(border) : "FAIL");
 
         this.feedbackManager.updateDisplay();
-
-        // TEMP
-        this._tempCOUNTER += 1;
-        if (this._tempCOUNTER >= 1) {
-            this._tempCOUNTER = 0;
-
-            if (this.scoreManager.getPlayedNotes() >= this.scoreManager
-                    .getTotalNotes()) {
-                return;
-            }
-
-            double rng = this.random.nextDouble();
-
-            if (rng < 0) {
-                this.feedbackManager.addJudgement(NoteType.TAP,
-                        JudgementType.PLATINUM_CRITICAL_PERFECT,
-                        FastLateType.NONE);
-            } else if (rng < 0) {
-                this.feedbackManager.addJudgement(NoteType.TAP,
-                        JudgementType.CRITICAL_PERFECT, FastLateType.FAST);
-            } else if (rng < 0) {
-                this.feedbackManager.addJudgement(NoteType.TAP,
-                        JudgementType.PERFECT, FastLateType.LATE);
-            } else if (rng < 1) {
-                this.feedbackManager.addJudgement(NoteType.TAP,
-                        JudgementType.GOOD, FastLateType.FAST);
-            } else {
-                this.feedbackManager.addJudgement(NoteType.TAP,
-                        JudgementType.MISS, FastLateType.NONE);
-            }
-        }
     }
 
     private int calculatePosY(BaseNote note) {
@@ -230,17 +199,16 @@ public class GameController implements BaseController {
 
     private int calculatePosX(BaseNote note) {
         int laneNumber = note.getLaneStart();
-        double x1 = Config.LANE_BOTTOM_WIDTH * laneNumber; // bottom left
-        double buffer = (WIDTH - Config.LANE_TOP_WIDTH * Config.LANE_COUNT) / 2; // empty
-                                                                                 // space
-        double x2 = buffer + Config.LANE_TOP_WIDTH * laneNumber; // top left
+        // bottom left
+        double x1 = Config.LANE_BOTTOM_WIDTH * laneNumber;
+        // empty space
+        double buffer = (WIDTH - Config.LANE_TOP_WIDTH * Config.LANE_COUNT) / 2;
+        // top left
+        double x2 = buffer + Config.LANE_TOP_WIDTH * laneNumber;
         double translation = x1 - x2;
         int timeDiff = Math.max(0, note.getTime() - getCurrentTime());
-        float ratio = 1 - ((float) timeDiff / (float) Config.NOTE_SHOW_TIME); // 0-100
-                                                                              // =
-                                                                              // top
-                                                                              // to
-                                                                              // bottom
+        // 0-100 = top to bottom
+        float ratio = 1 - ((float) timeDiff / (float) Config.NOTE_SHOW_TIME);
         return (int) (x2 + (ratio * translation));
     }
 
@@ -293,14 +261,6 @@ public class GameController implements BaseController {
 
     @FXML
     public void handleKeyPress(KeyEvent e) {
-        // TEMP!!!
-        if (e.getCode() == KeyCode.ESCAPE && this.scoreManager
-                .getTotalNotes() == this.scoreManager.getPlayedNotes()) {
-            AppState.getInstance().setPlayResult(this.scoreManager);
-            Router.getInstance().push(AppPage.RESULT);
-            return;
-        }
-
         int laneId = Config.getLaneFromKey(e.getCode()) - 1;
 
         if (laneId < 0)
