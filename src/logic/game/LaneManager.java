@@ -9,11 +9,10 @@ public class LaneManager {
     private int lastPressed = 0;
     private int lastHold = 0;
 
-    private int cooldown = 0;
+    private int cooldown = -Config.TAP_COOLDOWN;
 
     public void handleKeyPress(int timeStamp, boolean isSecondKey) {
         if (timeStamp < cooldown + Config.TAP_COOLDOWN) {
-            System.out.println("ILLEGAL CONDITION " + timeStamp);
             return;
         }
 
