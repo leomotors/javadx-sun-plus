@@ -25,7 +25,10 @@ import logic.components.game.BaseNote;
 import logic.components.game.EXTapNote;
 import logic.components.game.FlickNote;
 import logic.components.game.HoldNote;
+import logic.components.game.NoteCheckResult;
 import logic.core.Difficulty;
+import logic.core.FastLateType;
+import logic.core.JudgementType;
 import logic.game.FeedbackManager;
 import logic.game.LaneManager;
 import logic.game.MapLoader;
@@ -182,15 +185,18 @@ public class GameController implements BaseController {
      * Runs every 10ms
      */
     private void update() {
-        int curTime = getCurrentTime();
-        for (BaseNote note : notes) {
-            if (note.getTime() < curTime - 1000) {
+        for (var note : notes) {
+            var checkResult = note.checkJudgement(this);
+
+            if (checkResult == NoteCheckResult.REMOVE) {
                 Platform.runLater(() -> {
                     notes.remove(note);
+                    this.feedbackManager.addJudgement(note.getNoteType(),
+                            JudgementType.MISS, FastLateType.NONE);
                 });
-
             }
         }
+
         drawNote();
 
         this.BSCount.setText(
