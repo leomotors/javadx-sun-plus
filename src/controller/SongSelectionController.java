@@ -71,19 +71,28 @@ public class SongSelectionController implements BaseController {
     private String prevID;
     private String selectID;
     private String nextID;
+    private SongManager instance;
 
     @Override
     public void start() {
         username.setText(DataManager.getInstance().get(Setting.PLAYER_NAME));
-        SongManager instance = SongManager.getInstance();
+        instance = SongManager.getInstance();
         chartSize = instance.getCharts().size();
+        setAllChart();
+    }
+
+    private void setAllChart() {
         if (chartSize == 0)
             return;
+        var prevIdx = currentSongIndex - 1;
+        var nextIdx = (currentSongIndex + 1) % chartSize;
+        if (prevIdx < 0)
+            prevIdx += chartSize;
         Chart prev = instance.getCharts()
-                .get((currentSongIndex - 1) % chartSize);
+                .get(prevIdx);
         Chart select = instance.getCharts().get(currentSongIndex % chartSize);
         Chart next = instance.getCharts()
-                .get((currentSongIndex + 1) % chartSize);
+                .get(nextIdx);
         setPrevChart(prev);
         setNextChart(next);
         setSelectChart(select);
@@ -213,10 +222,14 @@ public class SongSelectionController implements BaseController {
     }
 
     private void toPrevSong() {
-
+        currentSongIndex = currentSongIndex - 1;
+        if (currentSongIndex < 0)
+            currentSongIndex += chartSize;
+        setAllChart();
     }
 
     private void toNextSong() {
-
+        currentSongIndex = (currentSongIndex + 1) % chartSize;
+        setAllChart();
     }
 }
