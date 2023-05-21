@@ -210,6 +210,7 @@ public class GameController implements BaseController {
                 case REMOVE:
                     Platform.runLater(() -> {
                         this.notes.remove(note);
+                        SoundManager.getInstance().playFx("fx/tapSound.mp3");
                     });
                 case PRESERVE:
                     Platform.runLater(() -> {
