@@ -184,7 +184,7 @@ public class SongSelectionController implements BaseController {
             return;
         }
         currentDifficulty += modifier;
-
+        SoundManager.getInstance().playFx("fx/Change.mp3");
         String bgFill;
         switch (currentDifficulty) {
             case 0:
