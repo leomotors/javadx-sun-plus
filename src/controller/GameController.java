@@ -257,6 +257,9 @@ public class GameController implements BaseController {
     private void drawNote() {
         gcNotes.clearRect(0, 0, WIDTH, HEIGHT);
         for (BaseNote note : notes) {
+            gcNotes.setFill(Color.WHITE);
+            gcNotes.fillRect(calculatePosX(note), calculatePosY(note) - 3,
+                    calculateWidth(note), 21);
             if (note instanceof EXTapNote) {
                 gcNotes.setFill(Color.GOLD);
             } else if (note instanceof FlickNote) {
@@ -267,8 +270,8 @@ public class GameController implements BaseController {
                 gcNotes.setFill(Color.RED);
             }
 
-            gcNotes.fillRect(calculatePosX(note), calculatePosY(note),
-                    calculateWidth(note), 10);
+            gcNotes.fillRect(calculatePosX(note) + 3, calculatePosY(note),
+                    calculateWidth(note) - 6, 15);
         }
     }
 
@@ -279,9 +282,9 @@ public class GameController implements BaseController {
 
         // Make lane gray if currently pressed
         if (this.getLaneManager(laneNumber).isCurrentlyPressed()) {
-            gcLanes.setFill(Color.web("#383f47"));
+            gcLanes.setFill(Color.web("rgba(57, 62, 70, 0.9)"));
         } else {
-            gcLanes.setFill(Color.BLACK);
+            gcLanes.setFill(Color.web("rgba(0, 0, 0, 0.7)"));
         }
 
         gcLanes.setStroke(Color.WHITE);
@@ -308,7 +311,10 @@ public class GameController implements BaseController {
         this.getLaneManager(laneNum).handleKeyPress(this.getCurrentTime(),
                 laneId > Config.N_LANES);
 
-        this.drawLane(laneNum);
+        gcLanes.clearRect(0, 0, WIDTH, HEIGHT);
+        for (int i = 0; i < Config.LANE_COUNT; i++) {
+            drawLane(i);
+        }
     }
 
     @FXML
@@ -323,7 +329,10 @@ public class GameController implements BaseController {
         this.getLaneManager(laneNum).handleKeyRelease(this.getCurrentTime(),
                 laneId > Config.N_LANES);
 
-        this.drawLane(laneNum);
+        gcLanes.clearRect(0, 0, WIDTH, HEIGHT);
+        for (int i = 0; i < Config.LANE_COUNT; i++) {
+            drawLane(i);
+        }
     }
 
 }

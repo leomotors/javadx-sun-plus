@@ -1,14 +1,16 @@
 package logic.components;
 
-import constant.Config;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class DXText extends Text {
+
     public DXText() {
         super();
-        this.setFont(new Font(Config.UI_FONT, 36));
+        this.setFont(Font.loadFont(ClassLoader
+                .getSystemResource("font/Helvetica.ttf").toString(),
+                36));
     }
 
     public DXText(String text) {
@@ -31,7 +33,9 @@ public class DXText extends Text {
     }
 
     public void setFontSize(int fontSize) {
-        this.setFont(new Font(Config.UI_FONT, fontSize));
+        this.setFont(Font.loadFont(ClassLoader
+                .getSystemResource("font/Helvetica.ttf").toString(),
+                fontSize));
     }
 
     public void setText(int number) {
