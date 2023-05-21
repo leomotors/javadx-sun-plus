@@ -25,6 +25,7 @@ import logic.components.game.BaseNote;
 import logic.components.game.EXTapNote;
 import logic.components.game.FlickNote;
 import logic.components.game.HoldNote;
+import logic.components.game.TapNote;
 import logic.game.FeedbackManager;
 import logic.game.LaneManager;
 import logic.game.MapLoader;
@@ -270,7 +271,9 @@ public class GameController implements BaseController {
             } else if (note instanceof FlickNote) {
                 gcNotes.setFill(Color.BLUE);
             } else if (note instanceof HoldNote) {
-                gcNotes.setFill(Color.PURPLE);
+                drawHold((HoldNote) note);
+                continue;
+
             } else {
                 gcNotes.setFill(Color.RED);
             }
@@ -278,6 +281,30 @@ public class GameController implements BaseController {
             gcNotes.fillRect(calculatePosX(note) + 3, calculatePosY(note),
                     calculateWidth(note) - 6, 15);
         }
+    }
+
+    private void drawHold(HoldNote note) {
+        BaseNote top = new TapNote(note.getTime(), note.getLaneStart(),
+                note.getLaneEnd());
+        int topX = calculatePosX(top);
+        int topY = calculatePosY(top);
+        int topW = calculateWidth(top);
+        BaseNote bottom = new TapNote(note.getEndTime(), note.getLaneStart(),
+                note.getLaneEnd());
+        int bottomX = calculatePosX(bottom);
+        int bottomY = calculatePosY(bottom);
+        int bottomW = calculateWidth(bottom);
+        gcNotes.setFill(Color.PURPLE);
+        gcNotes.setStroke(Color.WHITE);
+        gcNotes.setLineWidth(3);
+        gcNotes.beginPath();
+        gcNotes.moveTo(bottomX, bottomY);
+        gcNotes.lineTo(topX, topY);
+        gcNotes.lineTo(topX + topW, topY);
+        gcNotes.lineTo(bottomX + bottomW, bottomY);
+        gcNotes.closePath();
+        gcNotes.fill();
+        gcNotes.stroke();
     }
 
     private void drawLane(int laneNumber) {
