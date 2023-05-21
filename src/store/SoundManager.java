@@ -58,7 +58,7 @@ public final class SoundManager {
 
     public void playBGM(Chart chart) throws IOException {
         var chartId = chart.id();
-        var location = FileUtil.getPathPrefix() + SongManager.SONGS_DIR
+        var location = FileUtil.getPathPrefix() + ChartManager.CHARTS_DIR
                 + chartId;
         var url = new File(location + "/music.mp3").toURI().toString();
         if (bgmPlayer != null)
