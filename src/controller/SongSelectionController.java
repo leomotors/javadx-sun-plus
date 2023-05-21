@@ -33,14 +33,6 @@ public class SongSelectionController implements BaseController {
     @FXML
     private Label PrevArtist;
     @FXML
-    private Label PrevClear;
-    @FXML
-    private Label PrevRank;
-    @FXML
-    private Label PrevAPFC;
-    @FXML
-    private Label PrevScore;
-    @FXML
     private VBox SelectSong;
     @FXML
     private ImageView SelectImage;
@@ -51,14 +43,6 @@ public class SongSelectionController implements BaseController {
     @FXML
     private Label SelectArtist;
     @FXML
-    private Label SelectClear;
-    @FXML
-    private Label SelectRank;
-    @FXML
-    private Label SelectAPFC;
-    @FXML
-    private Label SelectScore;
-    @FXML
     private VBox NextSong;
     @FXML
     private ImageView NextImage;
@@ -68,14 +52,6 @@ public class SongSelectionController implements BaseController {
     private Label NextName;
     @FXML
     private Label NextArtist;
-    @FXML
-    private Label NextClear;
-    @FXML
-    private Label NextRank;
-    @FXML
-    private Label NextAPFC;
-    @FXML
-    private Label NextScore;
     @FXML
     private VBox SelectBG;
     @FXML
