@@ -29,6 +29,7 @@ import logic.core.Difficulty;
 import logic.core.FastLateType;
 import logic.core.JudgementType;
 import logic.core.NoteType;
+import logic.game.FeedbackManager;
 import logic.game.LaneManager;
 import logic.game.ScoreManager;
 import router.AppPage;

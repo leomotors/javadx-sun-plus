@@ -1,4 +1,4 @@
-package controller;
+package logic.game;
 
 import constant.DXColor;
 import constant.JudgementName;
@@ -10,7 +10,6 @@ import javafx.scene.paint.Color;
 import logic.core.FastLateType;
 import logic.core.JudgementType;
 import logic.core.NoteType;
-import logic.game.ScoreManager;
 
 public class FeedbackManager {
     public static int DISPLAY_TIME = 1500;
