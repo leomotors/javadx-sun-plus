@@ -9,8 +9,12 @@ public class LaneManager {
 
     public void handleKeyPress(int timeStamp, boolean isSecondKey) {
         if (isSecondKey) {
+            if (this.isKey2Pressed)
+                return;
             this.isKey2Pressed = true;
         } else {
+            if (this.isKey1Pressed)
+                return;
             this.isKey1Pressed = true;
         }
 
