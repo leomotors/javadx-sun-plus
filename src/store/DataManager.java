@@ -15,18 +15,17 @@ public final class DataManager {
 
     private static final Map<Setting, String> defaultValue = Collections
             .unmodifiableMap(
-                    Map.of(Setting.PLAYER_NAME, "JavaDX", Setting.PARTNER,
+                    Map.of(Setting.PLAYER_NAME, System.getProperty("user.name"),
+                            Setting.PARTNER,
                             "CPP", Setting.SPEED, "4",
-                            Setting.BGM_VOLUME, "100", Setting.FX_VOLUME,
-                            "100", Setting.PARTNER_VOLUME, "100"));
+                            Setting.BGM_VOLUME, "50", Setting.FX_VOLUME,
+                            "50", Setting.PARTNER_VOLUME, "50"));
 
     private String pathPrefix;
     private final HashMap<Setting, String> setting = new HashMap<>();
 
     private DataManager() throws IOException {
         this.pathPrefix = FileUtil.getPathPrefix();
-        this.set(Setting.PLAYER_NAME,
-                System.getProperty("user.name"));
         this.readConfig();
         this.writeConfig();
     }

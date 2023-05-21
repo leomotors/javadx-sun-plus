@@ -75,7 +75,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </HBox>
-      <StackPane fx:id="SettingButton" layoutX="1500.0" layoutY="14.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #F9F9F9;">
+      <StackPane fx:id="SettingButton" layoutX="1500.0" layoutY="14.0" onMouseClicked="#settingButtonHandler" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #F9F9F9;">
          <effect>
             <DropShadow offsetX="3.0" offsetY="3.0">
                <color>

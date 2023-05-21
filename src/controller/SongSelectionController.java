@@ -140,7 +140,7 @@ public class SongSelectionController implements BaseController {
 
     @FXML
     private void settingButtonHandler() {
-
+        Router.getInstance().push(AppPage.SETTING);
     }
 
     @FXML
