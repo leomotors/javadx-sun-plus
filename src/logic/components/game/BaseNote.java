@@ -12,7 +12,7 @@ public abstract class BaseNote {
     private boolean removed = false;
 
     private JudgementType judgementType;
-    private FastLateType fastLateType;
+    private FastLateType fastLateType = FastLateType.NONE;
 
     public BaseNote(int time, int laneStart, int laneEnd) {
         this.time = time;
@@ -36,7 +36,7 @@ public abstract class BaseNote {
         return this.judgementType;
     }
 
-    public FastLateType fastLateType() {
+    public FastLateType getFastLateType() {
         return this.fastLateType;
     }
 

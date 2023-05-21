@@ -2,8 +2,6 @@ package logic.components.game;
 
 import constant.Config;
 import controller.GameController;
-import logic.core.FastLateType;
-import logic.core.JudgementType;
 import logic.core.NoteType;
 
 public class HoldNote extends BaseNote {
@@ -22,11 +20,11 @@ public class HoldNote extends BaseNote {
 
     @Override
     public NoteCheckResult checkJudgement(GameController controller) {
-        if (controller.getCurrentTime() > this.getEndTime()) {
-            this.setJudgementType(JudgementType.MISS);
-            this.setFastLateType(FastLateType.NONE);
-            return NoteCheckResult.REMOVE;
-        }
+        // if (controller.getCurrentTime() > this.getEndTime()) {
+        // this.setJudgementType(JudgementType.MISS);
+        // this.setFastLateType(FastLateType.NONE);
+        // return NoteCheckResult.REMOVE;
+        // }
 
         return NoteCheckResult.NONE;
     }

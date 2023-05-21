@@ -15,6 +15,7 @@ public class Config {
 
     public static final int N_LANES = 12;
     public static final int HOLD_TICK = 250;
+    public static final int TAP_COOLDOWN = 20;
 
     public static int getLaneFromKey(KeyCode keyCode) {
         switch (keyCode) {

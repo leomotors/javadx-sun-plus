@@ -27,8 +27,6 @@ import logic.components.game.FlickNote;
 import logic.components.game.HoldNote;
 import logic.components.game.NoteCheckResult;
 import logic.core.Difficulty;
-import logic.core.FastLateType;
-import logic.core.JudgementType;
 import logic.game.FeedbackManager;
 import logic.game.LaneManager;
 import logic.game.MapLoader;
@@ -191,14 +189,10 @@ public class GameController implements BaseController {
 
             if (checkResult == NoteCheckResult.REMOVE) {
                 Platform.runLater(() -> {
-                    if (note.isRemoved())
-                        return;
-
-                    note.setRemoved(true);
                     this.notes.remove(note);
 
                     this.feedbackManager.addJudgement(note.getNoteType(),
-                            JudgementType.MISS, FastLateType.NONE);
+                            note.getJudgementType(), note.getFastLateType());
                 });
             }
         }
@@ -284,7 +278,7 @@ public class GameController implements BaseController {
         double x2 = buffer + Config.LANE_TOP_WIDTH * laneNumber;
 
         // Make lane gray if currently pressed
-        if (this.getLaneManager(laneNumber).isPressed()) {
+        if (this.getLaneManager(laneNumber).isCurrentlyPressed()) {
             gcLanes.setFill(Color.web("#383f47"));
         } else {
             gcLanes.setFill(Color.BLACK);
@@ -311,7 +305,7 @@ public class GameController implements BaseController {
 
         int laneNum = laneId % Config.N_LANES;
 
-        this.getLaneManager(laneNum).handleKeyPress(0,
+        this.getLaneManager(laneNum).handleKeyPress(this.getCurrentTime(),
                 laneId > Config.N_LANES);
 
         this.drawLane(laneNum);
@@ -326,7 +320,7 @@ public class GameController implements BaseController {
 
         int laneNum = laneId % Config.N_LANES;
 
-        this.getLaneManager(laneNum).handleKeyRelease(0,
+        this.getLaneManager(laneNum).handleKeyRelease(this.getCurrentTime(),
                 laneId > Config.N_LANES);
 
         this.drawLane(laneNum);

@@ -1,5 +1,7 @@
 package logic.game;
 
+import constant.Config;
+
 public class LaneManager {
     private boolean isKey1Pressed = false;
     private boolean isKey2Pressed = false;
@@ -7,7 +9,14 @@ public class LaneManager {
     private int lastPressed = 0;
     private int lastHold = 0;
 
+    private int cooldown = 0;
+
     public void handleKeyPress(int timeStamp, boolean isSecondKey) {
+        if (timeStamp < cooldown + Config.TAP_COOLDOWN) {
+            System.out.println("ILLEGAL CONDITION " + timeStamp);
+            return;
+        }
+
         if (isSecondKey) {
             this.isKey2Pressed = true;
         } else {
@@ -24,20 +33,17 @@ public class LaneManager {
             this.isKey1Pressed = false;
         }
 
-        if (!this.isPressed()) {
+        if (!this.isCurrentlyPressed()) {
             this.lastHold = timeStamp;
         }
     }
 
-    /**
-     * Is currently pressed
-     */
-    public boolean isPressed() {
+    public boolean isCurrentlyPressed() {
         return this.isKey1Pressed || this.isKey2Pressed;
     }
 
     /**
-     * Last time key is clicked
+     * Last time key is clicked, used for judging tap note / flick note
      */
     public int getLastPressed() {
         return this.lastPressed;
@@ -45,11 +51,17 @@ public class LaneManager {
 
     /**
      * Last time your finger is on the lane.
+     * Returns {@link Integer.MAX_VALUE} if currently holding
      */
-    public int getLastHold(int timeStamp) {
-        if (this.isPressed())
-            return timeStamp;
+    public int getLastHold() {
+        if (this.isCurrentlyPressed())
+            return Integer.MAX_VALUE;
 
         return this.lastHold;
+    }
+
+    public void setCooldown(int cooldown) {
+        this.cooldown = cooldown;
+        this.lastPressed = -9999;
     }
 }
