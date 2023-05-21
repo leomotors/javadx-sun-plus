@@ -307,7 +307,23 @@ public class GameController implements BaseController {
 
     private void drawNote() {
         gcNotes.clearRect(0, 0, WIDTH, HEIGHT);
-        for (BaseNote note : notes) {
+
+        for (var note : notes) {
+            // Draw only hold notes
+            gcNotes.setFill(Color.WHITE);
+            gcNotes.fillRect(calculatePosX(note), calculatePosY(note) - 3,
+                    calculateWidth(note), 21);
+
+            if (note instanceof HoldNote) {
+                drawHold((HoldNote) note);
+                continue;
+            }
+        }
+
+        for (var note : notes) {
+            if (note instanceof HoldNote)
+                continue;
+
             gcNotes.setFill(Color.WHITE);
             gcNotes.fillRect(calculatePosX(note), calculatePosY(note) - 3,
                     calculateWidth(note), 21);
@@ -315,10 +331,6 @@ public class GameController implements BaseController {
                 gcNotes.setFill(Color.GOLD);
             } else if (note instanceof FlickNote) {
                 gcNotes.setFill(Color.BLUE);
-            } else if (note instanceof HoldNote) {
-                drawHold((HoldNote) note);
-                continue;
-
             } else {
                 gcNotes.setFill(Color.RED);
             }
@@ -339,7 +351,7 @@ public class GameController implements BaseController {
         int bottomX = calculatePosX(bottom);
         int bottomY = calculatePosY(bottom);
         int bottomW = calculateWidth(bottom);
-        gcNotes.setFill(Color.PURPLE);
+        gcNotes.setFill(Color.YELLOW);
         gcNotes.setStroke(Color.WHITE);
         gcNotes.setLineWidth(3);
         gcNotes.beginPath();
