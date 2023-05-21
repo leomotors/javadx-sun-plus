@@ -6,6 +6,16 @@ Java<ruby>DX<rt>でらっくす</rt></ruby> SUN PLUS! is a rythm game _not inspi
 
 - Copy `.classname.template` to `.classpath` and edit to your match JDK Config
 
+## Chart Setup
+
+This game needs chart to run, to get charts ready, run the following command:
+
+(MacOS)
+
+```
+cp -r charts ~/Library/Application\ Support/javadx
+```
+
 ## Chart Schema
 
 - Each line contains hit note
