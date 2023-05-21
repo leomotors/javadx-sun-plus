@@ -43,7 +43,7 @@ public class FlickNote extends BaseNote {
         int laneEnd = Math.min(11, this.getLaneEnd() + 1);
 
         for (int i = laneStart; i <= laneEnd; i++) {
-            var lastPressed = controller.getLaneManager(i).getLastPressed();
+            var lastPressed = controller.getLaneManager(i).getLastHold();
             // Fill array (?)
             timeMap.put(i, lastPressed);
 
@@ -57,8 +57,14 @@ public class FlickNote extends BaseNote {
             int ta = timeMap.get(i);
             int tb = timeMap.get(i + 1);
 
-            if (Math.abs(ta - tb) <= Config.FLICK_GAP) {
+            if (Math.abs(ta - tb) <= Config.FLICK_GAP
+                    || (ta != tb && ta == Integer.MAX_VALUE
+                            || tb == Integer.MAX_VALUE)) {
                 var triggerTime = Math.max(ta, tb);
+                triggerTime = triggerTime == Integer.MAX_VALUE
+                        ? Math.min(ta, tb)
+                        : triggerTime;
+
                 var triggerDiff = triggerTime - this.getTime();
                 var scoreTime = Math.abs(triggerDiff);
 

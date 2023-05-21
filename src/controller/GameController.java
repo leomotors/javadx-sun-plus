@@ -253,6 +253,7 @@ public class GameController implements BaseController {
     }
 
     private void endPhase() {
+        System.out.println("Game finished");
         this.animation.stop();
 
         var partnerName = "partner/"
@@ -264,6 +265,11 @@ public class GameController implements BaseController {
         } else if (ScoreUtil.isFullCombo(this.scoreManager)) {
             this.APLabel.setText("FULL COMBO");
             SoundManager.getInstance().playPartner(partnerName + "_FC.wav");
+        } else {
+            this.APLabel.setText(ScoreUtil
+                    .calculateScore(this.scoreManager) >= ScoreUtil.RANK_D
+                            ? "CLEAR"
+                            : "FAILED");
         }
 
         AppState.getInstance().setPlayResult(this.scoreManager);
