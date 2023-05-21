@@ -9,8 +9,8 @@ public class DXText extends Text {
     public DXText() {
         super();
         this.setFont(Font.loadFont(ClassLoader
-                .getSystemResource("font/Helvetica.ttf").toString(),
-                36));
+                .getSystemResource("font/YuGothM.ttc").toString(),
+                34));
     }
 
     public DXText(String text) {
@@ -34,8 +34,8 @@ public class DXText extends Text {
 
     public void setFontSize(int fontSize) {
         this.setFont(Font.loadFont(ClassLoader
-                .getSystemResource("font/Helvetica.ttf").toString(),
-                fontSize));
+                .getSystemResource("font/YuGothM.ttc").toString(),
+                fontSize - 3));
     }
 
     public void setText(int number) {
