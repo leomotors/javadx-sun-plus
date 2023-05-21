@@ -195,8 +195,6 @@ public class GameController implements BaseController {
      * Runs every 10ms
      */
     private void update() {
-        System.out.println("Ctime = " + this.getCurrentTime());
-
         for (var note : notes) {
             var checkResult = note.checkJudgement(this);
 
