@@ -37,7 +37,6 @@ public final class SongManager {
             try {
                 var chart = this.loadChart(song);
                 this.getCharts().add(chart);
-                System.out.println(chart.toString());
             } catch (Exception e) {
                 System.out.println("Fail to load chart " + song);
                 e.printStackTrace();
