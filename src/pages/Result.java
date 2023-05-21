@@ -21,7 +21,9 @@ import router.Router;
 import store.AppState;
 import store.DataManager;
 import store.Setting;
+import store.SoundManager;
 import utils.ImageUtil;
+import utils.ScoreUtil;
 
 public class Result implements Page {
     private StackPane node;
@@ -47,9 +49,6 @@ public class Result implements Page {
 
         this.node.getChildren().addAll(background, this.mainPane);
     }
-
-    @Override
-    public void startPage() {}
 
     private BorderPane createMainPane() {
         var mainPane = new BorderPane();
@@ -148,6 +147,25 @@ public class Result implements Page {
             this.rightPane.getChildren().add(this.cppChan);
         } else {
             this.rightPane.getChildren().add(this.javaChan);
+        }
+    }
+
+    @Override
+    public void startPage() {
+        var partner = "partner/"
+                + DataManager.getInstance().get(Setting.PARTNER);
+
+        var playResult = AppState.getInstance().getPlayResult();
+        var score = ScoreUtil.calculateScore(playResult);
+
+        if (score < ScoreUtil.RANK_D) {
+            SoundManager.getInstance().playPartner(partner + "_F.wav");
+        } else if (score < ScoreUtil.RANK_S) {
+            SoundManager.getInstance().playPartner(partner + "_CLEAR.wav");
+        } else if (score < ScoreUtil.RANK_SSS) {
+            SoundManager.getInstance().playPartner(partner + "_S.wav");
+        } else {
+            SoundManager.getInstance().playPartner(partner + "_SSS.wav");
         }
     }
 

@@ -15,10 +15,14 @@ public final class ScoreUtil {
 
     public static final int MAX_SCORE = 101_0000;
 
+    public static final int RANK_SSS = 1_000_000;
+    public static final int RANK_S = 970_000;
+    public static final int RANK_D = 550_000;
+
     public static String getRank(int score) {
         if (score >= 1_005_000) {
             return "SSS+";
-        } else if (score >= 1_000_000) {
+        } else if (score >= RANK_SSS) {
             return "SSS";
         } else if (score >= 995_000) {
             return "SS+";
@@ -26,7 +30,7 @@ public final class ScoreUtil {
             return "SS";
         } else if (score >= 980_000) {
             return "S+";
-        } else if (score >= 970_000) {
+        } else if (score >= RANK_S) {
             return "S";
         } else if (score >= 940_000) {
             return "AAA";
@@ -44,7 +48,7 @@ public final class ScoreUtil {
             return "C";
         } else if (score >= 600_000) {
             return "D+";
-        } else if (score >= 550_000) {
+        } else if (score >= RANK_D) {
             return "D";
         } else {
             return "F";
