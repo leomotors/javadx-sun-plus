@@ -11,8 +11,7 @@ import logic.core.NoteType;
 
 public class FlickNote extends BaseNote {
     private int bestTime = 1000;
-    private int currentTapLane;
-    private int currentTapTime;
+    private boolean hasTap = false;
 
     private HashMap<Integer, Integer> timeMap = new HashMap<>();
 
@@ -43,6 +42,11 @@ public class FlickNote extends BaseNote {
             var lastPressed = controller.getLaneManager(i).getLastPressed();
             // Fill array (?)
             timeMap.put(i, lastPressed);
+
+            if (i >= this.getLaneStart() && i <= this.getLaneEnd() && Math.abs(
+                    this.getTime() - lastPressed) <= JudgementWindow.GOOD) {
+                this.hasTap = true;
+            }
         }
 
         for (int i = laneStart; i < laneEnd; i++) {
@@ -69,7 +73,8 @@ public class FlickNote extends BaseNote {
         this.setRemoved(true);
 
         if (this.bestTime > JudgementWindow.PERFECT) {
-            this.setJudgementType(JudgementType.MISS);
+            this.setJudgementType(
+                    this.hasTap ? JudgementType.GOOD : JudgementType.MISS);
             this.setFastLateType(FastLateType.NONE);
             return NoteCheckResult.REMOVE;
         }
