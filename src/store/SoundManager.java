@@ -56,10 +56,16 @@ public final class SoundManager {
         bgmPlayer.play();
     }
 
-    public void playBGM(Chart chart) throws IOException {
+    public void playBGM(Chart chart) {
         var chartId = chart.id();
-        var location = FileUtil.getPathPrefix() + ChartManager.CHARTS_DIR
-                + chartId;
+        String location;
+        try {
+            location = FileUtil.getPathPrefix() + ChartManager.CHARTS_DIR
+                    + chartId;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
         var url = new File(location + "/music.mp3").toURI().toString();
         if (bgmPlayer != null)
             bgmPlayer.stop();
@@ -89,7 +95,9 @@ public final class SoundManager {
     }
 
     public int getTime() {
-        return (int) bgmPlayer.getCurrentTime().toMillis();
+        if (bgmPlayer != null)
+            return (int) bgmPlayer.getCurrentTime().toMillis();
+        return -1;
     }
 
     public static synchronized SoundManager createInstance() {

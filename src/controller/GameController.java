@@ -105,6 +105,8 @@ public class GameController implements BaseController {
 
         this.setupLabels();
         this.setupCanvas();
+        SoundManager.getInstance()
+                .playBGM(AppState.getInstance().getCurrentChart());
     }
 
     private void setupLabels() {
