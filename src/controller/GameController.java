@@ -371,8 +371,8 @@ public class GameController implements BaseController {
         }
 
         gcNotes.setFill(
-                isPressed ? new Color(1, 1, 0, 0.9)
-                        : new Color(0.75, 0.75, 0, 0.5));
+                isPressed ? Color.CORAL
+                        : new Color(0.75, 0, 0, 0.5));
 
         gcNotes.setStroke(Color.WHITE);
         gcNotes.setLineWidth(3);
