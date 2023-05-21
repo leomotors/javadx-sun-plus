@@ -3,6 +3,7 @@ package pages;
 import java.io.IOException;
 
 import controller.BaseController;
+import controller.WelcomeController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import router.Page;
@@ -29,5 +30,9 @@ public class Welcome implements Page {
     @Override
     public Parent getNode() {
         return this.node;
+    }
+
+    public void enableWelcome() {
+        ((WelcomeController) controller).enableWelcome();
     }
 }

@@ -28,7 +28,7 @@
             </DropShadow>
          </effect>
       </ImageView>
-      <Button fx:id="welcomeButton" layoutX="700.0" layoutY="508.0" mnemonicParsing="false" onMouseClicked="#buttonHandler" prefHeight="80.0" prefWidth="200.0" style="-fx-background-radius: 25; -fx-background-color: #fafbf9;" text="START">
+      <Button fx:id="welcomeButton" disable="true" layoutX="700.0" layoutY="508.0" mnemonicParsing="false" onMouseClicked="#buttonHandler" prefHeight="80.0" prefWidth="200.0" style="-fx-background-radius: 25; -fx-background-color: #fafbf9;" text="START">
          <effect>
             <DropShadow>
                <color>

@@ -102,11 +102,14 @@ public class GameController implements BaseController {
         for (int i = 0; i < Config.N_LANES; i++) {
             this.laneManagers.add(new LaneManager());
         }
-
         this.setupLabels();
         this.setupCanvas();
-        SoundManager.getInstance()
-                .playBGM(AppState.getInstance().getCurrentChart());
+        SoundManager.getInstance().stopBGM();
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(3), event -> SoundManager
+                        .getInstance()
+                        .playBGM(AppState.getInstance().getCurrentChart())));
+        timeline.play();
     }
 
     private void setupLabels() {
