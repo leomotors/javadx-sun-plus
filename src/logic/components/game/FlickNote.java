@@ -26,6 +26,10 @@ public class FlickNote extends BaseNote {
 
     @Override
     public NoteCheckResult checkJudgement(GameController controller) {
+        if (this.isRemoved()) {
+            return NoteCheckResult.NONE;
+        }
+
         var currentTime = controller.getCurrentTime();
 
         if (currentTime >= this.getTime() + this.bestTime
@@ -72,7 +76,7 @@ public class FlickNote extends BaseNote {
     private NoteCheckResult endJudgement() {
         this.setRemoved(true);
 
-        if (this.bestTime > JudgementWindow.PERFECT) {
+        if (this.bestTime > JudgementWindow.FLICK_PERFECT) {
             this.setJudgementType(
                     this.hasTap ? JudgementType.GOOD : JudgementType.MISS);
             this.setFastLateType(FastLateType.NONE);
@@ -86,7 +90,6 @@ public class FlickNote extends BaseNote {
             this.setJudgementType(JudgementType.PERFECT);
         }
 
-        this.setRemoved(true);
         return NoteCheckResult.REMOVE;
     }
 }
