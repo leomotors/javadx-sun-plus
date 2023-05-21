@@ -76,7 +76,7 @@ public class Config {
     // TODO Put this in settings
     public static final String TOP_LEFT_TEXT = "SCORE";
     public static final int TOP_RIGHT_GOAL = 000_000;
-    public static final int NOTE_SHOW_TIME = 900;
+    public static final int NOTE_SHOW_TIME = 4500;
 
     // Unused (?), to be removed
     public static final int SUBTILE_PER_TILE = 50;
