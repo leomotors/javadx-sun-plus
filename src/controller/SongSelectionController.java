@@ -6,10 +6,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import logic.core.Chart;
 import router.AppPage;
 import router.Router;
 import store.DataManager;
 import store.Setting;
+import store.SongManager;
 
 public class SongSelectionController implements BaseController {
     @FXML
@@ -64,10 +66,48 @@ public class SongSelectionController implements BaseController {
     private final String EXPERT_COLOR = "#e5024f";
     private final String MASTER_COLOR = "#ae0cd2";
     private int currentDifficulty = 0;
+    private int currentSongIndex = 1;
+    private int chartSize;
+    private String prevID;
+    private String selectID;
+    private String nextID;
 
     @Override
     public void start() {
         username.setText(DataManager.getInstance().get(Setting.PLAYER_NAME));
+        SongManager instance = SongManager.getInstance();
+        chartSize = instance.getCharts().size();
+        if (chartSize == 0)
+            return;
+        Chart prev = instance.getCharts()
+                .get((currentSongIndex - 1) % chartSize);
+        Chart select = instance.getCharts().get(currentSongIndex % chartSize);
+        Chart next = instance.getCharts()
+                .get((currentSongIndex + 1) % chartSize);
+        setPrevChart(prev);
+        setNextChart(next);
+        setSelectChart(select);
+    }
+
+    private void setPrevChart(Chart chart) {
+        prevID = chart.id();
+        PrevName.setText(chart.title());
+        PrevArtist.setText(chart.author());
+        PrevImage.setImage(chart.image());
+    }
+
+    private void setSelectChart(Chart chart) {
+        selectID = chart.id();
+        SelectName.setText(chart.title());
+        SelectArtist.setText(chart.author());
+        SelectImage.setImage(chart.image());
+    }
+
+    private void setNextChart(Chart chart) {
+        nextID = chart.id();
+        NextName.setText(chart.title());
+        NextArtist.setText(chart.author());
+        NextImage.setImage(chart.image());
     }
 
     @FXML
