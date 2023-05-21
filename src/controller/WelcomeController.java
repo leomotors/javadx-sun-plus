@@ -18,7 +18,6 @@ public class WelcomeController implements BaseController {
         Timeline timeline = new Timeline(
                 new KeyFrame(delay, event -> {
                     enableWelcome();
-                    System.out.println("YAY");
                 }));
         timeline.play();
     }
