@@ -196,9 +196,9 @@ public class SongSelectionController implements BaseController {
                 break;
             case 1:
                 bgFill = "-fx-background-color: " + ADVANCE_COLOR + ";";
-                SelectDifficulty.setText("ADVANCE");
-                PrevDifficulty.setText("ADVANCE");
-                NextDifficulty.setText("ADVANCE");
+                SelectDifficulty.setText("ADVANCED");
+                PrevDifficulty.setText("ADVANCED");
+                NextDifficulty.setText("ADVANCED");
                 SelectBG.setStyle(bgFill);
                 NextBG.setStyle(bgFill);
                 PrevBG.setStyle(bgFill);
