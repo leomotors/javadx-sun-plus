@@ -17,6 +17,7 @@ public final class AppState {
         this.playResult = ScoreUtilMock.getMockPlayResult();
         if (!ChartManager.getInstance().getCharts().isEmpty())
             this.currentChart = ChartManager.getInstance().getCharts().get(0);
+        this.selectedDifficulty = Difficulty.BASIC;
     }
 
     public PlayResult getPlayResult() {

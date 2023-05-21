@@ -1,7 +1,5 @@
 package logic.game;
 
-import constant.Config;
-
 public class LaneManager {
     private boolean isKey1Pressed = false;
     private boolean isKey2Pressed = false;
@@ -9,14 +7,7 @@ public class LaneManager {
     private int lastPressed = 0;
     private int lastHold = 0;
 
-    private int cooldown = 0;
-
     public void handleKeyPress(int timeStamp, boolean isSecondKey) {
-        if (timeStamp < cooldown + Config.TAP_COOLDOWN) {
-            System.out.println("ILLEGAL CONDITION " + timeStamp);
-            return;
-        }
-
         if (isSecondKey) {
             this.isKey2Pressed = true;
         } else {
@@ -58,10 +49,5 @@ public class LaneManager {
             return Integer.MAX_VALUE;
 
         return this.lastHold;
-    }
-
-    public void setCooldown(int cooldown) {
-        this.cooldown = cooldown;
-        this.lastPressed = -9999;
     }
 }

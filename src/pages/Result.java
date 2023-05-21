@@ -16,7 +16,6 @@ import logic.components.BriefResult;
 import logic.components.ChartCard;
 import logic.components.DXButton;
 import logic.components.DetailedResult;
-import logic.core.Difficulty;
 import router.Page;
 import router.Router;
 import store.AppState;
@@ -77,10 +76,6 @@ public class Result implements Page {
     private VBox createRightPane() {
         var rightPane = new VBox();
 
-        var chartCard = new ChartCard(
-                AppState.getInstance().getCurrentChart(),
-                Difficulty.EXPERT);
-
         this.cppChan = ImageUtil.loadImageAsView("images/CPP.png");
         this.cppChan.setFitWidth(272);
         this.cppChan.setFitHeight(481);
@@ -89,7 +84,6 @@ public class Result implements Page {
         this.javaChan.setFitWidth(272);
         this.javaChan.setFitHeight(481);
 
-        rightPane.getChildren().addAll(chartCard, this.cppChan);
         rightPane.setSpacing(8);
         rightPane.setPadding(new Insets(0, 72, 0, 0));
         rightPane.setAlignment(Pos.CENTER);
@@ -144,7 +138,12 @@ public class Result implements Page {
         this.briefResult.render(result);
         this.detailedResult.render(result);
 
-        this.rightPane.getChildren().remove(1);
+        this.rightPane.getChildren().clear();
+        var chartCard = new ChartCard(
+                AppState.getInstance().getCurrentChart(),
+                AppState.getInstance().getSelectedDifficulty());
+
+        this.rightPane.getChildren().add(chartCard);
         if (DataManager.getInstance().get(Setting.PARTNER).equals("CPP")) {
             this.rightPane.getChildren().add(this.cppChan);
         } else {

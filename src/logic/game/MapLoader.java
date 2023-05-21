@@ -12,6 +12,7 @@ import logic.components.game.HoldNote;
 import logic.components.game.TapNote;
 import logic.core.Chart;
 import logic.core.Difficulty;
+import store.AppState;
 import store.ChartManager;
 import utils.FileUtil;
 
@@ -24,6 +25,7 @@ public class MapLoader {
         if (!chart.difficulties().containsKey(difficulty)) {
             difficulty = chart.difficulties().keySet().stream().findFirst()
                     .get();
+            AppState.getInstance().setSelectedDifficulty(difficulty);
         }
 
         var filePath = FileUtil.getPathPrefix() + ChartManager.CHARTS_DIR
