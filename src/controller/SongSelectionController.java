@@ -12,6 +12,7 @@ import router.Router;
 import store.DataManager;
 import store.Setting;
 import store.SongManager;
+import store.SoundManager;
 
 public class SongSelectionController implements BaseController {
     @FXML
@@ -225,11 +226,13 @@ public class SongSelectionController implements BaseController {
         currentSongIndex = currentSongIndex - 1;
         if (currentSongIndex < 0)
             currentSongIndex += chartSize;
+        SoundManager.getInstance().playFx("fx/SELECT.mp3");
         setAllChart();
     }
 
     private void toNextSong() {
         currentSongIndex = (currentSongIndex + 1) % chartSize;
+        SoundManager.getInstance().playFx("fx/SELECT.mp3");
         setAllChart();
     }
 }

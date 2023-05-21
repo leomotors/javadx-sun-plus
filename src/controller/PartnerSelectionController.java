@@ -38,7 +38,7 @@ public class PartnerSelectionController implements BaseController {
     @FXML
     private void SelectCpp() {
         DataManager.getInstance().set(Setting.PARTNER, "CPP");
-        SoundManager.getInstance().playFx("fx/SELECT.mp4");
+        SoundManager.getInstance().playFx("fx/SELECT.mp3");
         SelectCppButton.setDisable(true);
         SelectCppButton.setText("Selected");
         SelectJavaButton.setDisable(false);
@@ -52,7 +52,7 @@ public class PartnerSelectionController implements BaseController {
     @FXML
     private void SelectJava() {
         DataManager.getInstance().set(Setting.PARTNER, "JAVA");
-        SoundManager.getInstance().playFx("fx/SELECT.mp4");
+        SoundManager.getInstance().playFx("fx/SELECT.mp3");
         SelectCppButton.setDisable(false);
         SelectCppButton.setText("Select");
         SelectJavaButton.setDisable(true);
