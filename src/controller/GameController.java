@@ -352,7 +352,24 @@ public class GameController implements BaseController {
         int bottomX = calculatePosX(bottom);
         int bottomY = calculatePosY(bottom);
         int bottomW = calculateWidth(bottom);
-        gcNotes.setFill(Color.YELLOW);
+
+        boolean isPressed = false;
+
+        if (this.getCurrentTime() < note.getTime()) {
+            isPressed = true;
+        } else {
+            for (int i = note.getLaneStart(); i <= note.getLaneEnd(); i++) {
+                if (this.getLaneManager(i).isCurrentlyPressed()) {
+                    isPressed = true;
+                    break;
+                }
+            }
+        }
+
+        gcNotes.setFill(
+                isPressed ? new Color(1, 1, 0, 0.9)
+                        : new Color(0.75, 0.75, 0, 0.5));
+
         gcNotes.setStroke(Color.WHITE);
         gcNotes.setLineWidth(3);
         gcNotes.beginPath();
