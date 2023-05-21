@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer.Status;
 import logic.core.Chart;
 import utils.FileUtil;
 
@@ -76,6 +77,10 @@ public final class SoundManager {
         bgmPlayer.play();
     }
 
+    public void setOnEndOfMedia(Runnable runnable) {
+        bgmPlayer.setOnEndOfMedia(runnable);
+    }
+
     public void stopBGM() {
         if (bgmPlayer != null)
             bgmPlayer.stop();
@@ -92,6 +97,10 @@ public final class SoundManager {
         bgmPlayer.setVolume(Integer
                 .parseInt(DataManager.getInstance().get(Setting.BGM_VOLUME))
                 / 100.00);
+    }
+
+    public Status getPlayerStatus() {
+        return SoundManager.bgmPlayer.getStatus();
     }
 
     public int getTime() {

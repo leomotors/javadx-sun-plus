@@ -29,6 +29,8 @@ import logic.game.FeedbackManager;
 import logic.game.LaneManager;
 import logic.game.MapLoader;
 import logic.game.ScoreManager;
+import router.AppPage;
+import router.Router;
 import store.AppState;
 import store.DataManager;
 import store.Setting;
@@ -56,12 +58,16 @@ public class GameController implements BaseController {
     private Canvas PlayArea;
     @FXML
     private Canvas NoteArea;
+
+    @FXML
+    private Label APLabel;
     @FXML
     private Label fastLateLabel;
     @FXML
     private Label JudgeName;
     @FXML
     private Label ComboCount;
+
     @FXML
     private AnchorPane pageRoot;
     @FXML
@@ -109,6 +115,8 @@ public class GameController implements BaseController {
     @Override
     public void start() {
         this.laneManagers.clear();
+        this.notes.clear();
+
         for (int i = 0; i < Config.N_LANES; i++) {
             this.laneManagers.add(new LaneManager());
         }
@@ -126,9 +134,14 @@ public class GameController implements BaseController {
 
         SoundManager.getInstance().stopBGM();
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(3), event -> SoundManager
-                        .getInstance()
-                        .playBGM(AppState.getInstance().getCurrentChart())));
+                new KeyFrame(Duration.seconds(3), event -> {
+                    SoundManager
+                            .getInstance()
+                            .playBGM(AppState.getInstance().getCurrentChart());
+                    SoundManager.getInstance()
+                            .setOnEndOfMedia(() -> this.endPhase());
+                }));
+
         timeline.play();
     }
 
@@ -143,6 +156,7 @@ public class GameController implements BaseController {
                 .add(new ChartCard(AppState.getInstance().getCurrentChart(),
                         AppState.getInstance().getSelectedDifficulty()));
 
+        this.APLabel.setText("");
     }
 
     private void setupCanvas() {
@@ -181,7 +195,8 @@ public class GameController implements BaseController {
      * Runs every 10ms
      */
     private void update() {
-        this.mapLoader.getTotalNotes();
+        System.out.println("Ctime = " + this.getCurrentTime());
+
         for (var note : notes) {
             var checkResult = note.checkJudgement(this);
 
@@ -227,6 +242,34 @@ public class GameController implements BaseController {
                 .format(border) : "FAIL");
 
         this.feedbackManager.updateDisplay();
+    }
+
+    private void endPhase() {
+        this.animation.stop();
+
+        var partnerName = "partner/"
+                + DataManager.getInstance().get(Setting.PARTNER);
+
+        if (ScoreUtil.isAllPerfect(this.scoreManager)) {
+            this.APLabel.setText("MADE IN SAMUT PRAKAN");
+            SoundManager.getInstance().playPartner(partnerName + "_AP.wav");
+        } else if (ScoreUtil.isFullCombo(this.scoreManager)) {
+            this.APLabel.setText("FULL COMBO");
+            SoundManager.getInstance().playPartner(partnerName + "_FC.wav");
+        }
+
+        AppState.getInstance().setPlayResult(this.scoreManager);
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(3000);
+                Platform.runLater(() -> {
+                    Router.getInstance().replace(AppPage.RESULT);
+                });
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     private int calculatePosY(BaseNote note) {
