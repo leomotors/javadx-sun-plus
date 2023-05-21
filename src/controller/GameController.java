@@ -71,15 +71,21 @@ public class GameController implements BaseController {
     @FXML
     private ImageView PartnerImage;
 
-    private long startTime;
     private long UPDATE_DELAY = 10;
     private Timeline animation;
 
     private ArrayList<BaseNote> notes = new ArrayList<BaseNote>();
     private static final int WIDTH = 900;
     private static final int HEIGHT = 600;
-    private GraphicsContext gc;
-    private GraphicsContext gcNote;
+
+    /**
+     * Graphic context for drawing lanes
+     */
+    private GraphicsContext gcLanes;
+    /**
+     * Graphic context for drawing notes
+     */
+    private GraphicsContext gcNotes;
 
     private final ArrayList<LaneManager> laneManagers = new ArrayList<>();
     private ScoreManager scoreManager;
@@ -117,8 +123,8 @@ public class GameController implements BaseController {
     }
 
     private void setupCanvas() {
-        gc = PlayArea.getGraphicsContext2D();
-        gcNote = NoteArea.getGraphicsContext2D();
+        gcLanes = PlayArea.getGraphicsContext2D();
+        gcNotes = NoteArea.getGraphicsContext2D();
 
         for (int i = 0; i < Config.LANE_COUNT; i++) {
             drawLane(i);
@@ -134,7 +140,6 @@ public class GameController implements BaseController {
                             .toString()));
         }
 
-        startTime = System.currentTimeMillis();
         animation = new Timeline(new KeyFrame(Duration.millis(UPDATE_DELAY),
                 event -> {
                     update();
@@ -157,6 +162,9 @@ public class GameController implements BaseController {
         return SoundManager.getInstance().getTime();
     }
 
+    /**
+     * Runs every 10ms
+     */
     private void update() {
         int curTime = getCurrentTime();
         for (BaseNote note : notes) {
@@ -225,15 +233,15 @@ public class GameController implements BaseController {
     }
 
     private void drawNote() {
-        gcNote.clearRect(0, 0, WIDTH, HEIGHT);
+        gcNotes.clearRect(0, 0, WIDTH, HEIGHT);
         for (BaseNote note : notes) {
             if (note instanceof EXTapNote) {
-                gcNote.setFill(Color.GOLD);
+                gcNotes.setFill(Color.GOLD);
             } else {
-                gcNote.setFill(Color.RED);
+                gcNotes.setFill(Color.RED);
             }
 
-            gcNote.fillRect(calculatePosX(note), calculatePosY(note),
+            gcNotes.fillRect(calculatePosX(note), calculatePosY(note),
                     calculateWidth(note), 10);
         }
     }
@@ -242,20 +250,24 @@ public class GameController implements BaseController {
         double x1 = Config.LANE_BOTTOM_WIDTH * laneNumber;
         double buffer = (WIDTH - Config.LANE_TOP_WIDTH * Config.LANE_COUNT) / 2;
         double x2 = buffer + Config.LANE_TOP_WIDTH * laneNumber;
-        if (this.getLaneManager(laneNumber).isPressed())
-            gc.setFill(Color.web("#383f47"));
-        else
-            gc.setFill(Color.BLACK);
-        gc.setStroke(Color.WHITE);
-        gc.setLineWidth(1.0);
-        gc.beginPath();
-        gc.moveTo(x1, Config.LANE_HEIGHT);
-        gc.lineTo(x2, 0);
-        gc.lineTo(x2 + Config.LANE_TOP_WIDTH, 0);
-        gc.lineTo(x1 + Config.LANE_BOTTOM_WIDTH, Config.LANE_HEIGHT);
-        gc.closePath();
-        gc.fill();
-        gc.stroke();
+
+        // Make lane gray if currently pressed
+        if (this.getLaneManager(laneNumber).isPressed()) {
+            gcLanes.setFill(Color.web("#383f47"));
+        } else {
+            gcLanes.setFill(Color.BLACK);
+        }
+
+        gcLanes.setStroke(Color.WHITE);
+        gcLanes.setLineWidth(1.0);
+        gcLanes.beginPath();
+        gcLanes.moveTo(x1, Config.LANE_HEIGHT);
+        gcLanes.lineTo(x2, 0);
+        gcLanes.lineTo(x2 + Config.LANE_TOP_WIDTH, 0);
+        gcLanes.lineTo(x1 + Config.LANE_BOTTOM_WIDTH, Config.LANE_HEIGHT);
+        gcLanes.closePath();
+        gcLanes.fill();
+        gcLanes.stroke();
     }
 
     public LaneManager getLaneManager(int lane) {
