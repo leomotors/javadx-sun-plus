@@ -17,6 +17,7 @@ import utils.FileUtil;
 
 public class MapLoader {
     private LinkedList<BaseNote> notes = new LinkedList<>();
+    private int totalNotes = 0;
 
     public MapLoader(Chart chart, Difficulty difficulty) throws IOException {
         // Choose another difficulty if not exist
@@ -33,8 +34,10 @@ public class MapLoader {
         var notes = notesData.stream().map(line -> {
             var tokens = line.split(" ");
 
-            if (tokens.length < 4)
+            if (tokens.length < 4) {
+                System.out.println("INVALID NOTE " + line);
                 return null;
+            }
 
             var time = Integer.parseInt(tokens[1]);
             var laneStart = Integer.parseInt(tokens[2]) - 1;
@@ -49,20 +52,34 @@ public class MapLoader {
                 }
             }
 
-            if (tokens[1].equals("HOLD")) {
+            if (tokens[0].equals("HOLD")) {
                 return new HoldNote(time, laneStart, laneEnd, arg0);
             }
 
-            if (tokens[2].equals("FLICK")) {
+            if (tokens[0].equals("FLICK")) {
                 return new FlickNote(time, laneStart, laneEnd);
             }
+
+            System.out.println("UNKNOWN NOTE TYPE " + line);
 
             return null;
         }).filter(note -> note != null).toList();
 
+        this.totalNotes = notes.stream().mapToInt(note -> {
+            if (note instanceof HoldNote holdNote) {
+                return holdNote.getTotalTicks();
+            } else {
+                return 1;
+            }
+        }).sum();
+
         for (var note : notes) {
             this.notes.add(note);
         }
+
+        System.out.printf("Notes Object %d, Total Notes %d\n",
+                this.notes.size(),
+                this.getTotalNotes());
     }
 
     /**
@@ -77,5 +94,9 @@ public class MapLoader {
         }
 
         return notes;
+    }
+
+    public int getTotalNotes() {
+        return this.totalNotes;
     }
 }

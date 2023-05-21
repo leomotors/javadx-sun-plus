@@ -9,6 +9,7 @@ public abstract class BaseNote {
     private final int time;
     private final int laneStart;
     private final int laneEnd;
+    private boolean removed = false;
 
     private JudgementType judgementType;
     private FastLateType fastLateType;
@@ -48,6 +49,14 @@ public abstract class BaseNote {
     }
 
     public abstract NoteType getNoteType();
+
+    public boolean isRemoved() {
+        return this.removed;
+    }
+
+    public void setRemoved(boolean removed) {
+        this.removed = removed;
+    }
 
     public abstract NoteCheckResult checkJudgement(GameController controller);
 }
