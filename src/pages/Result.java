@@ -22,7 +22,6 @@ import router.Router;
 import store.AppState;
 import store.DataManager;
 import store.Setting;
-import store.SongManager;
 import utils.ImageUtil;
 
 public class Result implements Page {
@@ -79,7 +78,7 @@ public class Result implements Page {
         var rightPane = new VBox();
 
         var chartCard = new ChartCard(
-                SongManager.getInstance().getCharts().get(0),
+                AppState.getInstance().getCurrentChart(),
                 Difficulty.EXPERT);
 
         this.cppChan = ImageUtil.loadImageAsView("images/CPP.png");
@@ -94,7 +93,6 @@ public class Result implements Page {
         rightPane.setSpacing(8);
         rightPane.setPadding(new Insets(0, 72, 0, 0));
         rightPane.setAlignment(Pos.CENTER);
-
         return rightPane;
     }
 
@@ -140,7 +138,8 @@ public class Result implements Page {
     public void onBeforeNavigatedTo() {
         this.isShowingDetailedResult = false;
         this.mainPane.setLeft(this.briefResult);
-
+        this.rightPane = createRightPane();
+        this.mainPane.setRight(this.rightPane);
         var result = AppState.getInstance().getPlayResult();
         this.briefResult.render(result);
         this.detailedResult.render(result);

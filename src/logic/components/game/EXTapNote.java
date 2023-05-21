@@ -11,7 +11,7 @@ public class EXTapNote extends TapNote {
     }
 
     @Override
-    public boolean checkJudgement(GameController controller) {
+    public NoteCheckResult checkJudgement(GameController controller) {
         var result = super.checkJudgement(controller);
 
         if (result) {

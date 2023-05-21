@@ -36,7 +36,6 @@ import router.Router;
 import store.AppState;
 import store.DataManager;
 import store.Setting;
-import store.SongManager;
 import utils.ScoreUtil;
 
 public class GameController implements BaseController {
@@ -107,7 +106,7 @@ public class GameController implements BaseController {
         this.topLeft.setText(Config.TOP_LEFT_TEXT);
         this.cardBox.getChildren().clear();
         this.cardBox.getChildren()
-                .add(new ChartCard(SongManager.getInstance().getCharts().get(0),
+                .add(new ChartCard(AppState.getInstance().getCurrentChart(),
                         Difficulty.EXPERT));
 
         gc = PlayArea.getGraphicsContext2D();
@@ -297,9 +296,7 @@ public class GameController implements BaseController {
         if (e.getCode() == KeyCode.ESCAPE && this.scoreManager
                 .getTotalNotes() == this.scoreManager.getPlayedNotes()) {
             AppState.getInstance().setPlayResult(this.scoreManager);
-
-            Router.getInstance().replace(AppPage.RESULT);
-
+            Router.getInstance().push(AppPage.RESULT);
             return;
         }
 

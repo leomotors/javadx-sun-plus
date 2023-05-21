@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import logic.core.Chart;
 import router.AppPage;
 import router.Router;
+import store.AppState;
 import store.DataManager;
 import store.Setting;
 import store.SongManager;
@@ -107,6 +108,7 @@ public class SongSelectionController implements BaseController {
     }
 
     private void setSelectChart(Chart chart) {
+        AppState.getInstance().setCurrentChart(chart);
         selectID = chart.id();
         SelectName.setText(chart.title());
         SelectArtist.setText(chart.author());
