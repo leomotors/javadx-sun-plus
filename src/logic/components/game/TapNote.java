@@ -20,6 +20,7 @@ public class TapNote extends BaseNote {
     @Override
     public NoteCheckResult checkJudgement(GameController controller) {
         if (this.isRemoved()) {
+            // Thread mumbo jumbo
             return NoteCheckResult.NONE;
         }
 
@@ -35,7 +36,7 @@ public class TapNote extends BaseNote {
             var manager = controller.getLaneManager(i);
             var lastTap = manager.getLastPressed();
 
-            if (lastTap > 0) {
+            if (lastTap > this.getTime() - JudgementWindow.GOOD) {
                 tapTime = Math.min(tapTime, lastTap);
             }
         }
@@ -46,20 +47,17 @@ public class TapNote extends BaseNote {
                     : FastLateType.LATE;
 
             if (error > JudgementWindow.GOOD) {
-                // Early Miss but we don't have early miss
-                return NoteCheckResult.NONE;
+                System.out.println("ILLEGAL CONDITION");
             }
 
-            System.out.println("ERROR " + error + " ms");
-
             this.setFastLateType(fastLate);
-            if (error < JudgementWindow.PLATINUM_CRITICAL_PERFECT) {
+            if (error <= JudgementWindow.PLATINUM_CRITICAL_PERFECT) {
                 this.setJudgementType(JudgementType.PLATINUM_CRITICAL_PERFECT);
                 // No Fast Late for best judgement
                 this.setFastLateType(FastLateType.NONE);
-            } else if (error < JudgementWindow.CRITICAL_PERFECT) {
+            } else if (error <= JudgementWindow.CRITICAL_PERFECT) {
                 this.setJudgementType(JudgementType.CRITICAL_PERFECT);
-            } else if (error < JudgementWindow.PERFECT) {
+            } else if (error <= JudgementWindow.PERFECT) {
                 this.setJudgementType(JudgementType.PERFECT);
             } else {
                 this.setJudgementType(JudgementType.GOOD);
@@ -71,8 +69,6 @@ public class TapNote extends BaseNote {
 
         if (currentTime > this.getTime()
                 + JudgementWindow.GOOD) {
-            // Late Miss
-            System.out.println("LATE MISS");
             this.setJudgementType(JudgementType.MISS);
             this.setRemoved(true);
             return NoteCheckResult.REMOVE;
