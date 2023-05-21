@@ -26,6 +26,7 @@ import logic.components.game.EXTapNote;
 import logic.components.game.FlickNote;
 import logic.components.game.HoldNote;
 import logic.components.game.TapNote;
+import logic.core.JudgementType;
 import logic.game.FeedbackManager;
 import logic.game.LaneManager;
 import logic.game.MapLoader;
@@ -210,7 +211,10 @@ public class GameController implements BaseController {
                 case REMOVE:
                     Platform.runLater(() -> {
                         this.notes.remove(note);
-                        SoundManager.getInstance().playFx("fx/tapSound.mp3");
+
+                        if (note.getJudgementType() != JudgementType.MISS)
+                            SoundManager.getInstance()
+                                    .playFx("fx/tapSound.mp3");
                     });
                 case PRESERVE:
                     Platform.runLater(() -> {
@@ -352,7 +356,24 @@ public class GameController implements BaseController {
         int bottomX = calculatePosX(bottom);
         int bottomY = calculatePosY(bottom);
         int bottomW = calculateWidth(bottom);
-        gcNotes.setFill(Color.YELLOW);
+
+        boolean isPressed = false;
+
+        if (this.getCurrentTime() < note.getTime()) {
+            isPressed = true;
+        } else {
+            for (int i = note.getLaneStart(); i <= note.getLaneEnd(); i++) {
+                if (this.getLaneManager(i).isCurrentlyPressed()) {
+                    isPressed = true;
+                    break;
+                }
+            }
+        }
+
+        gcNotes.setFill(
+                isPressed ? Color.CORAL
+                        : new Color(0.75, 0, 0, 0.5));
+
         gcNotes.setStroke(Color.WHITE);
         gcNotes.setLineWidth(3);
         gcNotes.beginPath();
