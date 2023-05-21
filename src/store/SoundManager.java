@@ -27,9 +27,7 @@ public final class SoundManager {
         fxPlayer = new MediaPlayer(new Media(
                 SoundManager.class.getResource(this.path + soundPath)
                         .toString()));
-        fxPlayer.setVolume(Integer
-                .parseInt(DataManager.getInstance().get(Setting.FX_VOLUME))
-                / 100.00);
+        setVolume();
         fxPlayer.play();
     }
 
@@ -39,9 +37,7 @@ public final class SoundManager {
         partnerPlayer = new MediaPlayer(new Media(
                 SoundManager.class.getResource(this.path + soundPath)
                         .toString()));
-        partnerPlayer.setVolume(Integer
-                .parseInt(DataManager.getInstance().get(Setting.PARTNER_VOLUME))
-                / 100.00);
+        setVolume();
         partnerPlayer.play();
     }
 
@@ -51,9 +47,7 @@ public final class SoundManager {
         bgmPlayer = new MediaPlayer(new Media(
                 SoundManager.class.getResource(this.path + soundPath)
                         .toString()));
-        bgmPlayer.setVolume(Integer
-                .parseInt(DataManager.getInstance().get(Setting.BGM_VOLUME))
-                / 100.00);
+        setVolume();
         bgmPlayer.play();
     }
 
@@ -71,9 +65,7 @@ public final class SoundManager {
         if (bgmPlayer != null)
             bgmPlayer.stop();
         bgmPlayer = new MediaPlayer(new Media(url));
-        bgmPlayer.setVolume(Integer
-                .parseInt(DataManager.getInstance().get(Setting.BGM_VOLUME))
-                / 100.00);
+        setVolume();
         bgmPlayer.play();
     }
 
@@ -91,12 +83,20 @@ public final class SoundManager {
             bgmPlayer.play();
     }
 
-    public void setBGMVolume(int volume) {
-        DataManager.getInstance().set(Setting.BGM_VOLUME,
-                String.valueOf(volume));
-        bgmPlayer.setVolume(Integer
-                .parseInt(DataManager.getInstance().get(Setting.BGM_VOLUME))
-                / 100.00);
+    public void setVolume() {
+        if (bgmPlayer != null)
+            bgmPlayer.setVolume(Integer
+                    .parseInt(DataManager.getInstance().get(Setting.BGM_VOLUME))
+                    / 100.00);
+        if (partnerPlayer != null)
+            partnerPlayer.setVolume(Integer
+                    .parseInt(DataManager.getInstance()
+                            .get(Setting.PARTNER_VOLUME))
+                    / 100.00);
+        if (fxPlayer != null)
+            fxPlayer.setVolume(Integer
+                    .parseInt(DataManager.getInstance().get(Setting.FX_VOLUME))
+                    / 100.00);
     }
 
     public Status getPlayerStatus() {
