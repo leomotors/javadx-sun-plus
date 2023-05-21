@@ -11,4 +11,7 @@ public final class JudgementWindow {
     public static final int HOLD_PLATINUM_CRITICAL_PEFECT = 50;
     public static final int HOLD_PERFECT = 100;
     public static final int HOLD_GOOD = 150;
+
+    public static final int FLICK_PLATINUM_CRITICAL_PERFECT = 40;
+    public static final int FLICK_PERFECT = 100;
 }
