@@ -25,7 +25,8 @@ public final class DataManager {
 
     private DataManager() throws IOException {
         this.pathPrefix = FileUtil.getPathPrefix();
-
+        this.set(Setting.PLAYER_NAME,
+                System.getProperty("user.name"));
         this.readConfig();
         this.writeConfig();
     }
