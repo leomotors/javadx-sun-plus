@@ -106,6 +106,7 @@ public class GameController implements BaseController {
     private FeedbackManager feedbackManager;
     private MapLoader mapLoader;
 
+    private int timeWindow;
     private static DecimalFormat formatter = new DecimalFormat("#,###");
 
     /**
@@ -117,6 +118,9 @@ public class GameController implements BaseController {
     public void start() {
         this.laneManagers.clear();
         this.notes.clear();
+        this.timeWindow = Config.NOTE_SHOW_TIME
+                / Integer
+                        .parseInt(DataManager.getInstance().get(Setting.SPEED));
 
         for (int i = 0; i < Config.N_LANES; i++) {
             this.laneManagers.add(new LaneManager());
@@ -273,7 +277,7 @@ public class GameController implements BaseController {
 
     private int calculatePosY(BaseNote note) {
         int timeDiff = Math.max(0, note.getTime() - getCurrentTime());
-        float ratio = 1 - ((float) timeDiff / (float) Config.NOTE_SHOW_TIME);
+        float ratio = 1 - ((float) timeDiff / (float) timeWindow);
         return (int) (ratio * HEIGHT);
     }
 
@@ -288,7 +292,7 @@ public class GameController implements BaseController {
         double translation = x1 - x2;
         int timeDiff = Math.max(0, note.getTime() - getCurrentTime());
         // 0-100 = top to bottom
-        float ratio = 1 - ((float) timeDiff / (float) Config.NOTE_SHOW_TIME);
+        float ratio = 1 - ((float) timeDiff / (float) timeWindow);
         return (int) (x2 + (ratio * translation));
     }
 
@@ -296,7 +300,7 @@ public class GameController implements BaseController {
         int laneCount = note.getLaneEnd() - note.getLaneStart() + 1;
         int timeDiff = Math.max(0, note.getTime() - getCurrentTime());
         int translation = Config.LANE_BOTTOM_WIDTH - Config.LANE_TOP_WIDTH;
-        float ratio = 1 - ((float) timeDiff / (float) Config.NOTE_SHOW_TIME);
+        float ratio = 1 - ((float) timeDiff / (float) timeWindow);
         return (int) ((laneCount * Config.LANE_TOP_WIDTH)
                 + ratio * laneCount * translation);
     }
