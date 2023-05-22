@@ -4,5 +4,4 @@ bin
 # avoid conflict
 .classpath
 
-doc
 doc.zip

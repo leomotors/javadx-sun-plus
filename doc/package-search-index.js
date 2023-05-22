@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"application"},{"l":"constant"},{"l":"controller"},{"l":"logic.components"},{"l":"logic.components.game"},{"l":"logic.core"},{"l":"logic.game"},{"l":"pages"},{"l":"router"},{"l":"store"},{"l":"utils"}];updateSearchResults();
