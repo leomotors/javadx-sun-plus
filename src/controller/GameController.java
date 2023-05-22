@@ -26,7 +26,6 @@ import logic.components.game.EXTapNote;
 import logic.components.game.FlickNote;
 import logic.components.game.HoldNote;
 import logic.components.game.TapNote;
-import logic.core.JudgementType;
 import logic.game.FeedbackManager;
 import logic.game.LaneManager;
 import logic.game.MapLoader;
@@ -212,9 +211,11 @@ public class GameController implements BaseController {
                     Platform.runLater(() -> {
                         this.notes.remove(note);
 
-                        if (note.getJudgementType() != JudgementType.MISS)
-                            SoundManager.getInstance()
-                                    .playFx("fx/tapSound.mp3");
+                        // UNCOMMENT THESE LINES TO GET PLAY SOUND
+                        // ONLY WORKS ON WINDOWS, will break on MACOS
+                        // if (note.getJudgementType() != JudgementType.MISS)
+                        // SoundManager.getInstance()
+                        // .playFx("fx/tapSound.mp3");
                     });
                 case PRESERVE:
                     Platform.runLater(() -> {
